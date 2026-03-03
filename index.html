@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AVODA OS | Thiha Linn</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@300;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00ffcc; --secondary: #ff003c; --accent: #7a00ff;
+            --bg: #050505; --panel: rgba(15, 15, 15, 0.9); --glass: rgba(255, 255, 255, 0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: var(--bg); color: white; font-family: 'JetBrains Mono', monospace; display: flex; height: 100vh; overflow: hidden; }
+
+        /* SIDEBAR */
+        nav { width: 80px; background: #000; border-right: 1px solid var(--glass); display: flex; flex-direction: column; align-items: center; padding: 20px 0; transition: 0.3s; z-index: 100; }
+        nav:hover { width: 220px; }
+        .nav-item { width: 85%; padding: 15px; margin: 8px 0; border-radius: 12px; cursor: pointer; transition: 0.3s; white-space: nowrap; overflow: hidden; display: flex; align-items: center; }
+        .nav-item:hover { background: var(--glass); border: 1px solid var(--primary); }
+        .nav-item.active { background: var(--primary); color: #000; font-weight: bold; }
+        .nav-text { margin-left: 15px; font-family: 'Orbitron'; font-size: 0.8rem; opacity: 0; transition: 0.3s; }
+        nav:hover .nav-text { opacity: 1; }
+
+        /* CONTENT */
+        main { flex: 1; overflow-y: auto; padding: 40px; scroll-behavior: smooth; }
+        .page { display: none; animation: slideUp 0.4s ease-out; }
+        .page.active { display: block; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* UI ELEMENTS */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
+        .panel { background: var(--panel); padding: 30px; border-radius: 20px; border: 1px solid var(--glass); backdrop-filter: blur(15px); position: relative; }
+        h1, h2, h3 { font-family: 'Orbitron'; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; }
+        input, select, button { width: 100%; padding: 14px; margin: 8px 0; background: #111; border: 1px solid var(--glass); color: white; border-radius: 8px; font-family: inherit; }
+        button { background: var(--primary); color: #000; font-weight: 900; cursor: pointer; border: none; font-family: 'Orbitron'; transition: 0.3s; }
+        button:hover { transform: scale(1.02); box-shadow: 0 0 20px var(--primary); }
+
+        /* XP BAR */
+        .xp-container { position: sticky; top: 0; background: var(--bg); padding-bottom: 20px; z-index: 10; border-bottom: 1px solid var(--glass); margin-bottom: 30px; }
+        .bar-bg { width: 100%; height: 8px; background: #222; border-radius: 4px; margin-top: 10px; }
+        .bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--primary), var(--accent)); transition: 1s cubic-bezier(0.17, 0.67, 0.83, 0.67); }
+
+        /* NETWORKING LIST */
+        .contact-card { background: rgba(255,255,255,0.03); padding: 15px; margin-bottom: 10px; border-radius: 10px; border-left: 4px solid var(--accent); font-size: 0.85rem; }
+        .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; background: var(--accent); margin-right: 5px; }
+
+        #live-clock { position: fixed; top: 20px; right: 40px; color: var(--primary); font-family: 'Orbitron'; font-size: 0.8rem; letter-spacing: 1px; }
+    </style>
+</head>
+<body>
+
+    <div id="live-clock">LOADING...</div>
+
+    <nav>
+        <div class="nav-item active" onclick="showPage('dash', this)">🏠 <span class="nav-text">CORE</span></div>
+        <div class="nav-item" onclick="showPage('trade', this)">📈 <span class="nav-text">MARKETS</span></div>
+        <div class="nav-item" onclick="showPage('orbit', this)">🚀 <span class="nav-text">PHYSICS</span></div>
+        <div class="nav-item" onclick="showPage('network', this)">🌐 <span class="nav-text">NETWORK</span></div>
+    </nav>
+
+    <main>
+        <div class="xp-container">
+            <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+                <h1 style="font-size: 1.2rem; margin: 0;">THIHA LINN | LVL <span id="lvl">1</span></h1>
+                <span id="xp-text" style="color: var(--primary);">0 / 1000 XP</span>
+            </div>
+            <div class="bar-bg"><div id="xp-bar" class="bar-fill"></div></div>
+        </div>
+
+        <div id="dash" class="page active">
+            <div class="grid">
+                <div class="panel">
+                    <h2>Daily Directives</h2>
+                    <div onclick="addXP(50, this)" class="contact-card" style="cursor:pointer">Analyze SMC Internal Range Liquidity [+50]</div>
+                    <div onclick="addXP(40, this)" class="contact-card" style="cursor:pointer">Solve 3 Orbital Mechanics Equations [+40]</div>
+                    <div onclick="addXP(30, this)" class="contact-card" style="cursor:pointer">Physical Threshold Training [+30]</div>
+                </div>
+                <div class="panel">
+                    <h2>Philosophy</h2>
+                    <blockquote style="border-left: 2px solid var(--primary); padding-left: 15px; font-style: italic; color: #aaa;">
+                        "The market is a device for transferring money from the impatient to the patient." 
+                    </blockquote>
+                    <p style="margin-top: 20px; font-size: 0.8rem;">Focus on <b>Execution</b>, not outcome.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="trade" class="page">
+            <h2>Market Execution Log</h2>
+            <div class="grid">
+                <div class="panel">
+                    <input type="text" id="t-pair" placeholder="Pair (EURUSD/BTC)">
+                    <select id="t-setup">
+                        <option>ICT Killzone Entry</option>
+                        <option>SMC Order Block</option>
+                        <option>Fair Value Gap (FVG)</option>
+                    </select>
+                    <select id="t-res"><option value="win">WIN (+100 XP)</option><option value="loss">LOSS (+20 XP)</option></select>
+                    <button onclick="logTrade()">COMMIT TO HISTORY</button>
+                </div>
+                <div class="panel" id="t-history" style="max-height: 400px; overflow-y: auto;">
+                    <h3>Journal</h3>
+                </div>
+            </div>
+        </div>
+
+        <div id="orbit" class="page">
+            <h2>Space Engineering</h2>
+            <div class="grid">
+                <div class="panel">
+                    <h3>Delta-v Calc</h3>
+                    <input type="number" id="ve" placeholder="Exhaust Velocity (m/s)">
+                    <input type="number" id="m0" placeholder="Initial Mass (kg)">
+                    <input type="number" id="mf" placeholder="Final Mass (kg)">
+                    <button onclick="calcOrbit()">SOLVE EQUATION</button>
+                    <div id="orb-res" style="margin-top:20px; color: var(--primary); font-weight: bold;"></div>
+                </div>
+                <div class="panel">
+                    
+                    <p style="font-size: 0.8rem; color: #888;">$\Delta v = v_e \ln(\frac{m_0}{m_f})$<br><br>The foundation of all space travel. Without this math, we remain earthbound.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="network" class="page">
+            <h2>Global Elite Network</h2>
+            <div class="grid">
+                <div class="panel">
+                    <h3>New Connection</h3>
+                    <input type="text" id="n-name" placeholder="Name/Handle">
+                    <input type="text" id="n-role" placeholder="Role (e.g. SpaceX Engineer)">
+                    <button onclick="addContact()">TRACK CONTACT</button>
+                </div>
+                <div class="panel" id="n-list">
+                    <h3>The Inner Circle</h3>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // CORE SYSTEM LOGIC
+        let data = JSON.parse(localStorage.getItem('avoda_data')) || { xp: 0, trades: [], contacts: [] };
+
+        function save() { localStorage.setItem('avoda_data', JSON.stringify(data)); updateUI(); }
+
+        function showPage(id, el) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            el.classList.add('active');
+        }
+
+        function updateUI() {
+            const lvl = Math.floor(data.xp / 1000) + 1;
+            const progress = (data.xp % 1000) / 10;
+            document.getElementById('lvl').innerText = lvl;
+            document.getElementById('xp-text').innerText = `${data.xp % 1000} / 1000 XP`;
+            document.getElementById('xp-bar').style.width = progress + '%';
+            
+            // Render History
+            document.getElementById('t-history').innerHTML = '<h3>Journal</h3>' + data.trades.map(t => `<div class="contact-card">${t.pair} | ${t.setup} | <span style="color:${t.res === 'win' ? 'var(--primary)' : 'var(--secondary)'}">${t.res.toUpperCase()}</span></div>`).join('');
+            document.getElementById('n-list').innerHTML = '<h3>The Inner Circle</h3>' + data.contacts.map(c => `<div class="contact-card"><span class="tag">TARGET</span><b>${c.name}</b><br>${c.role}</div>`).join('');
+        }
+
+        function addXP(amt, el) {
+            if (el && el.style.opacity === "0.4") return;
+            data.xp += amt;
+            if(el) el.style.opacity = "0.4";
+            save();
+        }
+
+        function logTrade() {
+            const pair = document.getElementById('t-pair').value;
+            const res = document.getElementById('t-res').value;
+            if(!pair) return;
+            data.trades.unshift({ pair, setup: document.getElementById('t-setup').value, res });
+            addXP(res === 'win' ? 100 : 20);
+            save();
+        }
+
+        function addContact() {
+            const name = document.getElementById('n-name').value;
+            const role = document.getElementById('n-role').value;
+            if(!name) return;
+            data.contacts.unshift({ name, role });
+            addXP(150); // Networking is high value
+            save();
+        }
+
+        function calcOrbit() {
+            const ve = parseFloat(document.getElementById('ve').value);
+            const m0 = parseFloat(document.getElementById('m0').value);
+            const mf = parseFloat(document.getElementById('mf').value);
+            if(ve && m0 && mf) {
+                const dv = Math.round(ve * Math.log(m0/mf));
+                document.getElementById('orb-res').innerText = `DELTA-V: ${dv} m/s`;
+                addXP(200);
+                save();
+            }
+        }
+
+        setInterval(() => {
+            document.getElementById('live-clock').innerText = new Date().toUTCString().split(' ')[4] + " UTC";
+        }, 1000);
+
+        updateUI();
+    </script>
+</body>
+</html>
