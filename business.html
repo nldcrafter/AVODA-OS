@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BUSINESS MODULE | AVODA ACADEMY</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--purple:#7a00ff;--bg:#0a0a0a;--glass:rgba(255,255,255,0.03);--border:rgba(255,255,255,0.1);}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Orbitron',sans-serif;scroll-behavior:smooth;}
+body{background:var(--bg);color:white;line-height:1.6;}
+body::before{content:"";position:fixed;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle at 50% 50%,#1a1a1a 0%,#050505 100%);z-index:-2;}
+header{padding:60px;text-align:center;}
+h1{font-size:clamp(40px,8vw,60px);color:var(--purple);font-weight:900;}
+.subtitle{color:#888;margin-top:15px;font-size:16px;}
+section{padding:60px 10%;max-width:1200px;margin:0 auto;}
+h2{font-size:24px;border-left:5px solid var(--purple);padding-left:15px;color:#fff;margin-bottom:30px;}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px;}
+.card{background:var(--glass);border:1px solid var(--border);padding:30px;backdrop-filter:blur(15px);cursor:pointer;position:relative;}
+.card:hover{border-color:var(--purple);transform:scale(1.02);background:rgba(255,255,255,0.06);}
+.card::after{content:"→";position:absolute;bottom:15px;right:15px;color:var(--purple);opacity:0;transition:0.3s;}
+.card:hover::after{opacity:1;}
+.btn{display:inline-block;padding:12px 30px;border-radius:2px;border:1px solid var(--purple);color:var(--purple);text-decoration:none;font-weight:bold;margin-top:20px;}
+.btn:hover{background:var(--purple);color:black;box-shadow:0 0 30px rgba(122,0,255,0.4);transform:translateY(-2px);}
+footer{padding:80px 20px;border-top:1px solid var(--border);color:#444;text-align:center;font-size:12px;}
+</style>
+</head>
+<body>
+<header>
+<h1>BUSINESS MODULE</h1>
+<p class="subtitle">SCALABLE SYSTEMS</p>
+<a href="index.html" class="btn">BACK TO DASHBOARD</a>
+</header>
+<section>
+<h2>MISSION TASKS</h2>
+<div class="card-grid">
+<div class="card"><h3>BUILD INCOME CHANNEL</h3><p style="font-size:12px;color:#aaa;">Create digital and physical business systems for cashflow.</p></div>
+<div class="card"><h3>OPTIMIZE OPERATIONS</h3><p style="font-size:12px;color:#aaa;">Automate processes for maximum efficiency.</p></div>
+<div class="card"><h3>NETWORK WITH PARTNERS</h3><p style="font-size:12px;color:#aaa;">Find allies to scale faster.</p></div>
+</div>
+</section>
+<footer>© 2026 AVODA ACADEMY — BUSINESS MODULE</footer>
+</body>
+</html>
