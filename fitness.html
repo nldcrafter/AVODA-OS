@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FITNESS MODULE | AVODA ACADEMY</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--secondary:#ff003c;--bg:#0a0a0a;--glass:rgba(255,255,255,0.03);--border:rgba(255,255,255,0.1);}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Orbitron',sans-serif;scroll-behavior:smooth;}
+body{background:var(--bg);color:white;line-height:1.6;}
+body::before{content:"";position:fixed;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle at 50% 50%,#1a1a1a 0%,#050505 100%);z-index:-2;}
+header{padding:60px;text-align:center;}
+h1{font-size:clamp(40px,8vw,60px);color:var(--secondary);font-weight:900;}
+.subtitle{color:#888;margin-top:15px;font-size:16px;}
+section{padding:60px 10%;max-width:1200px;margin:0 auto;}
+h2{font-size:24px;border-left:5px solid var(--secondary);padding-left:15px;color:#fff;margin-bottom:30px;}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px;}
+.card{background:var(--glass);border:1px solid var(--border);padding:30px;backdrop-filter:blur(15px);cursor:pointer;position:relative;}
+.card:hover{border-color:var(--secondary);transform:scale(1.02);background:rgba(255,255,255,0.06);}
+.card::after{content:"→";position:absolute;bottom:15px;right:15px;color:var(--secondary);opacity:0;transition:0.3s;}
+.card:hover::after{opacity:1;}
+.btn{display:inline-block;padding:12px 30px;border-radius:2px;border:1px solid var(--secondary);color:var(--secondary);text-decoration:none;font-weight:bold;margin-top:20px;}
+.btn:hover{background:var(--secondary);color:black;box-shadow:0 0 30px rgba(255,0,60,0.4);transform:translateY(-2px);}
+footer{padding:80px 20px;border-top:1px solid var(--border);color:#444;text-align:center;font-size:12px;}
+</style>
+</head>
+<body>
+<header>
+<h1>FITNESS MODULE</h1>
+<p class="subtitle">PHYSICAL & MENTAL</p>
+<a href="index.html" class="btn">BACK TO DASHBOARD</a>
+</header>
+<section>
+<h2>MISSION TASKS</h2>
+<div class="card-grid">
+<div class="card"><h3>20 MIN INTENSE WORKOUT</h3><p style="font-size:12px;color:#aaa;">Focus on strength, endurance, and agility circuits.</p></div>
+<div class="card"><h3>MEDITATION & FOCUS</h3><p style="font-size:12px;color:#aaa;">Train mental resilience and clarity.</p></div>
+<div class="card"><h3>TRACK FITNESS XP</h3><p style="font-size:12px;color:#aaa;">Log workouts and measure progress consistently.</p></div>
+</div>
+</section>
+<footer>© 2026 AVODA ACADEMY — FITNESS MODULE</footer>
+</body>
+  </html>
