@@ -1,114 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AVODA ACADEMY | SOVEREIGN SYSTEM</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        /* ======== THE ARCHITECTURE ======== */
-        :root {
-            --primary: #00ffcc;
-            --secondary: #ff003c;
-            --gold: #ffcc00;
-            --purple: #7a00ff;
-            --bg-dark: #0a0a0a;
-            --glass: rgba(255, 255, 255, 0.03);
-            --border: rgba(255, 255, 255, 0.1);
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AVODA ACADEMY | V12 SOVEREIGN SYSTEM</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ===== ROOT COLORS ===== */
+:root{
+    --primary:#00ffcc;
+    --secondary:#ff003c;
+    --gold:#ffcc00;
+    --purple:#7a00ff;
+    --bg:#0a0a0a;
+    --glass:rgba(255,255,255,0.03);
+    --border:rgba(255,255,255,0.1);
+}
 
-        * { margin:0; padding:0; box-sizing:border-box; font-family:'Orbitron',sans-serif; scroll-behavior: smooth; }
-        body { background: var(--bg-dark); color: white; overflow-x: hidden; line-height: 1.6; }
-        
-        /* High-Definition Glow Background */
-        body::before {
-            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #050505 100%);
-            z-index: -2;
-        }
+/* ===== GENERAL ===== */
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Orbitron',sans-serif;scroll-behavior:smooth;}
+body{background:var(--bg);color:white;overflow-x:hidden;line-height:1.6;}
 
-        /* ======== HEADER & TICKER ======== */
-        .ticker-wrap {
-            width: 100%; overflow: hidden; background: #000; border-bottom: 1px solid var(--border);
-            padding: 10px 0; white-space: nowrap; font-family: 'JetBrains Mono', monospace; font-size: 12px;
-        }
-        .ticker-move { display: inline-block; animation: ticker 30s linear infinite; color: var(--primary); }
-        @keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+/* ===== BACKGROUND GLOW ===== */
+body::before{
+    content:"";position:fixed;top:0;left:0;width:100%;height:100%;
+    background:radial-gradient(circle at 50% 50%,#1a1a1a 0%,#050505 100%);
+    z-index:-2;
+}
 
-        header { padding: 80px 20px; text-align: center; position: relative; }
-        h1 {
-            font-size: clamp(40px, 8vw, 80px); font-weight: 900; letter-spacing: 10px;
-            background: linear-gradient(270deg, var(--secondary), var(--gold), var(--purple), var(--primary));
-            background-size: 600% 600%; -webkit-background-clip: text; color: transparent;
-            animation: gradientMove 8s ease infinite; text-transform: uppercase;
-        }
-        @keyframes gradientMove { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+/* ===== TICKER ===== */
+.ticker-wrap{
+    width:100%;overflow:hidden;background:#000;border-bottom:1px solid var(--border);
+    padding:10px 0;white-space:nowrap;font-family:'JetBrains Mono',monospace;font-size:12px;
+}
+.ticker-move{display:inline-block;animation:ticker 30s linear infinite;color:var(--primary);}
+@keyframes ticker{0%{transform:translateX(100%);}100%{transform:translateX(-100%);}}
 
-        .subtitle { color: #888; margin-top: 15px; font-size: clamp(14px, 2vw, 18px); letter-spacing: 5px; }
-        
-        /* ======== INTERACTIVE BUTTONS ======== */
-        .btn-container { margin-top: 40px; }
-        .btn {
-            display: inline-block; padding: 18px 45px; border-radius: 2px;
-            background: transparent; border: 1px solid var(--primary); color: var(--primary);
-            font-weight: bold; text-decoration: none; transition: 0.4s;
-            text-transform: uppercase; letter-spacing: 3px; position: relative; overflow: hidden;
-        }
-        .btn:hover { background: var(--primary); color: black; box-shadow: 0 0 50px rgba(0, 255, 204, 0.4); transform: translateY(-3px); }
+/* ===== HEADER ===== */
+header{padding:80px 20px;text-align:center;position:relative;}
+h1{
+    font-size:clamp(40px,8vw,80px);font-weight:900;letter-spacing:10px;
+    background:linear-gradient(270deg,var(--secondary),var(--gold),var(--purple),var(--primary));
+    background-size:600% 600%;-webkit-background-clip:text;color:transparent;
+    animation:gradientMove 8s ease infinite;text-transform:uppercase;
+}
+@keyframes gradientMove{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.subtitle{color:#888;margin-top:15px;font-size:clamp(14px,2vw,18px);letter-spacing:5px;}
 
-        /* ======== THE HUD (DASHBOARD) ======== */
-        section { padding: 80px 10%; max-width: 1600px; margin: 0 auto; }
-        h2 { font-size: 24px; letter-spacing: 5px; margin-bottom: 40px; border-left: 5px solid var(--primary); padding-left: 20px; color: #fff; }
+/* ===== BUTTON ===== */
+.btn-container{margin-top:40px;}
+.btn{
+    display:inline-block;padding:18px 45px;border-radius:2px;
+    background:transparent;border:1px solid var(--primary);color:var(--primary);
+    font-weight:bold;text-decoration:none;transition:0.4s;
+    text-transform:uppercase;letter-spacing:3px;position:relative;overflow:hidden;
+}
+.btn:hover{background:var(--primary);color:black;box-shadow:0 0 50px rgba(0,255,204,0.4);transform:translateY(-3px);}
 
-        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-bottom: 60px; }
-        .card {
-            background: var(--glass); border: 1px solid var(--border); padding: 40px;
-            transition: 0.5s cubic-bezier(0.19, 1, 0.22, 1); text-align: left;
-            backdrop-filter: blur(15px); position: relative;
-        }
-        .card:hover { border-color: var(--primary); transform: scale(1.02); background: rgba(255,255,255,0.06); }
-        .card::after { content: "→"; position: absolute; bottom: 20px; right: 20px; color: var(--primary); font-size: 20px; opacity: 0; transition: 0.3s; }
-        .card:hover::after { opacity: 1; }
+/* ===== SECTIONS ===== */
+section{padding:80px 10%;max-width:1600px;margin:0 auto;}
+h2{font-size:24px;letter-spacing:5px;margin-bottom:40px;border-left:5px solid var(--primary);padding-left:20px;color:#fff;}
 
-        /* ======== MISSION PROTOCOLS ======== */
-        .mission {
-            margin: 15px 0; padding: 30px; background: #0d0d0d; border: 1px solid #1a1a1a;
-            display: flex; justify-content: space-between; align-items: center;
-            transition: 0.3s; cursor: pointer;
-        }
-        .mission:hover { border-color: var(--primary); background: #111; box-shadow: 0 0 20px rgba(0, 255, 204, 0.1); }
-        .mission.completed { border-color: #333; opacity: 0.5; cursor: default; }
-        .mission.completed .status-tag { color: var(--primary); }
-        
-        .status-tag { font-family: 'JetBrains Mono'; font-size: 12px; color: #444; }
+/* ===== CARD GRID ===== */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px;margin-bottom:60px;}
+.card{
+    background:var(--glass);border:1px solid var(--border);padding:40px;
+    transition:0.5s cubic-bezier(0.19,1,0.22,1);text-align:left;
+    backdrop-filter:blur(15px);position:relative;cursor:pointer;
+}
+.card:hover{border-color:var(--primary);transform:scale(1.02);background:rgba(255,255,255,0.06);}
+.card::after{content:"→";position:absolute;bottom:20px;right:20px;color:var(--primary);font-size:20px;opacity:0;transition:0.3s;}
+.card:hover::after{opacity:1;}
 
-        /* ======== PROGRESS ENGINE ======== */
-        .stats-hud { background: #000; padding: 30px; border: 1px solid var(--border); margin-bottom: 60px; }
-        .progress-bar { background: #111; height: 10px; margin: 20px 0; border-radius: 0; overflow: hidden; }
-        .progress { height: 100%; background: var(--primary); width: 0%; transition: 1.5s cubic-bezier(0.19, 1, 0.22, 1); box-shadow: 0 0 20px var(--primary); }
-        
-        /* ======== LEADERBOARD ALPHA ======== */
-        .leader {
-            background: #0d0d0d; border: 1px solid #1a1a1a; padding: 30px;
-            text-align: left; transition: 0.3s; position: relative;
-        }
-        .leader:first-child { border-color: var(--gold); }
-        .rank-num { position: absolute; top: 10px; right: 20px; color: #222; font-size: 40px; font-weight: 900; }
+/* ===== MISSION ===== */
+.mission{
+    margin:15px 0;padding:20px;background:#0d0d0d;border:1px solid #1a1a1a;
+    display:flex;justify-content:space-between;align-items:center;
+    transition:0.3s;cursor:pointer;
+}
+.mission:hover{border-color:var(--primary);background:#111;box-shadow:0 0 20px rgba(0,255,204,0.1);}
+.mission.completed{border-color:#333;opacity:0.5;cursor:default;}
+.status-tag{font-family:'JetBrains Mono';font-size:12px;color:#444;}
 
-        footer { padding: 100px 20px; border-top: 1px solid var(--border); color: #444; text-align: center; font-size: 12px; letter-spacing: 5px; }
-    </style>
+/* ===== PROGRESS ===== */
+.stats-hud{background:#000;padding:30px;border:1px solid var(--border);margin-bottom:60px;}
+.progress-bar{background:#111;height:10px;margin:20px 0;border-radius:0;overflow:hidden;}
+.progress{height:100%;background:var(--primary);width:0%;transition:1.5s cubic-bezier(0.19,1,0.22,1);box-shadow:0 0 20px var(--primary);}
+
+/* ===== LEADERBOARD ===== */
+.leader{
+    background:#0d0d0d;border:1px solid #1a1a1a;padding:30px;text-align:left;transition:0.3s;position:relative;
+}
+.rank-num{position:absolute;top:10px;right:20px;color:#222;font-size:40px;font-weight:900;}
+.leader:first-child{border-color:var(--gold);}
+
+/* ===== FOOTER ===== */
+footer{padding:100px 20px;border-top:1px solid var(--border);color:#444;text-align:center;font-size:12px;letter-spacing:5px;}
+</style>
 </head>
 <body>
 
 <div class="ticker-wrap">
     <div class="ticker-move" id="market-ticker">
-        BTC/USD +2.4% • XAU/USD -0.8% • NASDAQ +1.2% • ETH/USD +4.1% • SOL/USD +5.5% • GBP/USD -0.2% • 
+        BTC/USD +2.4% • XAU/USD -0.8% • NASDAQ +1.2% • ETH/USD +4.1% • SOL/USD +5.5% • GBP/USD -0.2% •
     </div>
 </div>
 
 <header>
     <h1>AVODA ACADEMY</h1>
-    <p class="subtitle">THE SOVEREIGN WEALTH TERMINAL</p>
+    <p class="subtitle">SOVEREIGN WEALTH TERMINAL</p>
     <div class="btn-container">
         <a href="#missions" class="btn">INITIALIZE SYSTEM</a>
     </div>
@@ -116,148 +116,117 @@
 
 <section id="missions">
     <div class="stats-hud">
-        <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;">
             <h2>SYSTEM PROGRESS</h2>
-            <p id="progressText" style="font-family: 'JetBrains Mono'; color: var(--primary);">RANK: INITIATE [0 XP]</p>
+            <p id="progressText" style="font-family:'JetBrains Mono';color:var(--primary);">RANK: INITIATE [0 XP]</p>
         </div>
         <div class="progress-bar"><div class="progress" id="progress"></div></div>
     </div>
 
     <h2>MISSION DIRECTIVES</h2>
-    <div id="missionList">
-        </div>
+    <div id="missionList"></div>
 
-    <h2 style="margin-top: 80px;">INTEL MODULES</h2>
+    <h2 style="margin-top:80px;">INTEL MODULES</h2>
     <div class="card-grid">
-        <div class="card" onclick="openModule('Wealth')">
-            <h3 style="color: var(--gold);">WEALTH</h3>
-            <p style="font-size: 12px; color: #666; margin-top: 10px;">CAPITAL ALLOCATION & PRESERVATION</p>
-        </div>
-        <div class="card" onclick="openModule('Trading')">
-            <h3 style="color: var(--primary);">TRADING</h3>
-            <p style="font-size: 12px; color: #666; margin-top: 10px;">SMC & INSTITUTIONAL ORDERFLOW</p>
-        </div>
-        <div class="card" onclick="openModule('Business')">
-            <h3 style="color: var(--purple);">BUSINESS</h3>
-            <p style="font-size: 12px; color: #666; margin-top: 10px;">SCALABLE REVENUE SYSTEMS</p>
-        </div>
-        <div class="card" onclick="openModule('Fitness')">
-            <h3 style="color: var(--secondary);">FITNESS</h3>
-            <p style="font-size: 12px; color: #666; margin-top: 10px;">PHYSICAL & MENTAL FORTRESS</p>
-        </div>
+        <div class="card" onclick="goToModule('wealth.html')"><h3 style="color: var(--gold)">WEALTH</h3><p style="font-size:12px;color:#666;margin-top:10px;">CAPITAL & PRESERVATION</p></div>
+        <div class="card" onclick="goToModule('trading.html')"><h3 style="color: var(--primary)">TRADING</h3><p style="font-size:12px;color:#666;margin-top:10px;">SMC & ORDERFLOW</p></div>
+        <div class="card" onclick="goToModule('business.html')"><h3 style="color: var(--purple)">BUSINESS</h3><p style="font-size:12px;color:#666;margin-top:10px;">SCALABLE SYSTEMS</p></div>
+        <div class="card" onclick="goToModule('fitness.html')"><h3 style="color: var(--secondary)">FITNESS</h3><p style="font-size:12px;color:#666;margin-top:10px;">PHYSICAL & MENTAL</p></div>
+        <div class="card" onclick="goToModule('crypto.html')"><h3 style="color: var(--primary)">CRYPTO</h3><p style="font-size:12px;color:#666;margin-top:10px;">BLOCKCHAIN STUDY</p></div>
     </div>
 
-    <h2 style="margin-top: 80px;">GLOBAL RANKINGS</h2>
-    <div class="card-grid" id="leaderboard">
-        </div>
+    <h2 style="margin-top:80px;">GLOBAL RANKINGS</h2>
+    <div class="card-grid" id="leaderboard"></div>
 </section>
 
 <footer>
-    © 2026 AVODA ACADEMY — THE FOUNDATION FOR REAL BUILDERS
+© 2026 AVODA ACADEMY — FOUNDATION FOR REAL BUILDERS
 </footer>
 
 <script>
-    // ======== THE AVODA CORE ENGINE ========
+// ===== CORE DATA =====
+const missionData = [
+    {id:1,title:"EXECUTE 1 A+ TRADE",xp:100,module:"Trading"},
+    {id:2,title:"20 MIN INTENSE WORKOUT",xp:50,module:"Fitness"},
+    {id:3,title:"STUDY WEALTH PROTOCOLS",xp:80,module:"Wealth"},
+    {id:4,title:"ANALYZE ON-CHAIN DATA",xp:60,module:"Crypto"},
+    {id:5,title:"BUILD INCOME CHANNEL",xp:120,module:"Business"}
+];
 
-    // Data Structure
-    const missionData = [
-        { id: 1, title: "EXECUTE 1 A+ TRADE", xp: 100, category: "TRADING" },
-        { id: 2, title: "20 MIN INTENSE WORKOUT", xp: 50, category: "FITNESS" },
-        { id: 3, title: "STUDY WEALTH PROTOCOLS", xp: 80, category: "WEALTH" },
-        { id: 4, title: "ANALYZE ON-CHAIN DATA", xp: 60, category: "CRYPTO" },
-        { id: 5, title: "BUILD INCOME CHANNEL", xp: 120, category: "BUSINESS" }
-    ];
+let state = JSON.parse(localStorage.getItem('avoda_state')) || {totalXP:0,completedIds:[]};
 
-    let state = JSON.parse(localStorage.getItem('avoda_state')) || {
-        totalXP: 0,
-        completedIds: []
-    };
+// ===== INIT MISSIONS =====
+function loadMissions(){
+    const list = document.getElementById('missionList');
+    list.innerHTML='';
+    missionData.forEach(m=>{
+        const isDone = state.completedIds.includes(m.id);
+        const div=document.createElement('div');
+        div.className=`mission ${isDone?'completed':''}`;
+        div.innerHTML=`<div><span style="font-size:10px;color:#444;">// ${m.module}</span><p style="margin-top:5px;">${m.title}</p></div><span class="status-tag">${isDone?'VERIFIED':'+ '+m.xp+' XP'}</span>`;
+        if(!isDone) div.onclick=()=>completeMission(m.id,m.xp);
+        list.appendChild(div);
+    });
+}
 
-    // Initialize Missions
-    function loadMissions() {
-        const list = document.getElementById('missionList');
-        list.innerHTML = '';
-        missionData.forEach(m => {
-            const isDone = state.completedIds.includes(m.id);
-            const div = document.createElement('div');
-            div.className = `mission ${isDone ? 'completed' : ''}`;
-            div.innerHTML = `
-                <div>
-                    <span style="font-size: 10px; color: #444;">// ${m.category}</span>
-                    <p style="margin-top: 5px;">${m.title}</p>
-                </div>
-                <span class="status-tag">${isDone ? 'VERIFIED' : '+ ' + m.xp + ' XP'}</span>
-            `;
-            if (!isDone) div.onclick = () => completeMission(m.id, m.xp);
-            list.appendChild(div);
-        });
-    }
-
-    function completeMission(id, xp) {
+// ===== COMPLETE MISSION =====
+function completeMission(id,xp){
+    if(!state.completedIds.includes(id)){
         state.completedIds.push(id);
-        state.totalXP += xp;
+        state.totalXP+=xp;
         saveState();
         loadMissions();
         updateUI();
     }
+}
 
-    function saveState() {
-        localStorage.setItem('avoda_state', JSON.stringify(state));
-    }
+// ===== LOCAL STORAGE =====
+function saveState(){localStorage.setItem('avoda_state',JSON.stringify(state));}
 
-    function updateUI() {
-        const maxXP = missionData.reduce((acc, m) => acc + m.xp, 0);
-        const percent = (state.totalXP / maxXP) * 100;
-        document.getElementById('progress').style.width = percent + '%';
-        
-        let rank = "INITIATE";
-        if(state.totalXP > 150) rank = "EXECUTOR";
-        if(state.totalXP > 300) rank = "SOVEREIGN";
-        
-        document.getElementById('progressText').innerText = `RANK: ${rank} [${state.totalXP} XP]`;
-        updateLeaderboard();
-    }
+// ===== UPDATE UI =====
+function updateUI(){
+    const maxXP = missionData.reduce((acc,m)=>acc+m.xp,0);
+    const percent = (state.totalXP/maxXP)*100;
+    document.getElementById('progress').style.width = percent+'%';
+    let rank="INITIATE";
+    if(state.totalXP>150) rank="EXECUTOR";
+    if(state.totalXP>300) rank="SOVEREIGN";
+    document.getElementById('progressText').innerText=`RANK: ${rank} [${state.totalXP} XP]`;
+    updateLeaderboard();
+}
 
-    function updateLeaderboard() {
-        const leadEl = document.getElementById('leaderboard');
-        let leaders = [
-            { name: "ALPHA_01", xp: 500 },
-            { name: "ALPHA_02", xp: 420 },
-            { name: "ALPHA_03", xp: 380 },
-            { name: "YOU", xp: state.totalXP }
-        ];
-        
-        leaders.sort((a, b) => b.xp - a.xp);
-        
-        leadEl.innerHTML = leaders.map((u, i) => `
-            <div class="leader">
-                <span class="rank-num">0${i+1}</span>
-                <p style="color: ${u.name === 'YOU' ? 'var(--primary)' : '#fff'}">${u.name}</p>
-                <p style="font-family: 'JetBrains Mono'; font-size: 14px; color: #444;">${u.xp} XP</p>
-            </div>
-        `).join('');
-    }
+// ===== LEADERBOARD =====
+function updateLeaderboard(){
+    const leadEl=document.getElementById('leaderboard');
+    let leaders=[
+        {name:"ALPHA_01",xp:500},
+        {name:"ALPHA_02",xp:420},
+        {name:"ALPHA_03",xp:380},
+        {name:"YOU",xp:state.totalXP}
+    ];
+    leaders.sort((a,b)=>b.xp-a.xp);
+    leadEl.innerHTML=leaders.map((u,i)=>`<div class="leader"><span class="rank-num">0${i+1}</span><p style="color:${u.name==='YOU'?'var(--primary)':'#fff'}">${u.name}</p><p style="font-family:'JetBrains Mono';font-size:14px;color:#444">${u.xp} XP</p></div>`).join('');
+}
 
-    function openModule(name) {
-        console.log(`Initializing ${name} Protocol...`);
-        alert(`PROTOCOL ${name.toUpperCase()} INITIALIZING... Access Granted.`);
-    }
+// ===== MODULE NAVIGATION =====
+function goToModule(url){
+    window.location.href = url; // Redirect to external page
+}
 
-    // Market Ticker Simulation
-    function updateTicker() {
-        const prices = [
-            `BTC $${(65000 + Math.random()*100).toFixed(0)}`,
-            `XAU $${(2350 + Math.random()*5).toFixed(2)}`,
-            `ETH $${(3450 + Math.random()*10).toFixed(0)}`
-        ];
-        document.getElementById('market-ticker').innerText = prices.join(' • ') + ' • ' + prices.join(' • ');
-    }
+// ===== MARKET TICKER =====
+function updateTicker(){
+    const prices=[
+        `BTC $${(65000+Math.random()*100).toFixed(0)}`,
+        `XAU $${(2350+Math.random()*5).toFixed(2)}`,
+        `ETH $${(3450+Math.random()*10).toFixed(0)}`
+    ];
+    document.getElementById('market-ticker').innerText=prices.join(' • ')+' • '+prices.join(' • ');
+}
 
-    // Launch
-    setInterval(updateTicker, 3000);
-    loadMissions();
-    updateUI();
-
+// ===== LAUNCH =====
+setInterval(updateTicker,3000);
+loadMissions();
+updateUI();
 </script>
 
 </body>
