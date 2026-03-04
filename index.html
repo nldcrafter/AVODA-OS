@@ -240,6 +240,41 @@ CLOSE
 </div>
 
 <script>
+
+// ===== PROFILE SYSTEM =====
+
+function openProfile(){
+    document.getElementById("profilePanel").style.right="0";
+
+    document.getElementById("profileName").innerText = currentUser;
+    document.getElementById("profileXP").innerText = state.totalXP;
+
+    const level = Math.floor(state.totalXP / 200) + 1;
+    document.getElementById("profileLevel").innerText = level;
+
+    document.getElementById("profileMissions").innerText = state.completedIds.length;
+
+    // Calculate rank
+    let allUsers = Object.keys(users).map(name => ({
+        name: name,
+        xp: users[name].totalXP || 0
+    }));
+
+    allUsers.sort((a,b)=>b.xp-a.xp);
+
+    const rank = allUsers.findIndex(u=>u.name===currentUser)+1;
+    document.getElementById("profileRank").innerText = "#"+rank;
+}
+
+function closeProfile(){
+    document.getElementById("profilePanel").style.right="-400px";
+}
+
+function logout(){
+    localStorage.removeItem("currentUser");
+    location.reload();
+    }
+    
 // ===== CORE DATA =====
 const missionData = [
     // ===== USER SYSTEM =====
