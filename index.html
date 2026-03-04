@@ -6,122 +6,122 @@
 <title>AVODA ACADEMY | V12 SOVEREIGN SYSTEM</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-/* ===== ROOT COLORS ===== */
-:root{
-    --primary:#00ffcc;
-    --secondary:#ff003c;
-    --gold:#ffcc00;
-    --purple:#7a00ff;
-    --bg:#0a0a0a;
-    --glass:rgba(255,255,255,0.03);
-    --border:rgba(255,255,255,0.1);
-}
+    /* ===== SYSTEM VARIABLES ===== */
+    :root {
+        --primary: #00ffcc; --secondary: #ff003c; --gold: #ffcc00;
+        --purple: #7a00ff; --bg: #0a0a0a; --glass: rgba(255, 255, 255, 0.03);
+        --border: rgba(255, 255, 255, 0.1); --panel: #111;
+    }
 
-/* ===== GENERAL ===== */
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Orbitron',sans-serif;scroll-behavior:smooth;}
-body{background:var(--bg);color:white;overflow-x:hidden;line-height:1.6;}
+    /* ===== CORE RESET ===== */
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Orbitron', sans-serif; scroll-behavior: smooth; }
+    body { background: var(--bg); color: white; overflow-x: hidden; line-height: 1.6; }
+    
+    /* Cinematic Background */
+    body::before {
+        content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #050505 100%);
+        z-index: -2;
+    }
 
-/* ===== BACKGROUND GLOW ===== */
-body::before{
-    content:"";position:fixed;top:0;left:0;width:100%;height:100%;
-    background:radial-gradient(circle at 50% 50%,#1a1a1a 0%,#050505 100%);
-    z-index:-2;
-}
+    /* ===== AUTH OVERLAY ===== */
+    #loginOverlay {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: #000; z-index: 9999; display: flex; align-items: center; justify-content: center;
+        transition: 0.5s;
+    }
+    .login-box {
+        background: var(--panel); border: 1px solid var(--primary);
+        padding: 50px; width: 400px; text-align: center; box-shadow: 0 0 50px rgba(0, 255, 204, 0.1);
+    }
+    .login-box h2 { font-size: 18px; letter-spacing: 5px; margin-bottom: 30px; color: var(--primary); }
+    .login-box input {
+        width: 100%; padding: 15px; margin-bottom: 15px; background: #000;
+        border: 1px solid #333; color: #fff; font-family: 'JetBrains Mono';
+    }
 
-/* ===== TICKER ===== */
-.ticker-wrap{
-    width:100%;overflow:hidden;background:#000;border-bottom:1px solid var(--border);
-    padding:10px 0;white-space:nowrap;font-family:'JetBrains Mono',monospace;font-size:12px;
-}
-.ticker-move{display:inline-block;animation:ticker 30s linear infinite;color:var(--primary);}
-@keyframes ticker{0%{transform:translateX(100%);}100%{transform:translateX(-100%);}}
+    /* ===== TICKER ===== */
+    .ticker-wrap {
+        width: 100%; overflow: hidden; background: #000; border-bottom: 1px solid var(--border);
+        padding: 10px 0; white-space: nowrap; font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    }
+    .ticker-move { display: inline-block; animation: ticker 30s linear infinite; color: var(--primary); }
+    @keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
 
-/* ===== HEADER ===== */
-header{padding:80px 20px;text-align:center;position:relative;}
-h1{
-    font-size:clamp(40px,8vw,80px);font-weight:900;letter-spacing:10px;
-    background:linear-gradient(270deg,var(--secondary),var(--gold),var(--purple),var(--primary));
-    background-size:600% 600%;-webkit-background-clip:text;color:transparent;
-    animation:gradientMove 8s ease infinite;text-transform:uppercase;
-}
-@keyframes gradientMove{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-.subtitle{color:#888;margin-top:15px;font-size:clamp(14px,2vw,18px);letter-spacing:5px;}
+    /* ===== LAYOUT ===== */
+    header { padding: 100px 20px; text-align: center; }
+    h1 {
+        font-size: clamp(40px, 8vw, 80px); font-weight: 900; letter-spacing: 15px;
+        background: linear-gradient(270deg, var(--secondary), var(--gold), var(--purple), var(--primary));
+        background-size: 600% 600%; -webkit-background-clip: text; color: transparent;
+        animation: gradientMove 8s ease infinite;
+    }
+    @keyframes gradientMove { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
 
-/* ===== BUTTON ===== */
-.btn-container{margin-top:40px;}
-.btn{
-    display:inline-block;padding:18px 45px;border-radius:2px;
-    background:transparent;border:1px solid var(--primary);color:var(--primary);
-    font-weight:bold;text-decoration:none;transition:0.4s;
-    text-transform:uppercase;letter-spacing:3px;position:relative;overflow:hidden;
-}
-.btn:hover{background:var(--primary);color:black;box-shadow:0 0 50px rgba(0,255,204,0.4);transform:translateY(-3px);}
+    .btn {
+        display: inline-block; padding: 18px 45px; border: 1px solid var(--primary);
+        background: transparent; color: var(--primary); font-weight: bold;
+        text-transform: uppercase; letter-spacing: 3px; transition: 0.4s; cursor: pointer;
+    }
+    .btn:hover { background: var(--primary); color: #000; box-shadow: 0 0 30px var(--primary); }
 
-/* ===== SECTIONS ===== */
-section{padding:80px 10%;max-width:1600px;margin:0 auto;}
-h2{font-size:24px;letter-spacing:5px;margin-bottom:40px;border-left:5px solid var(--primary);padding-left:20px;color:#fff;}
+    section { padding: 80px 10%; max-width: 1400px; margin: 0 auto; }
+    h2 { font-size: 22px; letter-spacing: 5px; margin-bottom: 40px; border-left: 5px solid var(--primary); padding-left: 20px; }
 
-/* ===== CARD GRID ===== */
-.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px;margin-bottom:60px;}
-.card{
-    background:var(--glass);border:1px solid var(--border);padding:40px;
-    transition:0.5s cubic-bezier(0.19,1,0.22,1);text-align:left;
-    backdrop-filter:blur(15px);position:relative;cursor:pointer;
-}
-.card:hover{border-color:var(--primary);transform:scale(1.02);background:rgba(255,255,255,0.06);}
-.card::after{content:"→";position:absolute;bottom:20px;right:20px;color:var(--primary);font-size:20px;opacity:0;transition:0.3s;}
-.card:hover::after{opacity:1;}
+    /* ===== COMPONENTS ===== */
+    .stats-hud { background: #000; padding: 40px; border: 1px solid var(--border); margin-bottom: 60px; }
+    .progress-bar { background: #111; height: 12px; margin-top: 20px; position: relative; }
+    .progress { height: 100%; background: var(--primary); width: 0%; transition: 2s cubic-bezier(0.19, 1, 0.22, 1); box-shadow: 0 0 20px var(--primary); }
 
-/* ===== MISSION ===== */
-.mission{
-    margin:15px 0;padding:20px;background:#0d0d0d;border:1px solid #1a1a1a;
-    display:flex;justify-content:space-between;align-items:center;
-    transition:0.3s;cursor:pointer;
-}
-.mission:hover{border-color:var(--primary);background:#111;box-shadow:0 0 20px rgba(0,255,204,0.1);}
-.mission.completed{border-color:#333;opacity:0.5;cursor:default;}
-.status-tag{font-family:'JetBrains Mono';font-size:12px;color:#444;}
+    .mission {
+        background: #0d0d0d; border: 1px solid #1a1a1a; padding: 25px; margin-bottom: 15px;
+        display: flex; justify-content: space-between; align-items: center; transition: 0.3s;
+    }
+    .mission:hover { border-color: var(--primary); background: #111; }
+    .mission.completed { opacity: 0.4; border-color: #333; pointer-events: none; }
 
-/* ===== PROGRESS ===== */
-.stats-hud{background:#000;padding:30px;border:1px solid var(--border);margin-bottom:60px;}
-.progress-bar{background:#111;height:10px;margin:20px 0;border-radius:0;overflow:hidden;}
-.progress{height:100%;background:var(--primary);width:0%;transition:1.5s cubic-bezier(0.19,1,0.22,1);box-shadow:0 0 20px var(--primary);}
+    .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
+    .card { background: var(--glass); border: 1px solid var(--border); padding: 40px; transition: 0.4s; backdrop-filter: blur(10px); }
+    .card:hover { border-color: var(--primary); transform: translateY(-10px); }
 
-/* ===== LEADERBOARD ===== */
-.leader{
-    background:#0d0d0d;border:1px solid #1a1a1a;padding:30px;text-align:left;transition:0.3s;position:relative;
-}
-.rank-num{position:absolute;top:10px;right:20px;color:#222;font-size:40px;font-weight:900;}
-.leader:first-child{border-color:var(--gold);}
-
-/* ===== FOOTER ===== */
-footer{padding:100px 20px;border-top:1px solid var(--border);color:#444;text-align:center;font-size:12px;letter-spacing:5px;}
+    /* ===== PROFILE SLIDE ===== */
+    #profilePanel {
+        position: fixed; top: 0; right: -450px; width: 400px; height: 100%;
+        background: #0d0d0d; border-left: 1px solid var(--primary); z-index: 10000;
+        padding: 50px; transition: 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+    #profilePanel.active { right: 0; }
+    
+    .leader-item { background: #0d0d0d; padding: 20px; border: 1px solid #1a1a1a; margin-bottom: 10px; display: flex; justify-content: space-between; }
 </style>
 </head>
 <body>
 
-<div class="ticker-wrap">
-    <div class="ticker-move" id="market-ticker">
-        BTC/USD +2.4% • XAU/USD -0.8% • NASDAQ +1.2% • ETH/USD +4.1% • SOL/USD +5.5% • GBP/USD -0.2% •
+<div id="loginOverlay">
+    <div class="login-box">
+        <h2>IDENTIFICATION REQUIRED</h2>
+        <input type="text" id="username" placeholder="USERNAME">
+        <input type="password" id="password" placeholder="ACCESS KEY">
+        <button class="btn" style="width:100%" onclick="login()">INITIALIZE SYSTEM</button>
+        <p id="loginMsg" style="color:var(--secondary); font-size:10px; margin-top:20px; font-family:'JetBrains Mono';"></p>
     </div>
+</div>
+
+<div class="ticker-wrap">
+    <div class="ticker-move" id="market-ticker">SYNCHRONIZING WITH GLOBAL MARKETS...</div>
 </div>
 
 <header>
     <h1>AVODA ACADEMY</h1>
-    <button onclick="openProfile()" class="btn" style="margin-left:15px;">
-PROFILE
-    </button>
-    <p class="subtitle">SOVEREIGN WEALTH TERMINAL</p>
-    <div class="btn-container">
-        <a href="#missions" class="btn">INITIALIZE SYSTEM</a>
-    </div>
+    <p style="color:#555; letter-spacing:10px; margin-bottom:30px;">SOVEREIGN WEALTH TERMINAL</p>
+    <button class="btn" onclick="toggleProfile(true)">USER PROFILE</button>
 </header>
 
-<section id="missions">
+<section id="dashboard">
     <div class="stats-hud">
-        <div style="display:flex;justify-content:space-between;align-items:flex-end;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-end;">
             <h2>SYSTEM PROGRESS</h2>
-            <p id="progressText" style="font-family:'JetBrains Mono';color:var(--primary);">RANK: INITIATE [0 XP]</p>
+            <p id="progressText" style="color:var(--primary); font-family:'JetBrains Mono';">RANK: INITIATE [0 XP]</p>
         </div>
         <div class="progress-bar"><div class="progress" id="progress"></div></div>
     </div>
@@ -131,235 +131,153 @@ PROFILE
 
     <h2 style="margin-top:80px;">INTEL MODULES</h2>
     <div class="card-grid">
-        <div class="card" onclick="goToModule('wealth.html')"><h3 style="color: var(--gold)">WEALTH</h3><p style="font-size:12px;color:#666;margin-top:10px;">CAPITAL & PRESERVATION</p></div>
-        <div class="card" onclick="goToModule('trading.html')"><h3 style="color: var(--primary)">TRADING</h3><p style="font-size:12px;color:#666;margin-top:10px;">SMC & ORDERFLOW</p></div>
-        <div class="card" onclick="goToModule('business.html')"><h3 style="color: var(--purple)">BUSINESS</h3><p style="font-size:12px;color:#666;margin-top:10px;">SCALABLE SYSTEMS</p></div>
-        <div class="card" onclick="goToModule('fitness.html')"><h3 style="color: var(--secondary)">FITNESS</h3><p style="font-size:12px;color:#666;margin-top:10px;">PHYSICAL & MENTAL</p></div>
-        <div class="card" onclick="goToModule('crypto.html')"><h3 style="color: var(--primary)">CRYPTO</h3><p style="font-size:12px;color:#666;margin-top:10px;">BLOCKCHAIN STUDY</p></div>
+        <div class="card" onclick="alert('Accessing Wealth Intel...')">
+            <h3 style="color:var(--gold)">WEALTH</h3>
+            <p style="font-size:11px; color:#555; margin-top:10px;">CAPITAL & PRESERVATION</p>
+        </div>
+        <div class="card" onclick="alert('Accessing Trading Intel...')">
+            <h3 style="color:var(--primary)">TRADING</h3>
+            <p style="font-size:11px; color:#555; margin-top:10px;">SMC & ORDERFLOW</p>
+        </div>
+        <div class="card" onclick="alert('Accessing Business Intel...')">
+            <h3 style="color:var(--purple)">BUSINESS</h3>
+            <p style="font-size:11px; color:#555; margin-top:10px;">SCALABLE SYSTEMS</p>
+        </div>
     </div>
 
     <h2 style="margin-top:80px;">GLOBAL RANKINGS</h2>
-    <div class="card-grid" id="leaderboard"></div>
+    <div id="leaderboard"></div>
 </section>
 
-<footer>
-© 2026 AVODA ACADEMY — FOUNDATION FOR REAL BUILDERS
-</footer>
-
-    <!-- PROFILE PANEL -->
-<div id="profilePanel" style="
-position:fixed;
-top:0;
-right:-400px;
-width:350px;
-height:100%;
-background:#111;
-border-left:1px solid #00ffcc;
-padding:30px;
-transition:0.4s;
-z-index:9998;
-">
-
-<h2 style="color:#00ffcc;margin-bottom:20px;">USER PROFILE</h2>
-
-<p><strong>Username:</strong> <span id="profileName"></span></p>
-<p><strong>Total XP:</strong> <span id="profileXP"></span></p>
-<p><strong>Level:</strong> <span id="profileLevel"></span></p>
-<p><strong>Missions Completed:</strong> <span id="profileMissions"></span></p>
-<p><strong>Rank:</strong> <span id="profileRank"></span></p>
-
-<button onclick="logout()" style="
-margin-top:20px;
-padding:10px;
-background:#ff003c;
-border:none;
-color:white;
-width:100%;
-cursor:pointer;
-font-weight:bold;
-">
-LOGOUT
-</button>
-
-<button onclick="closeProfile()" style="
-margin-top:10px;
-padding:10px;
-background:#00ffcc;
-border:none;
-width:100%;
-cursor:pointer;
-font-weight:bold;
-">
-CLOSE
-</button>
-
+<div id="profilePanel">
+    <h2 style="color:var(--primary); margin-bottom:30px;">DATA PROFILE</h2>
+    <div style="font-family:'JetBrains Mono'; font-size:14px; color:#888;">
+        <p>IDENTIFIER: <span id="p-name" style="color:#fff;"></span></p>
+        <p>TOTAL_XP: <span id="p-xp" style="color:var(--primary);"></span></p>
+        <p>COMPLETED: <span id="p-missions" style="color:#fff;"></span></p>
+        <p>CURRENT_RANK: <span id="p-rank" style="color:var(--gold);"></span></p>
+    </div>
+    <button class="btn" style="width:100%; margin-top:50px;" onclick="toggleProfile(false)">CLOSE TERMINAL</button>
+    <button class="btn" style="width:100%; margin-top:10px; border-color:var(--secondary); color:var(--secondary);" onclick="logout()">LOGOUT</button>
 </div>
 
 <script>
-
-// ===== PROFILE SYSTEM =====
-
-function openProfile(){
-    document.getElementById("profilePanel").style.right="0";
-
-    document.getElementById("profileName").innerText = currentUser;
-    document.getElementById("profileXP").innerText = state.totalXP;
-
-    const level = Math.floor(state.totalXP / 200) + 1;
-    document.getElementById("profileLevel").innerText = level;
-
-    document.getElementById("profileMissions").innerText = state.completedIds.length;
-
-    // Calculate rank
-    let allUsers = Object.keys(users).map(name => ({
-        name: name,
-        xp: users[name].totalXP || 0
-    }));
-
-    allUsers.sort((a,b)=>b.xp-a.xp);
-
-    const rank = allUsers.findIndex(u=>u.name===currentUser)+1;
-    document.getElementById("profileRank").innerText = "#"+rank;
-}
-
-function closeProfile(){
-    document.getElementById("profilePanel").style.right="-400px";
-}
-
-function logout(){
-    localStorage.removeItem("currentUser");
-    location.reload();
-    }
-    
-// ===== CORE DATA =====
-const missionData = [
-    // ===== USER SYSTEM =====
-let users = JSON.parse(localStorage.getItem("avoda_users")) || {};
-let currentUser = localStorage.getItem("currentUser");
-let state;
-
-function login(){
-    const user = document.getElementById("username").value.trim();
-    const pass = document.getElementById("password").value.trim();
-
-    if(!user || !pass){
-        document.getElementById("loginMsg").innerText="ENTER CREDENTIALS";
-        return;
-    }
-
-    if(!users[user]){
-        users[user] = {
-            password: pass,
-            totalXP: 0,
-            completedIds: []
-        };
-    }
-
-    if(users[user].password === pass){
-        currentUser = user;
-        localStorage.setItem("currentUser", user);
-        localStorage.setItem("avoda_users", JSON.stringify(users));
-
-        state = users[user];
-        document.getElementById("loginOverlay").style.display="none";
-
-        loadMissions();
-        updateUI();
-    } else {
-        document.getElementById("loginMsg").innerText="INVALID PASSWORD";
-    }
-}
-
-function saveState(){
-    users[currentUser] = state;
-    localStorage.setItem("avoda_users", JSON.stringify(users));
-}
-// ===== INIT MISSIONS =====
-function loadMissions(){
-    const list = document.getElementById('missionList');
-    list.innerHTML='';
-    missionData.forEach(m=>{
-        const isDone = state.completedIds.includes(m.id);
-        const div=document.createElement('div');
-        div.className=`mission ${isDone?'completed':''}`;
-        div.innerHTML=`<div><span style="font-size:10px;color:#444;">// ${m.module}</span><p style="margin-top:5px;">${m.title}</p></div><span class="status-tag">${isDone?'VERIFIED':'+ '+m.xp+' XP'}</span>`;
-        if(!isDone) div.onclick=()=>completeMission(m.id,m.xp);
-        list.appendChild(div);
-    });
-}
-
-// ===== COMPLETE MISSION =====
-function completeMission(id,xp){
-    if(!state.completedIds.includes(id)){
-        state.completedIds.push(id);
-        state.totalXP+=xp;
-        saveState();
-        loadMissions();
-        updateUI();
-    }
-}
-
-// ===== LOCAL STORAGE =====
-function saveState(){localStorage.setItem('avoda_state',JSON.stringify(state));}
-
-// ===== UPDATE UI =====
-function updateUI(){
-    const maxXP = missionData.reduce((acc,m)=>acc+m.xp,0);
-    const percent = (state.totalXP/maxXP)*100;
-    document.getElementById('progress').style.width = percent+'%';
-    let rank="INITIATE";
-    if(state.totalXP>150) rank="EXECUTOR";
-    if(state.totalXP>300) rank="SOVEREIGN";
-    document.getElementById('progressText').innerText=`RANK: ${rank} [${state.totalXP} XP]`;
-    updateLeaderboard();
-}
-
-// ===== LEADERBOARD =====
-function updateLeaderboard(){
-    const leadEl = document.getElementById('leaderboard');
-
-    let allUsers = Object.keys(users).map(name => ({
-        name: name,
-        xp: users[name].totalXP || 0
-    }));
-
-    allUsers.sort((a,b)=>b.xp-a.xp);
-
-    leadEl.innerHTML = allUsers.map((u,i)=>`
-        <div class="leader">
-            <span class="rank-num">${i+1}</span>
-            <p style="color:${u.name===currentUser?'var(--primary)':'#fff'}">${u.name}</p>
-            <p style="font-family:'JetBrains Mono';font-size:14px;color:#444">
-                ${u.xp} XP
-            </p>
-        </div>
-    `).join('');
-    }
-// ===== MODULE NAVIGATION =====
-function goToModule(url){
-    window.location.href = url; // Redirect to external page
-}
-
-// ===== MARKET TICKER =====
-function updateTicker(){
-    const prices=[
-        `BTC $${(65000+Math.random()*100).toFixed(0)}`,
-        `XAU $${(2350+Math.random()*5).toFixed(2)}`,
-        `ETH $${(3450+Math.random()*10).toFixed(0)}`
+    // --- 1. CORE DATA ---
+    const missionData = [
+        { id: 1, title: "Market Session Review", xp: 100, cat: "TRADING" },
+        { id: 2, title: "Backtest 5 Setups", xp: 150, cat: "TRADING" },
+        { id: 3, title: "Capital Allocation Plan", xp: 200, cat: "WEALTH" },
+        { id: 4, title: "Physical Threshold Workout", xp: 80, cat: "FITNESS" }
     ];
-    document.getElementById('market-ticker').innerText=prices.join(' • ')+' • '+prices.join(' • ');
-}
 
-// ===== LAUNCH =====
-setInterval(updateTicker,3000);
+    let users = JSON.parse(localStorage.getItem("avoda_users")) || {};
+    let currentUser = localStorage.getItem("currentUser");
+    let state = { totalXP: 0, completedIds: [] };
 
-if(currentUser && users[currentUser]){
-    state = users[currentUser];
-    document.getElementById("loginOverlay").style.display="none";
-    loadMissions();
-    updateUI();
+    // --- 2. AUTH ENGINE ---
+    function login() {
+        const u = document.getElementById("username").value.trim();
+        const p = document.getElementById("password").value.trim();
+
+        if(!u || !p) {
+            document.getElementById("loginMsg").innerText = "INVALID INPUT";
+            return;
+        }
+
+        if(!users[u]) {
+            users[u] = { password: p, totalXP: 0, completedIds: [] };
+        }
+
+        if(users[u].password === p) {
+            currentUser = u;
+            localStorage.setItem("currentUser", u);
+            state = users[u];
+            document.getElementById("loginOverlay").style.display = "none";
+            sync();
+        } else {
+            document.getElementById("loginMsg").innerText = "ACCESS DENIED: INCORRECT KEY";
+        }
+    }
+
+    function logout() {
+        localStorage.removeItem("currentUser");
+        location.reload();
+    }
+
+    function sync() {
+        users[currentUser] = state;
+        localStorage.setItem("avoda_users", JSON.stringify(users));
+        render();
+    }
+
+    // --- 3. UI ENGINE ---
+    function render() {
+        // Mission List
+        const list = document.getElementById("missionList");
+        list.innerHTML = missionData.map(m => {
+            const isDone = state.completedIds.includes(m.id);
+            return `
+                <div class="mission ${isDone ? 'completed' : ''}" onclick="complete(${m.id}, ${m.xp})">
+                    <div>
+                        <span style="font-size:10px; color:#444;">// ${m.cat}</span>
+                        <p>${m.title}</p>
+                    </div>
+                    <span style="color:var(--primary); font-family:'JetBrains Mono';">${isDone ? 'VERIFIED' : '+'+m.xp+' XP'}</span>
+                </div>
+            `;
+        }).join('');
+
+        // Progress
+        const maxXP = missionData.reduce((acc, m) => acc + m.xp, 0);
+        const ratio = (state.totalXP / maxXP) * 100;
+        document.getElementById("progress").style.width = ratio + "%";
+        document.getElementById("progressText").innerText = `SYSTEM_XP: ${state.totalXP}`;
+
+        // Leaderboard
+        const lead = document.getElementById("leaderboard");
+        const sorted = Object.keys(users).map(k => ({ name: k, xp: users[k].totalXP })).sort((a,b) => b.xp - a.xp);
+        lead.innerHTML = sorted.map((u, i) => `
+            <div class="leader-item">
+                <span><b style="color:#333; margin-right:15px;">0${i+1}</b> ${u.name}</span>
+                <span style="color:var(--primary)">${u.xp} XP</span>
+            </div>
+        `).join('');
+    }
+
+    function complete(id, xp) {
+        if(!state.completedIds.includes(id)) {
+            state.completedIds.push(id);
+            state.totalXP += xp;
+            sync();
+        }
+    }
+
+    function toggleProfile(show) {
+        const p = document.getElementById("profilePanel");
+        if(show) {
+            p.classList.add("active");
+            document.getElementById("p-name").innerText = currentUser;
+            document.getElementById("p-xp").innerText = state.totalXP;
+            document.getElementById("p-missions").innerText = state.completedIds.length;
+            const sorted = Object.keys(users).sort((a,b) => users[b].totalXP - users[a].totalXP);
+            document.getElementById("p-rank").innerText = "#" + (sorted.indexOf(currentUser) + 1);
+        } else {
+            p.classList.remove("active");
+        }
+    }
+
+    function updateTicker() {
+        const prices = [`BTC $${(68000 + Math.random()*100).toFixed(0)}`, `ETH $${(3800 + Math.random()*50).toFixed(0)}`, `GOLD $2,345` ];
+        document.getElementById("market-ticker").innerText = prices.join(' • ') + ' • DATA STREAM ENCRYPTED • ';
+    }
+
+    // --- 4. INITIALIZE ---
+    setInterval(updateTicker, 3000);
+    if(currentUser && users[currentUser]) {
+        state = users[currentUser];
+        document.getElementById("loginOverlay").style.display = "none";
+        render();
     }
 </script>
-
 </body>
 </html>
