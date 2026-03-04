@@ -5,190 +5,298 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AVODA ACADEMY | WEALTH MODULE</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
 <style>
 :root{
     --primary:#00ffcc;
-    --secondary:#ff003c;
     --gold:#ffcc00;
-    --purple:#7a00ff;
     --bg:#0a0a0a;
     --glass:rgba(255,255,255,0.03);
     --border:rgba(255,255,255,0.1);
 }
 
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Orbitron',sans-serif;scroll-behavior:smooth;}
-body{background:var(--bg);color:white;overflow-x:hidden;line-height:1.6;}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Orbitron',sans-serif;}
+body{background:var(--bg);color:white;line-height:1.6;}
 
-body::before{
-    content:"";position:fixed;top:0;left:0;width:100%;height:100%;
-    background:radial-gradient(circle at 50% 50%,#1a1a1a 0%,#050505 100%);
-    z-index:-2;
-}
-
-/* ===== HEADER ===== */
-header{padding:60px 20px;text-align:center;position:relative;}
+header{text-align:center;padding:60px 20px;}
 h1{
-    font-size:clamp(40px,8vw,70px);font-weight:900;letter-spacing:10px;
-    background:linear-gradient(270deg,var(--secondary),var(--gold),var(--primary));
-    background-size:600% 600%;-webkit-background-clip:text;color:transparent;
-    animation:gradientMove 8s ease infinite;text-transform:uppercase;
+    font-size:clamp(40px,8vw,70px);
+    font-weight:900;
+    letter-spacing:10px;
+    background:linear-gradient(270deg,var(--gold),var(--primary));
+    -webkit-background-clip:text;
+    color:transparent;
 }
-@keyframes gradientMove{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-.subtitle{color:#888;margin-top:10px;font-size:clamp(14px,2vw,18px);letter-spacing:3px;}
+.subtitle{color:#888;margin-top:10px;}
 
-/* ===== BUTTON ===== */
-.btn-container{margin-top:30px;}
 .btn{
-    display:inline-block;padding:15px 35px;border-radius:2px;
-    background:transparent;border:1px solid var(--primary);color:var(--primary);
-    font-weight:bold;text-decoration:none;transition:0.4s;
-    text-transform:uppercase;letter-spacing:2px;position:relative;overflow:hidden;
+    display:inline-block;
+    margin-top:25px;
+    padding:12px 30px;
+    border:1px solid var(--primary);
+    color:var(--primary);
+    text-decoration:none;
+    transition:0.3s;
 }
-.btn:hover{background:var(--primary);color:black;box-shadow:0 0 40px rgba(0,255,204,0.4);transform:translateY(-3px);}
+.btn:hover{background:var(--primary);color:black;}
 
-/* ===== SECTIONS ===== */
-section{padding:60px 10%;max-width:1400px;margin:0 auto;}
-h2{font-size:22px;letter-spacing:4px;margin-bottom:30px;border-left:5px solid var(--gold);padding-left:15px;color:#fff;}
+section{padding:60px 10%;max-width:1400px;margin:auto;}
+h2{margin-bottom:20px;color:var(--gold);letter-spacing:3px;}
 
-/* ===== CARD GRID ===== */
-.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px;margin-bottom:50px;}
-.card{
-    background:var(--glass);border:1px solid var(--border);padding:30px;
-    transition:0.5s cubic-bezier(0.19,1,0.22,1);text-align:left;
-    backdrop-filter:blur(15px);position:relative;cursor:pointer;
+.card-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:20px;
+    margin-bottom:50px;
 }
-.card:hover{border-color:var(--gold);transform:scale(1.02);background:rgba(255,255,255,0.05);}
-.card::after{content:"→";position:absolute;bottom:15px;right:15px;color:var(--gold);font-size:18px;opacity:0;transition:0.3s;}
-.card:hover::after{opacity:1;}
 
-/* ===== MISSION ===== */
+.card,.tool-card{
+    background:var(--glass);
+    border:1px solid var(--border);
+    padding:25px;
+    backdrop-filter:blur(10px);
+    transition:0.3s;
+}
+
+.card:hover,.tool-card:hover{
+    border-color:var(--gold);
+    transform:scale(1.02);
+}
+
+input,button{
+    width:100%;
+    padding:8px;
+    margin-top:10px;
+    background:#000;
+    border:1px solid #333;
+    color:white;
+}
+
+button{
+    background:var(--gold);
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.progress-bar{background:#111;height:10px;margin:10px 0;}
+.progress{height:100%;background:var(--gold);width:0%;}
+
 .mission{
-    margin:12px 0;padding:18px;background:#0d0d0d;border:1px solid #1a1a1a;
-    display:flex;justify-content:space-between;align-items:center;
-    transition:0.3s;cursor:pointer;
+    padding:15px;
+    border:1px solid #222;
+    margin-bottom:10px;
+    cursor:pointer;
 }
-.mission:hover{border-color:var(--gold);background:#111;box-shadow:0 0 15px rgba(255,204,0,0.1);}
-.mission.completed{border-color:#333;opacity:0.5;cursor:default;}
-.status-tag{font-family:'JetBrains Mono';font-size:11px;color:#444;}
+.mission.completed{opacity:0.5;}
 
-/* ===== PROGRESS ===== */
-.stats-hud{background:#000;padding:25px;border:1px solid var(--border);margin-bottom:50px;}
-.progress-bar{background:#111;height:12px;margin:15px 0;border-radius:0;overflow:hidden;}
-.progress{height:100%;background:var(--gold);width:0%;transition:1.5s cubic-bezier(0.19,1,0.22,1);box-shadow:0 0 20px var(--gold);}
-
-/* ===== SPECIALIST TOOLS ===== */
-.tool-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin-bottom:50px;}
-.tool-card{
-    background:#111;border:1px solid var(--border);padding:25px;backdrop-filter:blur(12px);
-    text-align:left;transition:0.3s;cursor:pointer;
-}
-.tool-card:hover{border-color:var(--gold);transform:scale(1.02);box-shadow:0 0 20px rgba(255,204,0,0.2);}
-.tool-card h3{color:var(--gold);margin-bottom:8px;}
-.tool-card p{font-size:12px;color:#888;}
-
-/* ===== FOOTER ===== */
-footer{padding:80px 20px;border-top:1px solid var(--border);color:#444;text-align:center;font-size:12px;letter-spacing:4px;}
+footer{text-align:center;padding:50px;color:#555;}
 </style>
 </head>
 <body>
 
 <header>
     <h1>WEALTH MODULE</h1>
-    <p class="subtitle">CAPITAL & PRESERVATION INTEL</p>
-    <div class="btn-container">
-        <a href="index.html" class="btn">BACK TO HUB</a>
-    </div>
+    <p class="subtitle">CAPITAL INTELLIGENCE SYSTEM</p>
+    <a href="index.html" class="btn">BACK TO HUB</a>
 </header>
 
 <section>
-    <div class="stats-hud">
-        <h2>WEALTH PROGRESS</h2>
-        <p id="progressText" style="font-family:'JetBrains Mono';color:var(--gold);">RANK: INITIATE [0 XP]</p>
-        <div class="progress-bar"><div class="progress" id="progress"></div></div>
-    </div>
 
-    <h2>DAILY WEALTH TASKS</h2>
-    <div id="missionList" class="card-grid"></div>
+<!-- PROGRESS -->
+<h2>WEALTH PROGRESS</h2>
+<p id="progressText">RANK: INITIATE [0 XP]</p>
+<div class="progress-bar"><div class="progress" id="progress"></div></div>
 
-    <h2>SPECIALIST TOOLS</h2>
-    <div class="tool-grid">
-        <div class="tool-card">
-            <h3>ROI CALCULATOR</h3>
-            <p>Estimate investment returns quickly.</p>
-        </div>
-        <div class="tool-card">
-            <h3>PASSIVE INCOME TRACKER</h3>
-            <p>Track all recurring income streams.</p>
-        </div>
-        <div class="tool-card">
-            <h3>WEALTH JOURNAL</h3>
-            <p>Record daily financial progress.</p>
-        </div>
-        <div class="tool-card">
-            <h3>INVESTMENT IDEAS</h3>
-            <p>Save and rank new investment opportunities.</p>
-        </div>
-    </div>
+<!-- MISSIONS -->
+<h2>DAILY WEALTH TASKS</h2>
+<div id="missionList"></div>
+
+<!-- LEARNING -->
+<h2>WEALTH INTEL LIBRARY</h2>
+<div class="card-grid">
+<div class="card" onclick="openLesson('compound')">
+<h3>Compound Growth</h3>
+<p>Master exponential capital expansion.</p>
+</div>
+<div class="card" onclick="openLesson('assets')">
+<h3>Assets vs Liabilities</h3>
+<p>Understand true wealth structure.</p>
+</div>
+<div class="card" onclick="openLesson('cashflow')">
+<h3>Cashflow Systems</h3>
+<p>Build income engines.</p>
+</div>
+</div>
+
+<div id="lessonBox" style="display:none;margin-bottom:50px;">
+<h3 id="lessonTitle" style="color:var(--gold);"></h3>
+<p id="lessonContent" style="color:#aaa;font-size:14px;"></p>
+</div>
+
+<!-- SPECIALIST TOOLS -->
+<h2>SPECIALIST SYSTEMS</h2>
+<div class="card-grid">
+
+<div class="tool-card">
+<h3>ROI Calculator</h3>
+<input type="number" id="investment" placeholder="Initial Investment">
+<input type="number" id="finalValue" placeholder="Final Value">
+<button onclick="calculateROI()">Calculate ROI</button>
+<p id="roiResult"></p>
+</div>
+
+<div class="tool-card">
+<h3>Passive Income Tracker</h3>
+<input type="text" id="incomeSource" placeholder="Income Source">
+<input type="number" id="incomeAmount" placeholder="Monthly Amount">
+<button onclick="addIncome()">Add</button>
+<div id="incomeList"></div>
+</div>
+
+<div class="tool-card">
+<h3>Net Worth Tracker</h3>
+<input type="number" id="assetsInput" placeholder="Total Assets">
+<input type="number" id="liabilitiesInput" placeholder="Total Liabilities">
+<button onclick="calculateNetWorth()">Calculate</button>
+<p id="netWorthResult"></p>
+</div>
+
+<div class="tool-card">
+<h3>Capital Allocation Simulator</h3>
+<input type="number" id="capitalAmount" placeholder="Total Capital">
+<input type="number" id="stocksPercent" placeholder="% Stocks">
+<input type="number" id="cryptoPercent" placeholder="% Crypto">
+<input type="number" id="cashPercent" placeholder="% Cash">
+<button onclick="allocateCapital()">Simulate</button>
+<p id="allocationResult"></p>
+</div>
+
+</div>
+
 </section>
 
 <footer>
-© 2026 AVODA ACADEMY — WEALTH SPECIALISTS HUB
+© 2026 AVODA ACADEMY — WEALTH INTELLIGENCE DIVISION
 </footer>
 
 <script>
-// ===== CORE DATA =====
-const missionData = [
-    {id:1,title:"STUDY WEALTH PROTOCOLS",xp:80},
-    {id:2,title:"BUILD INCOME CHANNEL",xp:120},
-    {id:3,title:"ANALYZE MARKET TRENDS",xp:100},
-    {id:4,title:"READ 30 MIN INVESTING BOOK",xp:50},
-    {id:5,title:"PLAN MONTHLY BUDGET",xp:60}
+// ===== MISSIONS =====
+const missionData=[
+{id:1,title:"Study 30 mins investing",xp:50},
+{id:2,title:"Analyze one company",xp:80},
+{id:3,title:"Update budget sheet",xp:40}
 ];
 
-let state = JSON.parse(localStorage.getItem('wealth_state')) || {totalXP:0,completedIds:[]};
+let state=JSON.parse(localStorage.getItem("wealth_state"))||{totalXP:0,completedIds:[]};
 
-// ===== INIT MISSIONS =====
 function loadMissions(){
-    const list = document.getElementById('missionList');
-    list.innerHTML='';
-    missionData.forEach(m=>{
-        const isDone = state.completedIds.includes(m.id);
-        const div=document.createElement('div');
-        div.className=`mission ${isDone?'completed':''}`;
-        div.innerHTML=`<div><p>${m.title}</p></div><span class="status-tag">${isDone?'VERIFIED':'+ '+m.xp+' XP'}</span>`;
-        if(!isDone) div.onclick=()=>completeMission(m.id,m.xp);
-        list.appendChild(div);
-    });
+const list=document.getElementById("missionList");
+list.innerHTML="";
+missionData.forEach(m=>{
+const done=state.completedIds.includes(m.id);
+const div=document.createElement("div");
+div.className="mission "+(done?"completed":"");
+div.innerHTML=`${m.title} - ${done?"VERIFIED":"+ "+m.xp+" XP"}`;
+if(!done) div.onclick=()=>completeMission(m.id,m.xp);
+list.appendChild(div);
+});
 }
 
-// ===== COMPLETE MISSION =====
 function completeMission(id,xp){
-    if(!state.completedIds.includes(id)){
-        state.completedIds.push(id);
-        state.totalXP+=xp;
-        saveState();
-        loadMissions();
-        updateUI();
-    }
+state.completedIds.push(id);
+state.totalXP+=xp;
+localStorage.setItem("wealth_state",JSON.stringify(state));
+updateUI();
+loadMissions();
 }
 
-// ===== LOCAL STORAGE =====
-function saveState(){localStorage.setItem('wealth_state',JSON.stringify(state));}
-
-// ===== UPDATE UI =====
 function updateUI(){
-    const maxXP = missionData.reduce((acc,m)=>acc+m.xp,0);
-    const percent = (state.totalXP/maxXP)*100;
-    document.getElementById('progress').style.width = percent+'%';
-    let rank="INITIATE";
-    if(state.totalXP>150) rank="EXECUTOR";
-    if(state.totalXP>300) rank="SOVEREIGN";
-    document.getElementById('progressText').innerText=`RANK: ${rank} [${state.totalXP} XP]`;
+const maxXP=300;
+const percent=(state.totalXP/maxXP)*100;
+document.getElementById("progress").style.width=percent+"%";
+let rank="INITIATE";
+if(state.totalXP>150) rank="EXECUTOR";
+if(state.totalXP>300) rank="SOVEREIGN";
+document.getElementById("progressText").innerText=`RANK: ${rank} [${state.totalXP} XP]`;
 }
 
-// ===== LAUNCH =====
+// ===== LESSONS =====
+const lessons={
+compound:{title:"Compound Growth",content:"Consistent investing with reinvested returns creates exponential growth. Time is your strongest wealth ally."},
+assets:{title:"Assets vs Liabilities",content:"Assets generate income or appreciate. Liabilities consume cash. Wealth grows when assets dominate."},
+cashflow:{title:"Cashflow Systems",content:"Recurring income streams create financial independence. Build scalable systems."}
+};
+
+function openLesson(key){
+document.getElementById("lessonTitle").innerText=lessons[key].title;
+document.getElementById("lessonContent").innerText=lessons[key].content;
+document.getElementById("lessonBox").style.display="block";
+}
+
+// ===== ROI =====
+function calculateROI(){
+const inv=parseFloat(document.getElementById("investment").value);
+const final=parseFloat(document.getElementById("finalValue").value);
+if(inv && final){
+const roi=((final-inv)/inv)*100;
+document.getElementById("roiResult").innerText="ROI: "+roi.toFixed(2)+"%";
+}
+}
+
+// ===== PASSIVE INCOME =====
+let incomeData=JSON.parse(localStorage.getItem("wealth_income"))||[];
+
+function addIncome(){
+const source=document.getElementById("incomeSource").value;
+const amount=parseFloat(document.getElementById("incomeAmount").value);
+if(source && amount){
+incomeData.push({source,amount});
+localStorage.setItem("wealth_income",JSON.stringify(incomeData));
+renderIncome();
+}
+}
+
+function renderIncome(){
+const list=document.getElementById("incomeList");
+list.innerHTML="";
+let total=0;
+incomeData.forEach(i=>{
+total+=i.amount;
+list.innerHTML+=`<div>${i.source} - $${i.amount}</div>`;
+});
+list.innerHTML+=`<strong>Total: $${total}</strong>`;
+}
+
+// ===== NET WORTH =====
+function calculateNetWorth(){
+const assets=parseFloat(document.getElementById("assetsInput").value);
+const liabilities=parseFloat(document.getElementById("liabilitiesInput").value);
+if(assets>=0 && liabilities>=0){
+const net=assets-liabilities;
+document.getElementById("netWorthResult").innerText="Net Worth: $"+net;
+}
+}
+
+// ===== CAPITAL ALLOCATION =====
+function allocateCapital(){
+const capital=parseFloat(document.getElementById("capitalAmount").value);
+const s=parseFloat(document.getElementById("stocksPercent").value)/100;
+const c=parseFloat(document.getElementById("cryptoPercent").value)/100;
+const cash=parseFloat(document.getElementById("cashPercent").value)/100;
+if(capital){
+const result=`
+Stocks: $${(capital*s).toFixed(2)}
+Crypto: $${(capital*c).toFixed(2)}
+Cash: $${(capital*cash).toFixed(2)}
+`;
+document.getElementById("allocationResult").innerText=result;
+}
+}
+
 loadMissions();
 updateUI();
+renderIncome();
 </script>
 
 </body>
