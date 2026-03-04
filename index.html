@@ -190,6 +190,55 @@ PROFILE
 © 2026 AVODA ACADEMY — FOUNDATION FOR REAL BUILDERS
 </footer>
 
+    <!-- PROFILE PANEL -->
+<div id="profilePanel" style="
+position:fixed;
+top:0;
+right:-400px;
+width:350px;
+height:100%;
+background:#111;
+border-left:1px solid #00ffcc;
+padding:30px;
+transition:0.4s;
+z-index:9998;
+">
+
+<h2 style="color:#00ffcc;margin-bottom:20px;">USER PROFILE</h2>
+
+<p><strong>Username:</strong> <span id="profileName"></span></p>
+<p><strong>Total XP:</strong> <span id="profileXP"></span></p>
+<p><strong>Level:</strong> <span id="profileLevel"></span></p>
+<p><strong>Missions Completed:</strong> <span id="profileMissions"></span></p>
+<p><strong>Rank:</strong> <span id="profileRank"></span></p>
+
+<button onclick="logout()" style="
+margin-top:20px;
+padding:10px;
+background:#ff003c;
+border:none;
+color:white;
+width:100%;
+cursor:pointer;
+font-weight:bold;
+">
+LOGOUT
+</button>
+
+<button onclick="closeProfile()" style="
+margin-top:10px;
+padding:10px;
+background:#00ffcc;
+border:none;
+width:100%;
+cursor:pointer;
+font-weight:bold;
+">
+CLOSE
+</button>
+
+</div>
+
 <script>
 // ===== CORE DATA =====
 const missionData = [
