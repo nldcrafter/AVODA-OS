@@ -190,15 +190,47 @@ flex-direction:column;
 <script>
 // ===== CORE DATA =====
 const missionData = [
-    {id:1,title:"EXECUTE 1 A+ TRADE",xp:100,module:"Trading"},
-    {id:2,title:"20 MIN INTENSE WORKOUT",xp:50,module:"Fitness"},
-    {id:3,title:"STUDY WEALTH PROTOCOLS",xp:80,module:"Wealth"},
-    {id:4,title:"ANALYZE ON-CHAIN DATA",xp:60,module:"Crypto"},
-    {id:5,title:"BUILD INCOME CHANNEL",xp:120,module:"Business"}
-];
+    // ===== USER SYSTEM =====
+let users = JSON.parse(localStorage.getItem("avoda_users")) || {};
+let currentUser = localStorage.getItem("currentUser");
+let state;
 
-let state = JSON.parse(localStorage.getItem('avoda_state')) || {totalXP:0,completedIds:[]};
+function login(){
+    const user = document.getElementById("username").value.trim();
+    const pass = document.getElementById("password").value.trim();
 
+    if(!user || !pass){
+        document.getElementById("loginMsg").innerText="ENTER CREDENTIALS";
+        return;
+    }
+
+    if(!users[user]){
+        users[user] = {
+            password: pass,
+            totalXP: 0,
+            completedIds: []
+        };
+    }
+
+    if(users[user].password === pass){
+        currentUser = user;
+        localStorage.setItem("currentUser", user);
+        localStorage.setItem("avoda_users", JSON.stringify(users));
+
+        state = users[user];
+        document.getElementById("loginOverlay").style.display="none";
+
+        loadMissions();
+        updateUI();
+    } else {
+        document.getElementById("loginMsg").innerText="INVALID PASSWORD";
+    }
+}
+
+function saveState(){
+    users[currentUser] = state;
+    localStorage.setItem("avoda_users", JSON.stringify(users));
+}
 // ===== INIT MISSIONS =====
 function loadMissions(){
     const list = document.getElementById('missionList');
