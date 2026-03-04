@@ -100,50 +100,6 @@ footer{padding:100px 20px;border-top:1px solid var(--border);color:#444;text-ali
 </head>
 <body>
 
-<!-- LOGIN OVERLAY -->
-<div id="loginOverlay" style="
-position:fixed;
-top:0;left:0;
-width:100%;height:100%;
-background:#0a0a0a;
-display:flex;
-align-items:center;
-justify-content:center;
-z-index:9999;
-flex-direction:column;
-">
-
-    <h2 style="color:#00ffcc;margin-bottom:20px;">AVODA ACCESS</h2>
-
-    <input id="username" placeholder="USERNAME" style="
-        padding:10px;
-        margin:10px;
-        background:#111;
-        border:1px solid #00ffcc;
-        color:#00ffcc;
-        width:250px;
-    ">
-
-    <input id="password" type="password" placeholder="PASSWORD" style="
-        padding:10px;
-        margin:10px;
-        background:#111;
-        border:1px solid #00ffcc;
-        color:#00ffcc;
-        width:250px;
-    ">
-
-    <button onclick="login()" style="
-        padding:10px 20px;
-        background:#00ffcc;
-        border:none;
-        cursor:pointer;
-        font-weight:bold;
-    ">ENTER</button>
-
-    <p id="loginMsg" style="margin-top:10px;color:#ff003c;"></p>
-</div>
-    
 <div class="ticker-wrap">
     <div class="ticker-move" id="market-ticker">
         BTC/USD +2.4% • XAU/USD -0.8% • NASDAQ +1.2% • ETH/USD +4.1% • SOL/USD +5.5% • GBP/USD -0.2% •
