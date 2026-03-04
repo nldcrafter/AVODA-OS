@@ -301,8 +301,13 @@ function updateTicker(){
 
 // ===== LAUNCH =====
 setInterval(updateTicker,3000);
-loadMissions();
-updateUI();
+
+if(currentUser && users[currentUser]){
+    state = users[currentUser];
+    document.getElementById("loginOverlay").style.display="none";
+    loadMissions();
+    updateUI();
+    }
 </script>
 
 </body>
