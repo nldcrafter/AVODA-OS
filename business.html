@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AVODA ACADEMY | BUSINESS MODULE</title>
+<title>AVODA ACADEMY | BUSINESS COMMAND CENTER</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -15,59 +15,40 @@
     --glass:rgba(255,255,255,0.03);
     --border:rgba(255,255,255,0.1);
 }
-
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Orbitron',sans-serif;scroll-behavior:smooth;}
 body{background:var(--bg);color:white;overflow-x:hidden;line-height:1.6;}
 body::before{content:"";position:fixed;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle at 50% 50%,#1a1a1a 0%,#050505 100%);z-index:-2;}
-
-/* ===== HEADER ===== */
 header{padding:60px 20px;text-align:center;position:relative;}
 h1{font-size:clamp(40px,8vw,70px);font-weight:900;letter-spacing:10px;background:linear-gradient(270deg,var(--gold),var(--purple),var(--primary));background-size:600% 600%;-webkit-background-clip:text;color:transparent;animation:gradientMove 8s ease infinite;text-transform:uppercase;}
 @keyframes gradientMove{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 .subtitle{color:#888;margin-top:10px;font-size:clamp(14px,2vw,18px);letter-spacing:3px;}
-
-/* ===== BUTTON ===== */
 .btn-container{margin-top:30px;}
 .btn{display:inline-block;padding:15px 35px;border-radius:2px;background:transparent;border:1px solid var(--primary);color:var(--primary);font-weight:bold;text-decoration:none;transition:0.4s;text-transform:uppercase;letter-spacing:2px;position:relative;overflow:hidden;}
 .btn:hover{background:var(--primary);color:black;box-shadow:0 0 40px rgba(0,255,204,0.4);transform:translateY(-3px);}
-
-/* ===== SECTIONS ===== */
 section{padding:60px 10%;max-width:1400px;margin:0 auto;}
 h2{font-size:22px;letter-spacing:4px;margin-bottom:30px;border-left:5px solid var(--primary);padding-left:15px;color:#fff;}
-
-/* ===== CARD GRID ===== */
 .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px;margin-bottom:50px;}
-.card{background:var(--glass);border:1px solid var(--border);padding:30px;transition:0.5s cubic-bezier(0.19,1,0.22,1);text-align:left;backdrop-filter:blur(15px);position:relative;cursor:pointer;}
-.card:hover{border-color:var(--primary);transform:scale(1.02);background:rgba(0,255,204,0.05);}
+.card,.tool-card{background:var(--glass);border:1px solid var(--border);padding:30px;transition:0.5s cubic-bezier(0.19,1,0.22,1);text-align:left;backdrop-filter:blur(15px);position:relative;cursor:pointer;}
+.card:hover,.tool-card:hover{border-color:var(--primary);transform:scale(1.02);background:rgba(0,255,204,0.05);}
 .card::after{content:"→";position:absolute;bottom:15px;right:15px;color:var(--primary);font-size:18px;opacity:0;transition:0.3s;}
 .card:hover::after{opacity:1;}
-
-/* ===== MISSION ===== */
 .mission{margin:12px 0;padding:18px;background:#0d0d0d;border:1px solid #1a1a1a;display:flex;justify-content:space-between;align-items:center;transition:0.3s;cursor:pointer;}
 .mission:hover{border-color:var(--primary);background:#111;box-shadow:0 0 15px rgba(0,255,204,0.1);}
 .mission.completed{border-color:#333;opacity:0.5;cursor:default;}
 .status-tag{font-family:'JetBrains Mono';font-size:11px;color:#444;}
-
-/* ===== PROGRESS ===== */
 .stats-hud{background:#000;padding:25px;border:1px solid var(--border);margin-bottom:50px;}
 .progress-bar{background:#111;height:12px;margin:15px 0;border-radius:0;overflow:hidden;}
 .progress{height:100%;background:var(--primary);width:0%;transition:1.5s cubic-bezier(0.19,1,0.22,1);box-shadow:0 0 20px var(--primary);}
-
-/* ===== SPECIALIST TOOLS ===== */
-.tool-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin-bottom:50px;}
-.tool-card{background:#111;border:1px solid var(--border);padding:25px;backdrop-filter:blur(12px);text-align:left;transition:0.3s;cursor:pointer;}
-.tool-card:hover{border-color:var(--primary);transform:scale(1.02);box-shadow:0 0 20px rgba(0,255,204,0.2);}
-.tool-card h3{color:var(--primary);margin-bottom:8px;}
-.tool-card p{font-size:12px;color:#888;}
-
-/* ===== FOOTER ===== */
+input,button{width:100%;padding:8px;margin-top:10px;background:#000;border:1px solid #333;color:white;}
+button{background:var(--gold);color:black;font-weight:bold;cursor:pointer;}
+.mission,.tool-card input,.tool-card button{margin-bottom:10px;}
 footer{padding:80px 20px;border-top:1px solid var(--border);color:#444;text-align:center;font-size:12px;letter-spacing:4px;}
 </style>
 </head>
 <body>
 
 <header>
-    <h1>BUSINESS MODULE</h1>
+    <h1>BUSINESS COMMAND CENTER</h1>
     <p class="subtitle">SCALABLE SYSTEMS & NETWORKS</p>
     <div class="btn-container">
         <a href="index.html" class="btn">BACK TO HUB</a>
@@ -75,95 +56,119 @@ footer{padding:80px 20px;border-top:1px solid var(--border);color:#444;text-alig
 </header>
 
 <section>
-    <div class="stats-hud">
-        <h2>BUSINESS PROGRESS</h2>
-        <p id="progressText" style="font-family:'JetBrains Mono';color:var(--primary);">RANK: INITIATE [0 XP]</p>
-        <div class="progress-bar"><div class="progress" id="progress"></div></div>
-    </div>
+<!-- ===== BUSINESS PROGRESS ===== -->
+<div class="stats-hud">
+<h2>BUSINESS PROGRESS</h2>
+<p id="progressText" style="font-family:'JetBrains Mono';color:var(--primary);">RANK: INITIATE [0 XP]</p>
+<div class="progress-bar"><div class="progress" id="progress"></div></div>
+</div>
 
-    <h2>DAILY BUSINESS TASKS</h2>
-    <div id="missionList" class="card-grid"></div>
+<!-- ===== DAILY BUSINESS TASKS ===== -->
+<h2>DAILY BUSINESS TASKS</h2>
+<div id="missionList" class="card-grid"></div>
 
-    <h2>SPECIALIST TOOLS</h2>
-    <div class="tool-grid">
-        <div class="tool-card">
-            <h3>REVENUE TRACKER</h3>
-            <p>Monitor multiple income channels in one place.</p>
-        </div>
-        <div class="tool-card">
-            <h3>SYSTEM BUILDER</h3>
-            <p>Create and optimize scalable business processes.</p>
-        </div>
-        <div class="tool-card">
-            <h3>MARKET RESEARCH</h3>
-            <p>Analyze trends, competitors, and growth opportunities.</p>
-        </div>
-        <div class="tool-card">
-            <h3>TEAM MANAGER</h3>
-            <p>Track tasks, responsibilities, and performance of team members.</p>
-        </div>
-    </div>
+<!-- ===== BUSINESS LESSONS ===== -->
+<h2>BUSINESS INTEL LIBRARY</h2>
+<div class="card-grid">
+<div class="card" onclick="openLesson('system')"><h3>SYSTEM BUILDING</h3><p>Design scalable business processes and operations.</p></div>
+<div class="card" onclick="openLesson('network')"><h3>NETWORKING</h3><p>Master partnerships, collaborations, and influence.</p></div>
+<div class="card" onclick="openLesson('strategy')"><h3>BUSINESS STRATEGY</h3><p>Create growth plans and market positioning.</p></div>
+</div>
+<div id="lessonBox" style="display:none;margin-bottom:50px;">
+<h3 id="lessonTitle" style="color:var(--gold);"></h3>
+<p id="lessonContent" style="color:#aaa;font-size:14px;"></p>
+</div>
+
+<!-- ===== SPECIALIST TOOLS ===== -->
+<h2>SPECIALIST TOOLS</h2>
+<div class="tool-grid">
+<div class="tool-card"><h3>REVENUE TRACKER</h3><p>Monitor income streams and growth.</p></div>
+<div class="tool-card"><h3>SYSTEM BUILDER</h3><p>Create and optimize processes.</p></div>
+<div class="tool-card"><h3>MARKET RESEARCH</h3><p>Analyze competitors & trends.</p></div>
+<div class="tool-card"><h3>TEAM MANAGER</h3><p>Track team tasks and KPIs.</p></div>
+</div>
+
+<!-- ===== BUSINESS CALCULATORS ===== -->
+<h2>FINANCIAL CALCULATORS</h2>
+<div class="tool-grid">
+<div class="tool-card">
+<h3>REVENUE GOAL CALCULATOR</h3>
+<input type="number" id="currentRevenue" placeholder="Current Revenue">
+<input type="number" id="targetRevenue" placeholder="Target Revenue">
+<button onclick="calcRevenueGoal()">Calculate Growth %</button>
+<p id="revenueResult"></p>
+</div>
+
+<div class="tool-card">
+<h3>INVESTMENT ROI CALCULATOR</h3>
+<input type="number" id="investmentAmount" placeholder="Investment Amount">
+<input type="number" id="returnAmount" placeholder="Return Amount">
+<button onclick="calcROI()">Calculate ROI</button>
+<p id="roiResult"></p>
+</div>
+</div>
+
+<!-- ===== BUSINESS JOURNAL ===== -->
+<h2>BUSINESS JOURNAL</h2>
+<input type="text" id="journalTask" placeholder="Task / Meeting / Call">
+<input type="number" id="journalXP" placeholder="XP Earned">
+<button onclick="addJournal()">Add Entry</button>
+<div id="journalList"></div>
+<h3 style="margin-top:20px;">Performance Stats</h3>
+<p id="performanceStats"></p>
+
 </section>
-
 <footer>
-© 2026 AVODA ACADEMY — BUSINESS SPECIALISTS HUB
+© 2026 AVODA ACADEMY — BUSINESS COMMAND CENTER
 </footer>
 
 <script>
-// ===== CORE DATA =====
-const missionData = [
-    {id:1,title:"BUILD NEW INCOME CHANNEL",xp:120},
-    {id:2,title:"REVIEW SYSTEM PROCESSES",xp:80},
-    {id:3,title:"NETWORK WITH PARTNERS",xp:100},
-    {id:4,title:"CHECK PASSIVE INCOME",xp:70},
-    {id:5,title:"PLAN NEXT BUSINESS STRATEGY",xp:90}
+// ===== DAILY TASKS =====
+const missionData=[
+{id:1,title:"BUILD NEW INCOME CHANNEL",xp:120},
+{id:2,title:"REVIEW SYSTEM PROCESSES",xp:80},
+{id:3,title:"NETWORK WITH PARTNERS",xp:100},
+{id:4,title:"CHECK PASSIVE INCOME",xp:70},
+{id:5,title:"PLAN NEXT BUSINESS STRATEGY",xp:90}
 ];
-
 let state = JSON.parse(localStorage.getItem('business_state')) || {totalXP:0,completedIds:[]};
-
-// ===== INIT MISSIONS =====
 function loadMissions(){
-    const list = document.getElementById('missionList');
-    list.innerHTML='';
-    missionData.forEach(m=>{
-        const isDone = state.completedIds.includes(m.id);
-        const div=document.createElement('div');
-        div.className=`mission ${isDone?'completed':''}`;
-        div.innerHTML=`<div><p>${m.title}</p></div><span class="status-tag">${isDone?'VERIFIED':'+ '+m.xp+' XP'}</span>`;
-        if(!isDone) div.onclick=()=>completeMission(m.id,m.xp);
-        list.appendChild(div);
-    });
+const list=document.getElementById('missionList'); list.innerHTML='';
+missionData.forEach(m=>{
+const done=state.completedIds.includes(m.id);
+const div=document.createElement('div');
+div.className=`mission ${done?'completed':''}`;
+div.innerHTML=`<div><p>${m.title}</p></div><span class="status-tag">${done?'VERIFIED':'+ '+m.xp+' XP'}</span>`;
+if(!done) div.onclick=()=>completeMission(m.id,m.xp);
+list.appendChild(div);
+});
 }
-
-// ===== COMPLETE MISSION =====
-function completeMission(id,xp){
-    if(!state.completedIds.includes(id)){
-        state.completedIds.push(id);
-        state.totalXP+=xp;
-        saveState();
-        loadMissions();
-        updateUI();
-    }
-}
-
-// ===== LOCAL STORAGE =====
+function completeMission(id,xp){if(!state.completedIds.includes(id)){state.completedIds.push(id); state.totalXP+=xp; saveState(); loadMissions(); updateUI();}}
 function saveState(){localStorage.setItem('business_state',JSON.stringify(state));}
+function updateUI(){const maxXP=missionData.reduce((acc,m)=>acc+m.xp,0); const percent=(state.totalXP/maxXP)*100; document.getElementById('progress').style.width=percent+'%'; let rank="INITIATE"; if(state.totalXP>150) rank="EXECUTOR"; if(state.totalXP>300) rank="SOVEREIGN"; document.getElementById('progressText').innerText=`RANK: ${rank} [${state.totalXP} XP]`;}
 
-// ===== UPDATE UI =====
-function updateUI(){
-    const maxXP = missionData.reduce((acc,m)=>acc+m.xp,0);
-    const percent = (state.totalXP/maxXP)*100;
-    document.getElementById('progress').style.width = percent+'%';
-    let rank="INITIATE";
-    if(state.totalXP>150) rank="EXECUTOR";
-    if(state.totalXP>300) rank="SOVEREIGN";
-    document.getElementById('progressText').innerText=`RANK: ${rank} [${state.totalXP} XP]`;
-}
+// ===== BUSINESS LESSONS =====
+const lessons={
+system:{title:"SYSTEM BUILDING",content:"Learn to create processes and SOPs that scale efficiently across teams."},
+network:{title:"NETWORKING",content:"Master partnerships, collaborations, and influence for business growth."},
+strategy:{title:"BUSINESS STRATEGY",content:"Design actionable plans, growth hacks, and market positioning to dominate."}
+};
+function openLesson(key){document.getElementById("lessonTitle").innerText=lessons[key].title;document.getElementById("lessonContent").innerText=lessons[key].content;document.getElementById("lessonBox").style.display="block";}
+
+// ===== CALCULATORS =====
+function calcRevenueGoal(){const cur=parseFloat(currentRevenue.value); const target=parseFloat(targetRevenue.value); if(cur && target){const growth=((target-cur)/cur*100).toFixed(1); revenueResult.innerText="Growth Needed: "+growth+"%";}}
+function calcROI(){const invest=parseFloat(investmentAmount.value); const ret=parseFloat(returnAmount.value); if(invest && ret){const roi=((ret-invest)/invest*100).toFixed(1); roiResult.innerText="ROI: "+roi+"%";}}
+
+// ===== BUSINESS JOURNAL =====
+let businessData=JSON.parse(localStorage.getItem("business_journal")) || {journal:[],streak:0,lastDate:null};
+function saveJournal(){localStorage.setItem("business_journal",JSON.stringify(businessData));}
+function addJournal(){if(journalTask.value && journalXP.value){businessData.journal.push({task:journalTask.value,xp:parseInt(journalXP.value)}); updateStreak(); saveJournal(); renderJournal();}}
+function updateStreak(){const today=new Date().toDateString(); if(businessData.lastDate!==today){businessData.streak++; businessData.lastDate=today;}}
+function renderJournal(){journalList.innerHTML=""; let totalXP=0; businessData.journal.forEach(t=>{journalList.innerHTML+=`${t.task} | +${t.xp} XP<br>`; totalXP+=t.xp;}); performanceStats.innerText="Total Entries: "+businessData.journal.length+" | Total XP: "+totalXP+" | Streak: "+businessData.streak+" days";}
 
 // ===== LAUNCH =====
-loadMissions();
-updateUI();
+loadMissions(); updateUI(); renderJournal();
 </script>
 
 </body>
-</html>
+    </html>
