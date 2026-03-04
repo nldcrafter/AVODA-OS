@@ -273,17 +273,25 @@ function updateUI(){
 
 // ===== LEADERBOARD =====
 function updateLeaderboard(){
-    const leadEl=document.getElementById('leaderboard');
-    let leaders=[
-        {name:"ALPHA_01",xp:500},
-        {name:"ALPHA_02",xp:420},
-        {name:"ALPHA_03",xp:380},
-        {name:"YOU",xp:state.totalXP}
-    ];
-    leaders.sort((a,b)=>b.xp-a.xp);
-    leadEl.innerHTML=leaders.map((u,i)=>`<div class="leader"><span class="rank-num">0${i+1}</span><p style="color:${u.name==='YOU'?'var(--primary)':'#fff'}">${u.name}</p><p style="font-family:'JetBrains Mono';font-size:14px;color:#444">${u.xp} XP</p></div>`).join('');
-}
+    const leadEl = document.getElementById('leaderboard');
 
+    let allUsers = Object.keys(users).map(name => ({
+        name: name,
+        xp: users[name].totalXP || 0
+    }));
+
+    allUsers.sort((a,b)=>b.xp-a.xp);
+
+    leadEl.innerHTML = allUsers.map((u,i)=>`
+        <div class="leader">
+            <span class="rank-num">${i+1}</span>
+            <p style="color:${u.name===currentUser?'var(--primary)':'#fff'}">${u.name}</p>
+            <p style="font-family:'JetBrains Mono';font-size:14px;color:#444">
+                ${u.xp} XP
+            </p>
+        </div>
+    `).join('');
+    }
 // ===== MODULE NAVIGATION =====
 function goToModule(url){
     window.location.href = url; // Redirect to external page
