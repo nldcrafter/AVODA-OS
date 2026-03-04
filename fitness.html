@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AVODA ACADEMY | FITNESS MODULE</title>
+<title>AVODA ACADEMY | FITNESS COMMAND CENTER</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -15,155 +15,149 @@
     --glass:rgba(255,255,255,0.03);
     --border:rgba(255,255,255,0.1);
 }
-
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Orbitron',sans-serif;scroll-behavior:smooth;}
 body{background:var(--bg);color:white;overflow-x:hidden;line-height:1.6;}
 body::before{content:"";position:fixed;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle at 50% 50%,#1a1a1a 0%,#050505 100%);z-index:-2;}
-
-/* ===== HEADER ===== */
 header{padding:60px 20px;text-align:center;position:relative;}
 h1{font-size:clamp(40px,8vw,70px);font-weight:900;letter-spacing:10px;background:linear-gradient(270deg,var(--secondary),var(--gold),var(--primary));background-size:600% 600%;-webkit-background-clip:text;color:transparent;animation:gradientMove 8s ease infinite;text-transform:uppercase;}
 @keyframes gradientMove{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 .subtitle{color:#888;margin-top:10px;font-size:clamp(14px,2vw,18px);letter-spacing:3px;}
-
-/* ===== BUTTON ===== */
 .btn-container{margin-top:30px;}
 .btn{display:inline-block;padding:15px 35px;border-radius:2px;background:transparent;border:1px solid var(--primary);color:var(--primary);font-weight:bold;text-decoration:none;transition:0.4s;text-transform:uppercase;letter-spacing:2px;position:relative;overflow:hidden;}
 .btn:hover{background:var(--primary);color:black;box-shadow:0 0 40px rgba(0,255,204,0.4);transform:translateY(-3px);}
-
-/* ===== SECTIONS ===== */
 section{padding:60px 10%;max-width:1400px;margin:0 auto;}
 h2{font-size:22px;letter-spacing:4px;margin-bottom:30px;border-left:5px solid var(--primary);padding-left:15px;color:#fff;}
-
-/* ===== CARD GRID ===== */
 .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px;margin-bottom:50px;}
-.card{background:var(--glass);border:1px solid var(--border);padding:30px;transition:0.5s cubic-bezier(0.19,1,0.22,1);text-align:left;backdrop-filter:blur(15px);position:relative;cursor:pointer;}
-.card:hover{border-color:var(--primary);transform:scale(1.02);background:rgba(0,255,204,0.05);}
+.card,.tool-card{background:var(--glass);border:1px solid var(--border);padding:30px;transition:0.5s cubic-bezier(0.19,1,0.22,1);text-align:left;backdrop-filter:blur(15px);position:relative;cursor:pointer;}
+.card:hover,.tool-card:hover{border-color:var(--primary);transform:scale(1.02);background:rgba(0,255,204,0.05);}
 .card::after{content:"→";position:absolute;bottom:15px;right:15px;color:var(--primary);font-size:18px;opacity:0;transition:0.3s;}
 .card:hover::after{opacity:1;}
-
-/* ===== MISSION ===== */
 .mission{margin:12px 0;padding:18px;background:#0d0d0d;border:1px solid #1a1a1a;display:flex;justify-content:space-between;align-items:center;transition:0.3s;cursor:pointer;}
 .mission:hover{border-color:var(--primary);background:#111;box-shadow:0 0 15px rgba(0,255,204,0.1);}
 .mission.completed{border-color:#333;opacity:0.5;cursor:default;}
 .status-tag{font-family:'JetBrains Mono';font-size:11px;color:#444;}
-
-/* ===== PROGRESS ===== */
 .stats-hud{background:#000;padding:25px;border:1px solid var(--border);margin-bottom:50px;}
 .progress-bar{background:#111;height:12px;margin:15px 0;border-radius:0;overflow:hidden;}
 .progress{height:100%;background:var(--primary);width:0%;transition:1.5s cubic-bezier(0.19,1,0.22,1);box-shadow:0 0 20px var(--primary);}
-
-/* ===== SPECIALIST TOOLS ===== */
-.tool-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin-bottom:50px;}
-.tool-card{background:#111;border:1px solid var(--border);padding:25px;backdrop-filter:blur(12px);text-align:left;transition:0.3s;cursor:pointer;}
-.tool-card:hover{border-color:var(--primary);transform:scale(1.02);box-shadow:0 0 20px rgba(0,255,204,0.2);}
-.tool-card h3{color:var(--primary);margin-bottom:8px;}
-.tool-card p{font-size:12px;color:#888;}
-
-/* ===== FOOTER ===== */
+input,button{width:100%;padding:8px;margin-top:10px;background:#000;border:1px solid #333;color:white;}
+button{background:var(--gold);color:black;font-weight:bold;cursor:pointer;}
 footer{padding:80px 20px;border-top:1px solid var(--border);color:#444;text-align:center;font-size:12px;letter-spacing:4px;}
 </style>
 </head>
 <body>
 
 <header>
-    <h1>FITNESS MODULE</h1>
-    <p class="subtitle">PHYSICAL & MENTAL RESILIENCE</p>
-    <div class="btn-container">
-        <a href="index.html" class="btn">BACK TO HUB</a>
-    </div>
+<h1>FITNESS COMMAND CENTER</h1>
+<p class="subtitle">PHYSICAL & MENTAL RESILIENCE</p>
+<div class="btn-container">
+<a href="index.html" class="btn">BACK TO HUB</a>
+</div>
 </header>
 
 <section>
-    <div class="stats-hud">
-        <h2>FITNESS PROGRESS</h2>
-        <p id="progressText" style="font-family:'JetBrains Mono';color:var(--primary);">RANK: INITIATE [0 XP]</p>
-        <div class="progress-bar"><div class="progress" id="progress"></div></div>
-    </div>
+<!-- FITNESS PROGRESS -->
+<div class="stats-hud">
+<h2>FITNESS PROGRESS</h2>
+<p id="progressText" style="font-family:'JetBrains Mono';color:var(--primary);">RANK: INITIATE [0 XP]</p>
+<div class="progress-bar"><div class="progress" id="progress"></div></div>
+</div>
 
-    <h2>DAILY FITNESS TASKS</h2>
-    <div id="missionList" class="card-grid"></div>
+<!-- DAILY TASKS -->
+<h2>DAILY FITNESS TASKS</h2>
+<div id="missionList" class="card-grid"></div>
 
-    <h2>SPECIALIST TOOLS</h2>
-    <div class="tool-grid">
-        <div class="tool-card">
-            <h3>WORKOUT PLANNER</h3>
-            <p>Plan and log strength, cardio, and mobility routines.</p>
-        </div>
-        <div class="tool-card">
-            <h3>MEDITATION TRACKER</h3>
-            <p>Track focus sessions and mental resilience improvements.</p>
-        </div>
-        <div class="tool-card">
-            <h3>BODY STATS</h3>
-            <p>Record weight, body fat %, and muscle growth.</p>
-        </div>
-        <div class="tool-card">
-            <h3>RECOVERY LOG</h3>
-            <p>Monitor sleep, rest days, and recovery metrics.</p>
-        </div>
-    </div>
+<!-- LESSONS -->
+<h2>FITNESS INTEL LIBRARY</h2>
+<div class="card-grid">
+<div class="card" onclick="openLesson('workout')"><h3>WORKOUT STRATEGY</h3><p>Strength, endurance, and mobility plans.</p></div>
+<div class="card" onclick="openLesson('meditation')"><h3>MENTAL RESILIENCE</h3><p>Meditation, focus, and mental toughness.</p></div>
+<div class="card" onclick="openLesson('nutrition')"><h3>NUTRITION</h3><p>Optimal diet and supplementation guidance.</p></div>
+</div>
+<div id="lessonBox" style="display:none;margin-bottom:50px;">
+<h3 id="lessonTitle" style="color:var(--gold);"></h3>
+<p id="lessonContent" style="color:#aaa;font-size:14px;"></p>
+</div>
+
+<!-- SPECIALIST TOOLS -->
+<h2>SPECIALIST TOOLS</h2>
+<div class="tool-grid">
+<div class="tool-card"><h3>WORKOUT PLANNER</h3><p>Log exercises, sets, reps, and progress.</p></div>
+<div class="tool-card"><h3>MEDITATION TRACKER</h3><p>Track focus sessions and mental resilience.</p></div>
+<div class="tool-card"><h3>BODY STATS</h3><p>Record weight, body fat %, muscle growth.</p></div>
+<div class="tool-card"><h3>RECOVERY LOG</h3><p>Monitor sleep, rest, and recovery metrics.</p></div>
+</div>
+
+<!-- FITNESS CALCULATORS -->
+<h2>FITNESS CALCULATORS</h2>
+<div class="tool-grid">
+<div class="tool-card">
+<h3>BMI & BODY COMPOSITION</h3>
+<input type="number" id="weight" placeholder="Weight (kg)">
+<input type="number" id="height" placeholder="Height (cm)">
+<button onclick="calcBMI()">Calculate BMI</button>
+<p id="bmiResult"></p>
+</div>
+<div class="tool-card">
+<h3>WORKOUT VOLUME</h3>
+<input type="number" id="sets" placeholder="Sets">
+<input type="number" id="reps" placeholder="Reps">
+<input type="number" id="weightLifted" placeholder="Weight (kg)">
+<button onclick="calcVolume()">Calculate Volume</button>
+<p id="volumeResult"></p>
+</div>
+</div>
+
+<!-- FITNESS JOURNAL -->
+<h2>FITNESS JOURNAL</h2>
+<input type="text" id="journalTask" placeholder="Workout / Session / Nutrition">
+<input type="number" id="journalXP" placeholder="XP Earned">
+<button onclick="addJournal()">Add Entry</button>
+<div id="journalList"></div>
+<h3 style="margin-top:20px;">Performance Stats</h3>
+<p id="performanceStats"></p>
+
 </section>
-
 <footer>
-© 2026 AVODA ACADEMY — FITNESS SPECIALISTS HUB
+© 2026 AVODA ACADEMY — FITNESS COMMAND CENTER
 </footer>
 
 <script>
-// ===== CORE DATA =====
-const missionData = [
-    {id:1,title:"20 MIN HIGH-INTENSITY WORKOUT",xp:50},
-    {id:2,title:"MEDITATION & BREATHING SESSION",xp:40},
-    {id:3,title:"CHECK BODY METRICS",xp:30},
-    {id:4,title:"RECOVERY & STRETCHING",xp:30},
-    {id:5,title:"PLAN NEXT DAY FITNESS ROUTINE",xp:50}
+// DAILY TASKS
+const missionData=[
+{id:1,title:"20 MIN HIGH-INTENSITY WORKOUT",xp:50},
+{id:2,title:"MEDITATION & BREATHING SESSION",xp:40},
+{id:3,title:"CHECK BODY METRICS",xp:30},
+{id:4,title:"RECOVERY & STRETCHING",xp:30},
+{id:5,title:"PLAN NEXT DAY FITNESS ROUTINE",xp:50}
 ];
-
-let state = JSON.parse(localStorage.getItem('fitness_state')) || {totalXP:0,completedIds:[]};
-
-// ===== INIT MISSIONS =====
-function loadMissions(){
-    const list = document.getElementById('missionList');
-    list.innerHTML='';
-    missionData.forEach(m=>{
-        const isDone = state.completedIds.includes(m.id);
-        const div=document.createElement('div');
-        div.className=`mission ${isDone?'completed':''}`;
-        div.innerHTML=`<div><p>${m.title}</p></div><span class="status-tag">${isDone?'VERIFIED':'+ '+m.xp+' XP'}</span>`;
-        if(!isDone) div.onclick=()=>completeMission(m.id,m.xp);
-        list.appendChild(div);
-    });
-}
-
-// ===== COMPLETE MISSION =====
-function completeMission(id,xp){
-    if(!state.completedIds.includes(id)){
-        state.completedIds.push(id);
-        state.totalXP+=xp;
-        saveState();
-        loadMissions();
-        updateUI();
-    }
-}
-
-// ===== LOCAL STORAGE =====
+let state=JSON.parse(localStorage.getItem('fitness_state')) || {totalXP:0,completedIds:[]};
+function loadMissions(){const list=document.getElementById('missionList'); list.innerHTML=''; missionData.forEach(m=>{const done=state.completedIds.includes(m.id); const div=document.createElement('div'); div.className=`mission ${done?'completed':''}`; div.innerHTML=`<div><p>${m.title}</p></div><span class="status-tag">${done?'VERIFIED':'+ '+m.xp+' XP'}</span>`; if(!done) div.onclick=()=>completeMission(m.id,m.xp); list.appendChild(div);});}
+function completeMission(id,xp){if(!state.completedIds.includes(id)){state.completedIds.push(id); state.totalXP+=xp; saveState(); loadMissions(); updateUI();}}
 function saveState(){localStorage.setItem('fitness_state',JSON.stringify(state));}
+function updateUI(){const maxXP=missionData.reduce((acc,m)=>acc+m.xp,0); const percent=(state.totalXP/maxXP)*100; document.getElementById('progress').style.width=percent+'%'; let rank="INITIATE"; if(state.totalXP>150) rank="ATHLETE"; if(state.totalXP>300) rank="ELITE"; document.getElementById('progressText').innerText=`RANK: ${rank} [${state.totalXP} XP]`;}
 
-// ===== UPDATE UI =====
-function updateUI(){
-    const maxXP = missionData.reduce((acc,m)=>acc+m.xp,0);
-    const percent = (state.totalXP/maxXP)*100;
-    document.getElementById('progress').style.width = percent+'%';
-    let rank="INITIATE";
-    if(state.totalXP>150) rank="ATHLETE";
-    if(state.totalXP>300) rank="ELITE";
-    document.getElementById('progressText').innerText=`RANK: ${rank} [${state.totalXP} XP]`;
-}
+// LESSONS
+const lessons={
+workout:{title:"WORKOUT STRATEGY",content:"Plan strength, endurance, mobility routines."},
+meditation:{title:"MENTAL RESILIENCE",content:"Daily meditation, breathing, and focus training."},
+nutrition:{title:"NUTRITION",content:"Track macros, diet plans, and supplementation guidance."}
+};
+function openLesson(key){document.getElementById("lessonTitle").innerText=lessons[key].title;document.getElementById("lessonContent").innerText=lessons[key].content;document.getElementById("lessonBox").style.display="block";}
 
-// ===== LAUNCH =====
-loadMissions();
-updateUI();
+// CALCULATORS
+function calcBMI(){const w=parseFloat(weight.value); const h=parseFloat(height.value)/100; if(w && h){const bmi=(w/(h*h)).toFixed(1); bmiResult.innerText="BMI: "+bmi;}}
+function calcVolume(){const s=parseFloat(sets.value); const r=parseFloat(reps.value); const w=parseFloat(weightLifted.value); if(s && r && w){const vol=(s*r*w).toFixed(1); volumeResult.innerText="Total Volume: "+vol+" kg";}}
+
+// JOURNAL
+let fitnessData=JSON.parse(localStorage.getItem("fitness_journal")) || {journal:[],streak:0,lastDate:null};
+function saveJournal(){localStorage.setItem("fitness_journal",JSON.stringify(fitnessData));}
+function addJournal(){if(journalTask.value && journalXP.value){fitnessData.journal.push({task:journalTask.value,xp:parseInt(journalXP.value)}); updateStreak(); saveJournal(); renderJournal();}}
+function updateStreak(){const today=new Date().toDateString(); if(fitnessData.lastDate!==today){fitnessData.streak++; fitnessData.lastDate=today;}}
+function renderJournal(){journalList.innerHTML=""; let totalXP=0; fitnessData.journal.forEach(t=>{journalList.innerHTML+=`${t.task} | +${t.xp} XP<br>`; totalXP+=t.xp;}); performanceStats.innerText="Total Entries: "+fitnessData.journal.length+" | Total XP: "+totalXP+" | Streak: "+fitnessData.streak+" days";}
+
+// LAUNCH
+loadMissions(); updateUI(); renderJournal();
 </script>
 
 </body>
-</html>
+    </html>
