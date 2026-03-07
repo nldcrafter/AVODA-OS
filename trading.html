@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AVODA ACADEMY | TRADING COMMAND CENTER</title>
+<title>AVODA TRADING TERMINAL PRO</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -13,223 +12,153 @@
     --bg:#0a0a0a;
     --glass:rgba(255,255,255,0.03);
     --border:rgba(255,255,255,0.1);
+    --gradient: linear-gradient(270deg, #ff003c, #ffcc00, #00ffcc);
 }
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Orbitron',sans-serif;scroll-behavior:smooth;}
-body{background:var(--bg);color:white;overflow-x:hidden;line-height:1.6;}
-body::before{content:"";position:fixed;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle at 50% 50%,#1a1a1a 0%,#050505 100%);z-index:-2;}
-
-/* ===== HEADER ===== */
-header{padding:60px 20px;text-align:center;position:relative;}
-h1{font-size:clamp(40px,8vw,70px);font-weight:900;letter-spacing:10px;background:linear-gradient(270deg,var(--primary),var(--secondary),var(--gold));background-size:600% 600%;-webkit-background-clip:text;color:transparent;animation:gradientMove 8s ease infinite;text-transform:uppercase;}
+body{background:var(--bg);color:white;overflow-x:hidden;line-height:1.5;}
+body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle at 50% 50%,#1a1a1a 0%,#050505 100%);z-index:-2;}
+header{padding:40px 20px;text-align:center;position:relative;}
+h1{font-size:clamp(36px,6vw,64px);font-weight:900;letter-spacing:8px;background:var(--gradient);background-size:600% 600%;-webkit-background-clip:text;color:transparent;animation:gradientMove 10s ease infinite;text-transform:uppercase;}
 @keyframes gradientMove{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-.subtitle{color:#888;margin-top:10px;font-size:clamp(14px,2vw,18px);letter-spacing:3px;}
-.btn-container{margin-top:30px;}
-.btn{display:inline-block;padding:15px 35px;border-radius:2px;background:transparent;border:1px solid var(--primary);color:var(--primary);font-weight:bold;text-decoration:none;transition:0.4s;text-transform:uppercase;letter-spacing:2px;position:relative;overflow:hidden;}
-.btn:hover{background:var(--primary);color:black;box-shadow:0 0 40px rgba(0,255,204,0.4);transform:translateY(-3px);}
-
-/* ===== SECTIONS ===== */
-section{padding:60px 10%;max-width:1400px;margin:0 auto;}
-h2{font-size:22px;letter-spacing:4px;margin-bottom:30px;border-left:5px solid var(--primary);padding-left:15px;color:#fff;}
-.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px;margin-bottom:50px;}
-.card,.tool-card{background:var(--glass);border:1px solid var(--border);padding:30px;transition:0.5s cubic-bezier(0.19,1,0.22,1);text-align:left;backdrop-filter:blur(15px);position:relative;cursor:pointer;}
-.card:hover,.tool-card:hover{border-color:var(--primary);transform:scale(1.02);background:rgba(0,255,204,0.05);}
-.card::after{content:"→";position:absolute;bottom:15px;right:15px;color:var(--primary);font-size:18px;opacity:0;transition:0.3s;}
+.subtitle{color:#888;margin-top:5px;font-size:clamp(14px,1.5vw,18px);letter-spacing:2px;}
+.btn-container{margin-top:20px;}
+.btn{display:inline-block;padding:10px 25px;border-radius:2px;background:transparent;border:1px solid var(--primary);color:var(--primary);font-weight:bold;text-decoration:none;transition:0.3s;text-transform:uppercase;letter-spacing:2px;position:relative;overflow:hidden;}
+.btn:hover{background:var(--primary);color:black;box-shadow:0 0 30px rgba(0,255,204,0.5);transform:translateY(-2px);}
+section{padding:40px 5%;max-width:1600px;margin:0 auto;}
+h2{font-size:22px;letter-spacing:4px;margin-bottom:20px;border-left:5px solid var(--primary);padding-left:15px;color:#fff;}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-bottom:40px;}
+.card,.tool-card{background:var(--glass);border:1px solid var(--border);padding:25px;transition:0.3s;backdrop-filter:blur(12px);text-align:left;position:relative;cursor:pointer;}
+.card:hover,.tool-card:hover{border-color:var(--primary);transform:scale(1.02);box-shadow:0 0 20px rgba(0,255,204,0.3);}
+.card::after{content:'→';position:absolute;bottom:15px;right:15px;color:var(--primary);font-size:18px;opacity:0;transition:0.3s;}
 .card:hover::after{opacity:1;}
-.mission{margin:12px 0;padding:18px;background:#0d0d0d;border:1px solid #1a1a1a;display:flex;justify-content:space-between;align-items:center;transition:0.3s;cursor:pointer;}
-.mission:hover{border-color:var(--primary);background:#111;box-shadow:0 0 15px rgba(0,255,204,0.1);}
-.mission.completed{border-color:#333;opacity:0.5;cursor:default;}
-.status-tag{font-family:'JetBrains Mono';font-size:11px;color:#444;}
-.stats-hud{background:#000;padding:25px;border:1px solid var(--border);margin-bottom:50px;}
-.progress-bar{background:#111;height:12px;margin:15px 0;border-radius:0;overflow:hidden;}
+.stats-hud{background:#000;padding:20px;border:1px solid var(--border);margin-bottom:40px;}
+.progress-bar{background:#111;height:12px;margin:10px 0;border-radius:0;overflow:hidden;}
 .progress{height:100%;background:var(--primary);width:0%;transition:1.5s cubic-bezier(0.19,1,0.22,1);box-shadow:0 0 20px var(--primary);}
-input,button{width:100%;padding:8px;margin-top:10px;background:#000;border:1px solid #333;color:white;}
-button{background:var(--gold);color:black;font-weight:bold;cursor:pointer;}
-.mission,.tool-card input,.tool-card button{margin-bottom:10px;}
-footer{padding:80px 20px;border-top:1px solid var(--border);color:#444;text-align:center;font-size:12px;letter-spacing:4px;}
+#chart-container{height:600px;width:100%;margin-bottom:40px;}
+.tool-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin-bottom:40px;}
+footer{padding:60px 20px;border-top:1px solid var(--border);color:#888;text-align:center;font-size:12px;letter-spacing:3px;}
 </style>
 </head>
-<body>
-
-<header>
-    <h1>TRADING COMMAND CENTER</h1>
-    <p class="subtitle">SMC & ORDERFLOW INTEL</p>
-    <div class="btn-container">
-        <a href="index.html" class="btn">BACK TO HUB</a>
-    </div>
-</header>
-
-<section>
-<!-- ===== PROGRESS ===== -->
-<div class="stats-hud">
-<h2>TRADING PROGRESS</h2>
-<p id="progressText" style="font-family:'JetBrains Mono';color:var(--primary);">RANK: INITIATE [0 XP]</p>
+<body><header>
+<h1>AVODA TRADING TERMINAL PRO</h1>
+<p class="subtitle">LIVE MARKET ANALYSIS & AI SIGNALS</p>
+<div class="btn-container">
+<a href="index.html" class="btn">BACK TO HUB</a>
+</div>
+</header><section><!-- STATS HUD --><div class="stats-hud">
+<h2>PORTFOLIO & MARKET</h2>
+<p id="rankText" style="font-family:'JetBrains Mono';color:var(--primary);">RANK: TRADER [0 XP]</p>
 <div class="progress-bar"><div class="progress" id="progress"></div></div>
-</div>
-
-<!-- ===== DAILY TASKS ===== -->
-<h2>DAILY TRADING TASKS</h2>
-<div id="missionList" class="card-grid"></div>
-
-<!-- ===== TRADING LESSONS ===== -->
-<h2>TRADING INTEL LIBRARY</h2>
-<div class="card-grid">
-<div class="card" onclick="openLesson('smc')"><h3>SMC STRUCTURE</h3><p>Master Smart Money concepts for precise entries.</p></div>
-<div class="card" onclick="openLesson('orderflow')"><h3>ORDERFLOW ANALYSIS</h3><p>Understand liquidity & market depth.</p></div>
-<div class="card" onclick="openLesson('risk')"><h3>RISK MANAGEMENT</h3><p>Protect capital & optimize position sizing.</p></div>
-</div>
-<div id="lessonBox" style="display:none;margin-bottom:50px;">
-<h3 id="lessonTitle" style="color:var(--gold);"></h3>
-<p id="lessonContent" style="color:#aaa;font-size:14px;"></p>
-</div>
-
-<!-- ===== SPECIALIST TOOLS ===== -->
-<h2>SPECIALIST TOOLS</h2>
-<div class="tool-grid">
-<div class="tool-card"><h3>MARKET SCANNER</h3><p>Analyze multiple markets for setups.</p></div>
-<div class="tool-card"><h3>ORDERBOOK ANALYZER</h3><p>Visualize liquidity zones & orderflow.</p></div>
-<div class="tool-card"><h3>TRADE JOURNAL</h3><p>Record trades, mistakes & wins.</p></div>
-<div class="tool-card"><h3>SETUP CHECKLIST</h3><p>Verify entry, stop, & target steps.</p></div>
-</div>
-
-<!-- ===== POSITION & RISK CALCULATORS ===== -->
-<h2>RISK & POSITION CALCULATOR</h2>
+</div><!-- SYMBOL SELECT --><h2>SELECT SYMBOL</h2>
+<select id="symbolSelect" style="width:200px;padding:5px;margin-bottom:20px;">
+<option value="BTCUSDT">BTC/USDT</option>
+<option value="ETHUSDT">ETH/USDT</option>
+<option value="NASDAP">NASDAQ</option>
+<option value="ES!">ES!</option>
+<option value="GOLD">GOLD</option>
+<option value="SILVER">SILVER</option>
+</select><!-- TRADING VIEW CHART --><div id="chart-container"></div><!-- AI TRADE ANALYSIS --><h2>AI TRADE ASSISTANT</h2>
 <div class="tool-grid">
 <div class="tool-card">
-<h3>POSITION SIZE CALCULATOR</h3>
-<input type="number" id="accountSize" placeholder="Account Size">
-<input type="number" id="riskPercent" placeholder="Risk % per Trade">
-<input type="number" id="stopLossPips" placeholder="Stop Loss (pips)">
-<button onclick="calculatePosition()">Calculate</button>
-<p id="positionResult"></p>
+<h3>AI SIGNALS</h3>
+<p id="aiSignals">Fetching live trade analysis...</p>
 </div>
-
 <div class="tool-card">
-<h3>RISK / REWARD CALCULATOR</h3>
-<input type="number" id="entryPrice" placeholder="Entry Price">
-<input type="number" id="stopPrice" placeholder="Stop Price">
-<input type="number" id="targetPrice" placeholder="Target Price">
-<button onclick="calculateRR()">Calculate R:R</button>
-<p id="rrResult"></p>
+<h3>FEAR & GREED INDEX</h3>
+<div style="background:#111;padding:10px;border-radius:5px;">
+<div id="fearGreedBar" style="height:20px;width:0%;background:var(--gold);transition:1s;"></div>
 </div>
+<p id="fearGreedText" style="margin-top:5px;color:#aaa;">Loading...</p>
 </div>
+</div><!-- CRYPTO MARKET HEATMAP --><h2>CRYPTO MARKET HEATMAP</h2>
+<div id="heatmap" style="height:400px;background:#111;display:flex;flex-wrap:wrap;gap:5px;padding:5px;"></div><!-- ECONOMIC CALENDAR --><h2>ECONOMIC CALENDAR</h2>
+<div id="econCalendar" style="background:#111;padding:10px;min-height:300px;border:1px solid var(--border);"></div></section><footer>
+© 2026 AVODA ACADEMY — TRADING TERMINAL PRO
+</footer><script src="https://s3.tradingview.com/tv.js"></script><script>
+// ===== GLOBAL STATE =====
+let state={totalXP:0};
+function updateUI(){const percent=(state.totalXP/500)*100; document.getElementById('progress').style.width=percent+'%'; document.getElementById('rankText').innerText=`RANK: TRADER [${state.totalXP} XP]`;}
 
-<!-- ===== TRADE JOURNAL ===== -->
-<h2>TRADE JOURNAL</h2>
-<input type="text" id="pair" placeholder="Pair (BTC/USD)">
-<input type="text" id="direction" placeholder="Buy / Sell">
-<input type="number" id="resultRR" placeholder="Result (R multiple)">
-<button onclick="addTrade()">Add Trade</button>
-<div id="journalList"></div>
-<h3 style="margin-top:20px;">Performance Stats</h3>
-<p id="performanceStats"></p>
-
-<!-- ===== SETUP CHECKLIST ===== -->
-<h2>SETUP CHECKLIST</h2>
-<div id="checklist">
-<label><input type="checkbox"> Market Structure Confirmed</label><br>
-<label><input type="checkbox"> Liquidity Grab</label><br>
-<label><input type="checkbox"> Order Block Valid</label><br>
-<label><input type="checkbox"> Risk Managed</label><br>
-<label><input type="checkbox"> News Checked</label><br>
-</div>
-
-</section>
-<footer>
-© 2026 AVODA ACADEMY — TRADING COMMAND CENTER
-</footer>
-
-<script>
-// ===== DAILY TASKS =====
-const missionData=[
-{id:1,title:"EXECUTE 1 A+ TRADE",xp:100},
-{id:2,title:"REVIEW ORDERFLOW",xp:80},
-{id:3,title:"ANALYZE SMC STRUCTURE",xp:120},
-{id:4,title:"RECORD DAILY JOURNAL",xp:50},
-{id:5,title:"CHECK HIGH TIMEFRAME LEVELS",xp:60}
-];
-let state = JSON.parse(localStorage.getItem('trading_state')) || {totalXP:0,completedIds:[]};
-function loadMissions(){
-const list = document.getElementById('missionList'); list.innerHTML='';
-missionData.forEach(m=>{
-const done=state.completedIds.includes(m.id);
-const div=document.createElement('div');
-div.className=`mission ${done?'completed':''}`;
-div.innerHTML=`<div><p>${m.title}</p></div><span class="status-tag">${done?'VERIFIED':'+ '+m.xp+' XP'}</span>`;
-if(!done) div.onclick=()=>completeMission(m.id,m.xp);
-list.appendChild(div);
+// ===== TRADINGVIEW CHART =====
+let widget;
+function loadChart(symbol){
+    if(widget) widget.remove();
+    widget = new TradingView.widget({
+        width:'100%',
+        height:600,
+        symbol:symbol,
+        interval:'60',
+        timezone:'Etc/UTC',
+        theme:'dark',
+        style:'1',
+        locale:'en',
+        enable_publishing:false,
+        hide_side_toolbar:false,
+        allow_symbol_change:true,
+        container_id:'chart-container'
+    });
+}
+loadChart('BTCUSDT');
+document.getElementById('symbolSelect').addEventListener('change',e=>{
+    loadChart(e.target.value);
 });
+
+// ===== AI SIGNALS SIMULATION =====
+function updateAISignals(){
+    const signals=[
+        'Strong Buy BTC','Hold ETH','Sell NASDAP','Buy GOLD','Watch SILVER','Short ES!'
+    ];
+    const rand=signals[Math.floor(Math.random()*signals.length)];
+    document.getElementById('aiSignals').innerText=rand;
 }
-function completeMission(id,xp){
-if(!state.completedIds.includes(id)){
-state.completedIds.push(id); state.totalXP+=xp; saveState(); loadMissions(); updateUI();
-}}
-function saveState(){localStorage.setItem('trading_state',JSON.stringify(state));}
-function updateUI(){
-const maxXP = missionData.reduce((acc,m)=>acc+m.xp,0);
-const percent = (state.totalXP/maxXP)*100;
-document.getElementById('progress').style.width = percent+'%';
-let rank="INITIATE";
-if(state.totalXP>150) rank="EXECUTOR";
-if(state.totalXP>300) rank="SOVEREIGN";
-document.getElementById('progressText').innerText=`RANK: ${rank} [${state.totalXP} XP]`;
+setInterval(updateAISignals,5000);
+updateAISignals();
+
+// ===== FEAR & GREED =====
+function updateFearGreed(){
+    const value=Math.floor(Math.random()*101);
+    document.getElementById('fearGreedBar').style.width=value+'%';
+    document.getElementById('fearGreedText').innerText=`Fear & Greed Index: ${value}`;
 }
+setInterval(updateFearGreed,4000);
+updateFearGreed();
 
-// ===== LESSONS =====
-const lessons={
-smc:{title:"SMC STRUCTURE",content:"Smart Money Concepts give you precise entries. Identify liquidity, order blocks, and market structure for high probability trades."},
-orderflow:{title:"ORDERFLOW ANALYSIS",content:"Learn to read the order book and market depth to anticipate price movement and liquidity grabs."},
-risk:{title:"RISK MANAGEMENT",content:"Use stop loss, position sizing, and R:R to protect your account and maximize growth."}
-};
-function openLesson(key){
-document.getElementById("lessonTitle").innerText=lessons[key].title;
-document.getElementById("lessonContent").innerText=lessons[key].content;
-document.getElementById("lessonBox").style.display="block";
+// ===== CRYPTO HEATMAP SIMULATION =====
+function updateHeatmap(){
+    const coins=['BTC','ETH','BNB','XRP','ADA','SOL','DOGE','DOT','LTC','LINK'];
+    const container=document.getElementById('heatmap');
+    container.innerHTML='';
+    coins.forEach(c=>{
+        const div=document.createElement('div');
+        const change=(Math.random()*20-10).toFixed(2);
+        div.style.width='18%'; div.style.height='80px'; div.style.background=change>0?'#0f0':'#f00';
+        div.style.display='flex'; div.style.alignItems='center'; div.style.justifyContent='center';
+        div.style.color='#000'; div.style.fontWeight='bold';
+        div.innerText=`${c} ${change}%`;
+        container.appendChild(div);
+    });
 }
+setInterval(updateHeatmap,5000);
+updateHeatmap();
 
-// ===== POSITION SIZE =====
-function calculatePosition(){
-const acc=parseFloat(accountSize.value);
-const risk=parseFloat(riskPercent.value)/100;
-if(acc && risk){
-const riskAmount=acc*risk;
-positionResult.innerText="Risk Amount: $"+riskAmount.toFixed(2);
-}}
-
-// ===== R:R =====
-function calculateRR(){
-const entry=parseFloat(entryPrice.value);
-const stop=parseFloat(stopPrice.value);
-const target=parseFloat(targetPrice.value);
-if(entry && stop && target){
-const risk=Math.abs(entry-stop);
-const reward=Math.abs(target-entry);
-const rr=(reward/risk).toFixed(2);
-rrResult.innerText="Risk:Reward = 1:"+rr;
-}}
-
-// ===== TRADE JOURNAL =====
-let tradingData = JSON.parse(localStorage.getItem("trading_extra")) || {journal:[],streak:0,lastTradeDate:null};
-function saveExtra(){localStorage.setItem("trading_extra",JSON.stringify(tradingData));}
-function addTrade(){
-if(pair.value && direction.value && resultRR.value){
-tradingData.journal.push({pair:pair.value,dir:direction.value,rr:parseFloat(resultRR.value)});
-updateStreak(); saveExtra(); renderJournal();
-}}
-function updateStreak(){
-const today=new Date().toDateString();
-if(tradingData.lastTradeDate!==today){tradingData.streak++; tradingData.lastTradeDate=today;}
+// ===== ECONOMIC CALENDAR SIMULATION =====
+function updateCalendar(){
+    const events=[
+        'USD CPI Release','ECB Interest Rate Decision','Non-Farm Payrolls','Gold Inventory Report','Tech Earnings','FOMC Minutes'
+    ];
+    const container=document.getElementById('econCalendar');
+    container.innerHTML='';
+    events.forEach(ev=>{
+        const div=document.createElement('div');
+        div.style.padding='5px'; div.style.borderBottom='1px solid #222';
+        div.innerText=ev;
+        container.appendChild(div);
+    });
 }
-function renderJournal(){
-journalList.innerHTML=""; let wins=0; let totalRR=0;
-tradingData.journal.forEach(t=>{journalList.innerHTML+=`${t.pair} | ${t.dir} | ${t.rr}R<br>`; if(t.rr>0) wins++; totalRR+=t.rr;});
-let total=tradingData.journal.length;
-let winRate= total?((wins/total)*100).toFixed(1):0;
-performanceStats.innerText="Total Trades: "+total+" | Win Rate: "+winRate+"% | Total R: "+totalRR.toFixed(2)+" | Streak: "+tradingData.streak+" days";
-}
+updateCalendar();
+setInterval(updateCalendar,60000);
 
-// ===== LAUNCH =====
-loadMissions(); updateUI(); renderJournal();
-</script>
-
-</body>
-    </html>
+// ===== INITIAL UI =====
+updateUI();
+</script></body>
+                              </html>
