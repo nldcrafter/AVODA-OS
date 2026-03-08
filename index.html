@@ -150,6 +150,7 @@ footer{padding:100px 20px;border-top:1px solid var(--border);color:#444;text-ali
     <h1>AVODA ACADEMY</h1>
     <p class="subtitle">SOVEREIGN WEALTH TERMINAL</p>
     <button class="btn" onclick="toggleProfile(true)">USER PROFILE</button>
+    <button class="btn" onclick="toggleChat(true)">OPEN CHAT</button>
 </header>
 
 <!-- DASHBOARD -->
@@ -163,11 +164,11 @@ footer{padding:100px 20px;border-top:1px solid var(--border);color:#444;text-ali
     </div>
 
 <h2 style="margin-top:80px;">PUBLIC CHAT</h2>
-<div id="chatContainer" style="background:var(--glass);border:1px solid var(--border);padding:20px;max-height:400px;overflow-y:auto;">
-    <div id="chatBox" style="height:300px;overflow-y:auto;padding:10px;background:#111;border:1px solid var(--border);margin-bottom:10px;"></div>
-    <input type="text" id="chatName" placeholder="Name" style="width:20%;padding:10px;margin-right:10px;background:#000;border:1px solid #333;color:#fff;font-family:'JetBrains Mono';">
-    <input type="text" id="chatMessage" placeholder="Message" style="width:55%;padding:10px;margin-right:10px;background:#000;border:1px solid #333;color:#fff;font-family:'JetBrains Mono';">
-    <button class="btn" style="width:20%;" onclick="sendChat()">SEND</button>
+<div id="chatContainer" style="background:var(--glass);border:1px solid var(--border);padding:20px;max-width:800px;margin:0 auto;">
+    <div id="chatBox" style="height:250px;overflow-y:auto;padding:10px;background:#111;"></div>
+    <input type="text" id="chatName" placeholder="Your Name" style="width:30%;margin-right:10px;padding:10px;background:#000;border:1px solid #333;color:#fff;font-family:'JetBrains Mono';">
+    <input type="text" id="chatMessage" placeholder="Type your message..." style="width:50%;margin-right:10px;padding:10px;background:#000;border:1px solid #333;color:#fff;font-family:'JetBrains Mono';">
+    <button class="btn" onclick="sendChat()">SEND</button>
 </div>
     
     <h2>MISSION DIRECTIVES</h2>
@@ -404,7 +405,11 @@ db.ref('publicChat').on('child_added', snapshot=>{
     chatBox.appendChild(newMsg);
     chatBox.scrollTop = chatBox.scrollHeight;
 });
-    
+
+    function toggleChat(show){
+    const container = document.getElementById('chatContainer');
+    container.style.display = show ? 'block' : 'none';
+    }
 </script>
 
 
