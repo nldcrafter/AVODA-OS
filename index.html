@@ -128,6 +128,35 @@ footer{padding:100px 20px;border-top:1px solid var(--border);color:#444;text-ali
     <div id="leaderboard"></div>
 </section>
 
+    <!-- AVODA TRADING JOURNAL -->
+<div id="tradingJournal" style="background:#111;padding:20px;border-radius:10px;margin-top:20px">
+
+<h2>AVODA Trading Journal</h2>
+
+<input id="pair" placeholder="Pair (BTCUSDT / GOLD / NASDAQ)">
+<input id="entry" placeholder="Entry Price">
+<input id="sl" placeholder="Stop Loss">
+<input id="tp" placeholder="Take Profit">
+<input id="result" placeholder="Result (Win/Loss)">
+<button onclick="addTrade()">Add Trade</button>
+
+<table style="width:100%;margin-top:15px;border-collapse:collapse">
+<thead>
+<tr>
+<th>Pair</th>
+<th>Entry</th>
+<th>SL</th>
+<th>TP</th>
+<th>Result</th>
+</tr>
+</thead>
+
+<tbody id="tradeTable"></tbody>
+
+</table>
+
+</div>
+    
 <!-- CHAT -->
 <div id="chatContainer">
     <h2>PUBLIC CHAT</h2>
@@ -231,6 +260,7 @@ function render(){
     lead.innerHTML=sorted.map((u,i)=>`<div class="leader"><span class="rank-num">${i+1}</span><p style="color:${u.name===currentUser?'var(--primary)':'#fff'}">${u.name}</p><p style="font-family:'JetBrains Mono';font-size:14px;color:#444">${u.xp} XP</p></div>`).join('');
 }
 
+    
 // ===== TICKER =====
 function updateTicker(){
     const prices=[`BTC $${(68000+Math.random()*100).toFixed(0)}`, `ETH $${(1900+Math.random()*50).toFixed(0)}`, `GOLD $5,157`];
@@ -245,6 +275,54 @@ if(currentUser && users[currentUser]){
     render();
 }
 
+// ===== TRADING JOURNAL SYSTEM =====
+
+let trades = JSON.parse(localStorage.getItem("avodaTrades")) || []
+
+function renderTrades(){
+
+const table = document.getElementById("tradeTable")
+
+table.innerHTML = ""
+
+trades.forEach(trade => {
+
+const row = document.createElement("tr")
+
+row.innerHTML = `
+<td>${trade.pair}</td>
+<td>${trade.entry}</td>
+<td>${trade.sl}</td>
+<td>${trade.tp}</td>
+<td>${trade.result}</td>
+`
+
+table.appendChild(row)
+
+})
+
+}
+
+function addTrade(){
+
+const pair = document.getElementById("pair").value
+const entry = document.getElementById("entry").value
+const sl = document.getElementById("sl").value
+const tp = document.getElementById("tp").value
+const result = document.getElementById("result").value
+
+const trade = {pair, entry, sl, tp, result}
+
+trades.push(trade)
+
+localStorage.setItem("avodaTrades", JSON.stringify(trades))
+
+renderTrades()
+
+}
+
+renderTrades()
+    
 // ===== FIREBASE CHAT =====
 const firebaseConfig = {
     apiKey: "YOUR_API_KEY",
