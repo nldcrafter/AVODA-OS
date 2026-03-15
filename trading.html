@@ -3,431 +3,821 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AVODA Trading Terminal</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
-
+<title>AVODA ACADEMY | Trading Terminal</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-
-body{
-background:#050505;
-color:white;
-font-family:Orbitron;
-margin:0;
+:root{
+    --primary:#00ffcc;
+    --secondary:#ff003c;
+    --bg:#0a0a0a;
+    --panel:#111;
+    --border:rgba(255,255,255,0.1);
 }
-
-header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:10px 20px;
-background:#111;
-border-bottom:1px solid #222;
-}
-
-.container{
-display:grid;
-grid-template-columns:3fr 1fr;
-gap:10px;
-padding:10px;
-}
-
-.panel{
-background:#0e0e0e;
-padding:12px;
-border-radius:8px;
-border:1px solid #222;
-}
-
-h3{
-margin-top:0;
-}
-
-input,select{
-width:100%;
-background:#111;
-border:1px solid #333;
-color:white;
-padding:6px;
-margin-top:5px;
-}
-
-button{
-margin-top:6px;
-padding:7px;
-cursor:pointer;
-border:none;
-}
-
-.buy{background:#16c784;color:black;}
-.sell{background:#ea3943;color:white;}
-
-table{
-width:100%;
-border-collapse:collapse;
-font-family:JetBrains Mono;
-}
-
-td,th{
-padding:6px;
-border-bottom:1px solid #222;
-font-size:12px;
-}
-
-#chart{
-height:520px;
-}
-
-#chatBox{
-height:150px;
-overflow-y:auto;
-background:#000;
-padding:6px;
-}
-
+*{margin:0;padding:0;box-sizing:border-box;font-family:'JetBrains Mono',monospace;}
+body{background:var(--bg);color:white;overflow-x:hidden;line-height:1.6;}
+header{padding:20px;text-align:center;}
+h1{font-size:2rem;color:var(--primary);}
+section{padding:20px;max-width:1600px;margin:0 auto;}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;}
+.card{background:var(--panel);border:1px solid var(--border);padding:20px;border-radius:10px;}
+input, select{padding:10px;margin:5px;border-radius:5px;background:#000;border:1px solid var(--border);color:white;width:100%;}
+button{padding:10px 20px;background:var(--primary);border:none;color:black;font-weight:bold;cursor:pointer;border-radius:5px;margin-top:5px;}
+#tradePanel,#positionsPanel,#historyPanel,#watchlistPanel,#chatContainer{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:15px;margin-top:20px;}
+#chatBox{height:200px;overflow-y:auto;background:#111;padding:10px;margin-bottom:10px;border-radius:5px;}
+#chatBox::-webkit-scrollbar{width:6px;}
+#chatBox::-webkit-scrollbar-thumb{background:var(--primary);border-radius:3px;}
 </style>
 </head>
-
 <body>
 
 <header>
-
-<div>AVODA TERMINAL</div>
-
-<div>
-Balance $<span id="balance">50</span> |
-Equity $<span id="equity">50</span>
-</div>
-
+<h1>AVODA TRADING TERMINAL</h1>
 </header>
 
-<div class="container">
-
-<!-- CHART -->
-<div class="panel">
-
-<h3>Trading Chart</h3>
-<div id="chart"></div>
-
-</div>
-
-<!-- TRADE PANEL -->
-<div class="panel">
-
-<h3>Trade Execution</h3>
-
-<label>Pair</label>
-<select id="pair">
-
-<option value="BINANCE:BTCUSDT">BTCUSDT</option>
-<option value="BINANCE:ETHUSDT">ETHUSDT</option>
-<option value="BINANCE:SOLUSDT">SOLUSDT</option>
-<option value="BINANCE:BNBUSDT">BNBUSDT</option>
-<option value="BINANCE:XRPUSDT">XRPUSDT</option>
-
-<option value="OANDA:EURUSD">EURUSD</option>
-<option value="OANDA:GBPUSD">GBPUSD</option>
-<option value="OANDA:USDJPY">USDJPY</option>
-
-<option value="FOREXCOM:XAUUSD">GOLD</option>
-<option value="FOREXCOM:XAGUSD">SILVER</option>
-
-<option value="NASDAQ:NDX">NASDAQ</option>
-<option value="SP:SPX">SP500</option>
-
+<section>
+<h2>Market Pair Selector</h2>
+<select id="marketPair">
+    <option value="BTC/USD">BTC/USD</option>
+    <option value="ETH/USD">ETH/USD</option>
+    <option value="XAU/USD">Gold (XAU/USD)</option>
+    <option value="XAG/USD">Silver (XAG/USD)</option>
+    <option value="EUR/USD">EUR/USD</option>
+    <option value="USD/JPY">USD/JPY</option>
 </select>
 
-<label>Lot Size</label>
-<input id="lot" value="0.01">
-
-<label>Leverage</label>
-<input id="lev" value="100">
-
-<label>Entry Price</label>
-<input id="price">
-
-<label>Stop Loss</label>
-<input id="sl">
-
-<label>Take Profit</label>
-<input id="tp">
-
-<button class="buy" onclick="openTrade('BUY')">BUY</button>
-<button class="sell" onclick="openTrade('SELL')">SELL</button>
-
-<div id="marginInfo"></div>
-
+<div id="tradePanel">
+<h3>Trade Execution</h3>
+<input type="number" id="lotSize" placeholder="Lot Size (Units)">
+<input type="number" id="leverage" placeholder="Leverage (1-100)">
+<button onclick="placeTrade('BUY')">BUY</button>
+<button onclick="placeTrade('SELL')">SELL</button>
+<p id="marginCalc">Margin: 0 USD</p>
 </div>
 
-<!-- OPEN POSITIONS -->
-<div class="panel">
-
+<div id="positionsPanel">
 <h3>Open Positions</h3>
-
-<table>
-
-<thead>
-<tr>
-<th>Pair</th>
-<th>Type</th>
-<th>Entry</th>
-<th>PnL</th>
-</tr>
-</thead>
-
-<tbody id="positions"></tbody>
-
-</table>
-
+<div id="openPositions"></div>
 </div>
 
-<!-- WATCHLIST -->
-<div class="panel">
-
-<h3>Market Watchlist</h3>
-
-<table id="watchlist"></table>
-
-</div>
-
-<!-- HEATMAP -->
-<div class="panel">
-
-<h3>Top Crypto Movers</h3>
-
-<table id="heatmap"></table>
-
-</div>
-
-<!-- TRADE HISTORY -->
-<div class="panel">
-
+<div id="historyPanel">
 <h3>Trade History</h3>
-
-<table>
-
-<thead>
-<tr>
-<th>Pair</th>
-<th>Result</th>
-<th>PnL</th>
-</tr>
-</thead>
-
-<tbody id="history"></tbody>
-
-</table>
-
+<div id="tradeHistory"></div>
 </div>
 
-<!-- FEAR GREED -->
-<div class="panel">
-
-<h3>Fear & Greed Index</h3>
-
-<div id="fear"></div>
-
+<div id="watchlistPanel">
+<h3>Watchlist</h3>
+<div id="watchlist"></div>
 </div>
 
-<!-- ECONOMIC CALENDAR -->
-<div class="panel">
-
-<h3>Economic Calendar</h3>
-
-<iframe src="https://tradingeconomics.com/calendar/widget?c=unitedstates"
-width="100%" height="300"></iframe>
-
-</div>
-
-<!-- AI TRADE ANALYSIS -->
-<div class="panel">
-
-<h3>AI Trade Assistant</h3>
-
-<textarea id="aiInput" style="width:100%;height:60px"></textarea>
-
-<button onclick="analyze()">Analyze</button>
-
-<div id="aiResult"></div>
-
-</div>
-
-<!-- CHAT -->
-<div class="panel">
-
-<h3>Trader Chat</h3>
-
+<div id="chatContainer">
+<h3>Trader Community Chat</h3>
 <div id="chatBox"></div>
-
-<input id="chatName" placeholder="Name">
-<input id="chatMsg" placeholder="Message">
-
-<button onclick="sendChat()">Send</button>
-
+<input type="text" id="chatName" placeholder="Your Name">
+<input type="text" id="chatMessage" placeholder="Type message...">
+<button onclick="sendChat()">SEND</button>
 </div>
+</section>
 
-</div>
-
-<!-- TRADINGVIEW CHART -->
-<script src="https://s3.tradingview.com/tv.js"></script>
-
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 <script>
+// ===== FIREBASE CHAT =====
+const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_PROJECT.firebaseapp.com",
+    databaseURL: "https://YOUR_PROJECT-default-rtdb.firebaseio.com",
+    projectId: "YOUR_PROJECT",
+    storageBucket: "YOUR_PROJECT.appspot.com",
+    messagingSenderId: "XXXX",
+    appId: "YOUR_APP_ID"
+};
+if(!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+const chatDB = firebase.database().ref("publicChat");
+const chatBox = document.getElementById('chatBox');
+const chatNameInput = document.getElementById('chatName');
+const chatMessageInput = document.getElementById('chatMessage');
 
-new TradingView.widget({
-container_id:"chart",
-symbol:"BINANCE:BTCUSDT",
-interval:"15",
-theme:"dark",
-style:"1",
-autosize:true
-})
-
-</script>
-
-<!-- MARKET DATA -->
-<script>
-
-async function loadWatchlist(){
-
-let res=await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd")
-
-let data=await res.json()
-
-document.getElementById("watchlist").innerHTML=
-
-`<tr><td>BTC</td><td>$${data.bitcoin.usd}</td></tr>
-<tr><td>ETH</td><td>$${data.ethereum.usd}</td></tr>`
-
+function sendChat(){
+    const name = chatNameInput.value.trim() || "Trader";
+    const msg = chatMessageInput.value.trim();
+    if(!msg) return;
+    chatDB.push({name,msg,timestamp:Date.now()});
+    chatMessageInput.value='';
 }
 
-loadWatchlist()
-setInterval(loadWatchlist,10000)
+chatDB.on('child_added', snap=>{
+    const {name,msg} = snap.val();
+    const p = document.createElement('p');
+    p.innerHTML = `<strong style="color:var(--primary)">${name}:</strong> ${msg}`;
+    chatBox.appendChild(p);
+    chatBox.scrollTop=chatBox.scrollHeight;
+});
 
-</script>
-
-<!-- HEATMAP -->
-<script>
-
-async function heatmap(){
-
-let res=await fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=6&page=1")
-
-let coins=await res.json()
-
-let html=""
-
-coins.forEach(c=>{
-
-html+=`<tr>
-<td>${c.symbol.toUpperCase()}</td>
-<td>${c.price_change_percentage_24h.toFixed(2)}%</td>
-</tr>`
-
-})
-
-document.getElementById("heatmap").innerHTML=html
-
+// ===== LIVE PRICE FETCH =====
+let currentPrice = 0;
+const pairSelect = document.getElementById('marketPair');
+async function fetchPrice(){
+    const pair = pairSelect.value.replace('/','');
+    let url='';
+    if(pair==='BTCUSD'||pair==='ETHUSD'){
+        url=`https://api.binance.com/api/v3/ticker/price?symbol=${pair}`;
+        const res=await fetch(url); const data=await res.json(); currentPrice=parseFloat(data.price);
+    } else if(pair==='XAUUSD'){
+        url='https://www.metals-api.com/api/latest?access_key=YOUR_METALS_API_KEY&base=USD&symbols=XAU';
+        const res=await fetch(url); const data=await res.json(); currentPrice=parseFloat(data.rates.XAU);
+    } else if(pair==='XAGUSD'){
+        url='https://www.metals-api.com/api/latest?access_key=YOUR_METALS_API_KEY&base=USD&symbols=XAG';
+        const res=await fetch(url); const data=await res.json(); currentPrice=parseFloat(data.rates.XAG);
+    } else {
+        // Free Forex API
+        url=`https://api.exchangerate.host/latest?base=${pair.slice(0,3)}&symbols=${pair.slice(4,7)}`;
+        const res=await fetch(url); const data=await res.json(); currentPrice=parseFloat(data.rates[pair.slice(4,7)]);
+    }
 }
+setInterval(fetchPrice,3000);
+pairSelect.addEventListener('change',fetchPrice);
 
-heatmap()
-
-</script>
-
-<!-- FEAR GREED -->
-<script>
-
-async function fear(){
-
-let res=await fetch("https://api.alternative.me/fng/")
-
-let d=await res.json()
-
-document.getElementById("fear").innerHTML=d.data[0].value+"/100"
-
+// ===== TRADING LOGIC =====
+let openPositions=[];
+let tradeHistory=[];
+const lotInput=document.getElementById('lotSize');
+const leverageInput=document.getElementById('leverage');
+const marginCalc=document.getElementById('marginCalc');
+function calcMargin(){
+    const lot=parseFloat(lotInput.value)||0;
+    const lev=parseFloat(leverageInput.value)||1;
+    const margin=(lot*currentPrice)/lev;
+    marginCalc.innerText=`Margin: ${margin.toFixed(2)} USD`;
 }
+lotInput.addEventListener('input',calcMargin);
+leverageInput.addEventListener('input',calcMargin);
 
-fear()
-
-</script>
-
-<!-- TRADING ENGINE -->
-<script>
-
-let balance=50
-let positions=[]
-let history=[]
-
-function openTrade(type){
-
-let pair=document.getElementById("pair").value
-let price=parseFloat(document.getElementById("price").value)
-let lot=parseFloat(document.getElementById("lot").value)
-let lev=parseFloat(document.getElementById("lev").value)
-
-let margin=(price*lot)/lev
-
-document.getElementById("marginInfo").innerHTML="Margin Required: $"+margin.toFixed(2)
-
-positions.push({pair,type,price,pnl:0})
-
-renderPositions()
-
+function placeTrade(type){
+    const lot=parseFloat(lotInput.value); const lev=parseFloat(leverageInput.value)||1;
+    if(!lot){alert("Enter lot size");return;}
+    const margin=(lot*currentPrice)/lev;
+    const pos={pair:pairSelect.value,type,lot,price:currentPrice,leverage:lev,margin};
+    openPositions.push(pos);
+    tradeHistory.push({...pos,time:new Date().toLocaleTimeString()});
+    renderPositions();
+    renderHistory();
 }
 
 function renderPositions(){
-
-let html=""
-
-positions.forEach(p=>{
-
-html+=`<tr>
-<td>${p.pair}</td>
-<td>${p.type}</td>
-<td>${p.price}</td>
-<td>${p.pnl}</td>
-</tr>`
-
-})
-
-document.getElementById("positions").innerHTML=html
-
+    const container=document.getElementById('openPositions');
+    container.innerHTML=openPositions.map((p,i)=>`<p>#${i+1} ${p.type} ${p.pair} @ ${p.price.toFixed(2)} Lot:${p.lot} Lev:${p.leverage} Margin:${p.margin.toFixed(2)}</p>`).join('');
 }
 
-</script>
+function renderHistory(){
+    const container=document.getElementById('tradeHistory');
+    container.innerHTML=tradeHistory.map((t,i)=>`<p>#${i+1} ${t.type} ${t.pair} @ ${t.price.toFixed(2)} Lot:${t.lot} Lev:${t.leverage} Margin:${t.margin.toFixed(2)} Time:${t.time}</p>`).join('');
+}
 
-<!-- AI ANALYSIS -->
+// ===== WATCHLIST =====
+let watchlist=['BTC/USD','ETH/USD','XAU/USD'];
+function renderWatchlist(){
+    const container=document.getElementById('watchlist');
+    container.innerHTML=watchlist.map(p=>`<p>${p}</p>`).join('');
+}
+renderWatchlist();
+
+  <!-- Add this after Phase 2 script -->
+
+<!-- TradingView Lightweight Charts -->
+<script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+
 <script>
+// ===== PHASE 3: LIVE PnL + Chart =====
 
-function analyze(){
+// Create chart container
+const chartContainer = document.createElement('div');
+chartContainer.style.height = '300px';
+chartContainer.style.marginTop = '20px';
+chartContainer.style.background = '#111';
+document.querySelector('section').insertBefore(chartContainer, document.getElementById('tradePanel'));
 
-let txt=document.getElementById("aiInput").value
+// Initialize chart
+const chart = LightweightCharts.createChart(chartContainer, {
+    width: chartContainer.clientWidth,
+    height: 300,
+    layout: { backgroundColor:'#111', textColor:'#fff' },
+    grid: { vertLines: { color:'#333' }, horzLines:{ color:'#333' } },
+    crosshair: { mode: LightweightCharts.CrosshairMode.Normal },
+    rightPriceScale: { borderColor:'#444' },
+    timeScale: { borderColor:'#444' }
+});
+const candleSeries = chart.addCandlestickSeries();
+let candles=[];
 
-let rr=(Math.random()*5).toFixed(2)
-
-document.getElementById("aiResult").innerHTML="Estimated RR: "+rr
-
+// Dummy historical candles for init
+function initCandles(){
+    const now = Math.floor(Date.now()/1000);
+    for(let i=0;i<50;i++){
+        const open=100+Math.random()*10;
+        const close=open+(Math.random()*4-2);
+        const high=Math.max(open,close)+Math.random()*2;
+        const low=Math.min(open,close)-Math.random()*2;
+        candles.push({time:now-50*60+i*60,open,high,low,close});
+    }
+    candleSeries.setData(candles);
 }
+initCandles();
 
-</script>
+// Update chart with live price
+function updateChartPrice(){
+    if(candles.length===0) return;
+    const last=candles[candles.length-1];
+    const newCandle={...last};
+    newCandle.close=currentPrice;
+    newCandle.high=Math.max(last.high,currentPrice);
+    newCandle.low=Math.min(last.low,currentPrice);
+    newCandle.time=Math.floor(Date.now()/1000);
+    candles.push(newCandle);
+    if(candles.length>50) candles.shift();
+    candleSeries.setData(candles);
+}
+setInterval(updateChartPrice,3000);
 
-<!-- CHAT (LOCAL DEMO) -->
+// ===== LIVE PnL =====
+function updatePnL(){
+    const pnlContainer=document.getElementById('openPositions');
+    pnlContainer.innerHTML=openPositions.map((p,i)=>{
+        const direction=(p.type==='BUY')?1:-1;
+        const profit=(currentPrice - p.price)*direction*p.lot;
+        return `<p>#${i+1} ${p.type} ${p.pair} @ ${p.price.toFixed(2)} Lot:${p.lot} Lev:${p.leverage} Margin:${p.margin.toFixed(2)} PnL: ${profit.toFixed(2)} USD</p>`;
+    }).join('');
+    // Alert if total margin used > 80% (simulate)
+    const totalMargin=openPositions.reduce((sum,p)=>sum+p.margin,0);
+    if(totalMargin>10000) console.warn('High Margin Usage!');
+}
+setInterval(updatePnL,3000);
+
+// ===== ENHANCED WATCHLIST =====
+function renderWatchlist(){
+    const container=document.getElementById('watchlist');
+    container.innerHTML=watchlist.map(async pair=>{
+        let priceText='Loading...';
+        try{
+            let symbol=pair.replace('/','');
+            if(symbol==='BTCUSD'||symbol==='ETHUSD'){
+                const res=await fetch(`https://api.binance.com/api/v3/ticker/price?symbol=${symbol}`);
+                const data=await res.json(); priceText=parseFloat(data.price).toFixed(2);
+            } else if(symbol==='XAUUSD'||symbol==='XAGUSD'){
+                const res=await fetch(`https://www.metals-api.com/api/latest?access_key=YOUR_METALS_API_KEY&base=USD&symbols=${symbol.slice(0,3)}`);
+                const data=await res.json(); priceText=parseFloat(data.rates[symbol.slice(0,3)]).toFixed(2);
+            } else {
+                const res=await fetch(`https://api.exchangerate.host/latest?base=${symbol.slice(0,3)}&symbols=${symbol.slice(4,7)}`);
+                const data=await res.json(); priceText=parseFloat(data.rates[symbol.slice(4,7)]).toFixed(5);
+            }
+        } catch(e){ priceText='N/A'; }
+        return `<p>${pair}: ${priceText}</p>`;
+    });
+}
+setInterval(renderWatchlist,5000);
+  <!-- ===== PHASE 4: AI TRADE SIGNALS & ALERTS ===== -->
+<section id="aiSignals" style="padding:40px 10%;background:#0a0a0a;">
+    <h2 style="border-left:5px solid #ffcc00;padding-left:20px;">AI SIGNALS & ALERTS</h2>
+    <div id="signalPanel" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin-top:20px;"></div>
+    <div style="margin-top:30px;">
+        <h3 style="margin-bottom:10px;">Market Sentiment Gauge</h3>
+        <div style="background:#111;border:1px solid #333;height:30px;width:100%;border-radius:5px;overflow:hidden;">
+            <div id="sentimentBar" style="height:100%;width:50%;background:#00ffcc;"></div>
+        </div>
+    </div>
+</section>
+
 <script>
+// ===== PHASE 4: AI SIGNALS =====
+const pairs = ['BTC/USDT','ETH/USDT','XRP/USDT','BNB/USDT','DOGE/USDT','GOLD/USD','SILVER/USD'];
+const signalPanel = document.getElementById('signalPanel');
+const sentimentBar = document.getElementById('sentimentBar');
 
-function sendChat(){
-
-let name=document.getElementById("chatName").value
-let msg=document.getElementById("chatMsg").value
-
-let div=document.createElement("div")
-div.innerHTML="<b>"+name+":</b> "+msg
-
-document.getElementById("chatBox").appendChild(div)
-
-document.getElementById("chatMsg").value=""
-
+// Simulate AI signals
+function generateSignals(){
+    signalPanel.innerHTML = '';
+    let bullishCount = 0;
+    pairs.forEach(pair=>{
+        const signalStrength = Math.random(); // 0=strong sell, 1=strong buy
+        let signalText = '';
+        let color = '';
+        if(signalStrength > 0.7){ signalText='STRONG BUY'; color='#00ffcc'; bullishCount++; }
+        else if(signalStrength > 0.5){ signalText='BUY'; color='#7a00ff'; bullishCount++; }
+        else if(signalStrength > 0.3){ signalText='SELL'; color='#ff003c'; }
+        else{ signalText='STRONG SELL'; color='#ffcc00'; }
+        const card = document.createElement('div');
+        card.style.background='rgba(255,255,255,0.03)';
+        card.style.border='1px solid rgba(255,255,255,0.1)';
+        card.style.padding='20px';
+        card.style.borderRadius='10px';
+        card.style.textAlign='center';
+        card.innerHTML=`<h4 style="margin-bottom:5px;">${pair}</h4><p style="color:${color};font-weight:bold;">${signalText}</p>`;
+        signalPanel.appendChild(card);
+    });
+    // Update sentiment bar
+    const sentimentPercent = (bullishCount / pairs.length)*100;
+    sentimentBar.style.width = sentimentPercent+'%';
+    sentimentBar.style.background = sentimentPercent > 50 ? '#00ffcc' : '#ff003c';
 }
 
-</script>
+// Alerts
+function checkAlerts(){
+    pairs.forEach(pair=>{
+        const priceChange = (Math.random()-0.5)*4; // simulate % change
+        if(priceChange > 3){ alert(`ALERT: ${pair} surged ${priceChange.toFixed(2)}%`); }
+        if(priceChange < -3){ alert(`ALERT: ${pair} dropped ${priceChange.toFixed(2)}%`); }
+    });
+}
 
+// Refresh signals every 10s
+generateSignals();
+setInterval(generateSignals, 10000);
+setInterval(checkAlerts, 15000);
+
+  <!-- ===== PHASE 5: Open Positions & Trade History ===== -->
+<section id="phase5" class="container">
+    <h2>OPEN POSITIONS</h2>
+    <div id="openPositions"></div>
+
+    <h2>TRADE HISTORY</h2>
+    <div id="tradeHistory"></div>
+
+    <h2>ACCOUNT BALANCE</h2>
+    <p id="accountBalance">Balance: $10000.00</p>
+</section>
+
+<script>
+// ===== PHASE 5: OPEN POSITIONS & TRADE HISTORY LOGIC =====
+let accountBalance = 10000;
+let openPositions = [];
+let tradeHistory = [];
+
+function updateBalanceDisplay() {
+    document.getElementById('accountBalance').innerText = `Balance: $${accountBalance.toFixed(2)}`;
+}
+
+function renderPositions() {
+    const opDiv = document.getElementById('openPositions');
+    if(openPositions.length === 0){
+        opDiv.innerHTML = "<p>No open positions</p>";
+        return;
+    }
+    opDiv.innerHTML = openPositions.map((p,i)=>{
+        let profit = ((p.currentPrice - p.entryPrice) * p.lotSize * (p.type==='BUY'?1:-1)) * p.leverage;
+        return `<div style="margin-bottom:10px;padding:10px;border:1px solid #00ffcc;">
+            <strong>${p.pair} - ${p.type}</strong> | Entry: $${p.entryPrice} | Lot: ${p.lotSize} | Leverage: ${p.leverage}x | P/L: $${profit.toFixed(2)}
+            <button onclick="closePosition(${i})" style="margin-left:10px;padding:3px 8px;">Close</button>
+        </div>`;
+    }).join('');
+}
+
+function renderTradeHistory() {
+    const thDiv = document.getElementById('tradeHistory');
+    if(tradeHistory.length===0){
+        thDiv.innerHTML = "<p>No trades yet</p>";
+        return;
+    }
+    thDiv.innerHTML = tradeHistory.map(t=>{
+        return `<div style="margin-bottom:5px;padding:5px;border-bottom:1px solid #222;">
+            ${t.type} ${t.pair} | Entry: $${t.entryPrice} | Exit: $${t.exitPrice} | P/L: $${t.profit.toFixed(2)}
+        </div>`;
+    }).join('');
+}
+
+// ===== SIMULATED MARKET PRICE UPDATE =====
+function getPrice(pair){
+    // random fluctuation ±0.5%
+    let base = pair.startsWith("BTC")?68000:pair.startsWith("ETH")?1900:pair.startsWith("XAU")?5200:100;
+    let change = base * (Math.random()*0.01-0.005);
+    return +(base+change).toFixed(2);
+}
+
+// ===== PLACE POSITION =====
+function openPosition(pair, type, lotSize, leverage){
+    let entryPrice = getPrice(pair);
+    openPositions.push({pair,type,lotSize,leverage,entryPrice,currentPrice:entryPrice});
+    renderPositions();
+}
+
+// ===== CLOSE POSITION =====
+function closePosition(index){
+    let pos = openPositions[index];
+    pos.currentPrice = getPrice(pos.pair);
+    let profit = ((pos.currentPrice - pos.entryPrice) * pos.lotSize * (pos.type==='BUY'?1:-1)) * pos.leverage;
+    accountBalance += profit;
+    tradeHistory.push({...pos, exitPrice:pos.currentPrice, profit});
+    openPositions.splice(index,1);
+    renderPositions();
+    renderTradeHistory();
+    updateBalanceDisplay();
+}
+
+// ===== UPDATE OPEN POSITIONS PRICE =====
+setInterval(()=>{
+    openPositions.forEach(p=>p.currentPrice=getPrice(p.pair));
+    renderPositions();
+},2000);
+
+// ===== INITIAL RENDER =====
+updateBalanceDisplay();
+renderPositions();
+renderTradeHistory();
+
+  <!-- ===== PHASE 7: LIVE PROFIT / LOSS TRACKER ===== -->
+<section id="phase7" class="container" style="margin-top:40px;">
+    <h2>OPEN POSITIONS & LIVE P/L</h2>
+    <div id="openPositions"></div>
+</section>
+
+<script>
+// ===== PHASE 7: LIVE P/L LOGIC =====
+let accountBalance = 10000; // Starting demo balance
+let positions = [];
+
+function openPosition(pair, type, lot, leverage){
+    const price = getPrice(pair);
+    const pos = { pair, type, lot, leverage, entry: price, id: Date.now() };
+    positions.push(pos);
+    renderPositions();
+}
+
+function closePosition(id){
+    const index = positions.findIndex(p => p.id === id);
+    if(index===-1) return;
+    const pos = positions[index];
+    const currentPrice = getPrice(pos.pair);
+    const pnl = pos.type==='BUY' ? (currentPrice-pos.entry)*pos.lot : (pos.entry-currentPrice)*pos.lot;
+    accountBalance += pos.lot * pos.entry/pos.leverage + pnl; // release margin + pnl
+    positions.splice(index,1);
+    renderPositions();
+    updateBalanceDisplay();
+}
+
+function renderPositions(){
+    const container = document.getElementById('openPositions');
+    container.innerHTML = positions.map(p=>{
+        const currentPrice = getPrice(p.pair);
+        const pnl = p.type==='BUY' ? (currentPrice-p.entry)*p.lot : (p.entry-currentPrice)*p.lot;
+        return `<div class="mission" style="display:flex;justify-content:space-between;align-items:center;">
+            <div>
+                <p><strong>${p.pair}</strong> (${p.type})</p>
+                <p>Entry: ${p.entry.toFixed(2)}, Lot: ${p.lot}, Leverage: x${p.leverage}</p>
+            </div>
+            <div>
+                <p style="color:${pnl>=0?'#0f0':'#f00'}">P/L: $${pnl.toFixed(2)}</p>
+                <button class="btn" style="padding:5px 10px;font-size:12px;" onclick="closePosition(${p.id})">CLOSE</button>
+            </div>
+        </div>`;
+    }).join('');
+}
+
+// ===== SIMULATED PRICE FEED =====
+function getPrice(pair){
+    // Simple random price simulation
+    switch(pair){
+        case 'BTCUSD': return 68000 + Math.random()*200 - 100;
+        case 'ETHUSD': return 1900 + Math.random()*10 - 5;
+        case 'XAUUSD': return 5157 + Math.random()*5 - 2.5;
+        case 'BNBUSD': return 300 + Math.random()*2 - 1;
+        default: return 100;
+    }
+}
+
+// Update positions P/L every second
+setInterval(renderPositions, 1000);
+
+
+  <!-- ===== PHASE 8: TRADE HISTORY LOG ===== -->
+<section id="phase8" class="container" style="margin-top:40px;">
+    <h2>TRADE HISTORY</h2>
+    <div id="tradeHistory"></div>
+    <button class="btn" onclick="exportHistory()">EXPORT CSV</button>
+</section>
+
+<script>
+// ===== PHASE 8: TRADE HISTORY LOG =====
+let tradeHistory = JSON.parse(localStorage.getItem("tradeHistory")) || [];
+
+// Override closePosition to store history
+function closePosition(id){
+    const index = positions.findIndex(p => p.id === id);
+    if(index===-1) return;
+    const pos = positions[index];
+    const currentPrice = getPrice(pos.pair);
+    const pnl = pos.type==='BUY' ? (currentPrice-pos.entry)*pos.lot : (pos.entry-currentPrice)*pos.lot;
+    accountBalance += pos.lot * pos.entry/pos.leverage + pnl; // release margin + pnl
+
+    // Add to trade history
+    tradeHistory.push({
+        pair: pos.pair,
+        type: pos.type,
+        entry: pos.entry.toFixed(2),
+        exit: currentPrice.toFixed(2),
+        lot: pos.lot,
+        leverage: pos.leverage,
+        pnl: pnl.toFixed(2),
+        time: new Date().toLocaleString()
+    });
+    localStorage.setItem("tradeHistory", JSON.stringify(tradeHistory));
+
+    positions.splice(index,1);
+    renderPositions();
+    renderTradeHistory();
+    updateBalanceDisplay();
+}
+
+// Render trade history
+function renderTradeHistory(){
+    const container = document.getElementById('tradeHistory');
+    if(tradeHistory.length===0){ container.innerHTML="<p>No trades yet.</p>"; return; }
+    container.innerHTML = tradeHistory.map(t=>{
+        return `<div class="mission" style="display:flex;justify-content:space-between;align-items:center;">
+            <div>
+                <p><strong>${t.pair}</strong> (${t.type})</p>
+                <p>Entry: ${t.entry}, Exit: ${t.exit}, Lot: ${t.lot}, Leverage: x${t.leverage}</p>
+            </div>
+            <div>
+                <p style="color:${t.pnl>=0?'#0f0':'#f00'}">P/L: $${t.pnl}</p>
+                <p style="font-size:10px;color:#888">${t.time}</p>
+            </div>
+        </div>`;
+    }).join('');
+}
+renderTradeHistory();
+
+// Export CSV
+function exportHistory(){
+    if(tradeHistory.length===0) return alert("No trades to export.");
+    let csv = "Pair,Type,Entry,Exit,Lot,Leverage,P/L,Time\n";
+    tradeHistory.forEach(t=>{
+        csv += `${t.pair},${t.type},${t.entry},${t.exit},${t.lot},${t.leverage},${t.pnl},${t.time}\n`;
+    });
+    const blob = new Blob([csv], {type: "text/csv"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = "trade_history.csv";
+    a.click();
+    URL.revokeObjectURL(url);
+}
+
+  <!-- ===== PHASE 9: ECONOMIC NEWS CALENDAR ===== -->
+<section id="phase9" class="container" style="margin-top:40px;">
+    <h2>ECONOMIC NEWS CALENDAR</h2>
+    <div id="newsCalendar"></div>
+</section>
+
+<script>
+// ===== PHASE 9: ECONOMIC NEWS CALENDAR =====
+const newsEvents = [
+    {time:"2026-03-16 08:30", country:"US", event:"CPI Release", impact:"High", pair:"USD"},
+    {time:"2026-03-16 14:00", country:"EU", event:"ECB Rate Decision", impact:"High", pair:"EUR"},
+    {time:"2026-03-17 09:00", country:"UK", event:"GDP Growth Rate", impact:"Medium", pair:"GBP"},
+    {time:"2026-03-18 10:00", country:"JP", event:"BOJ Policy Meeting", impact:"High", pair:"JPY"},
+    {time:"2026-03-18 12:00", country:"AU", event:"Employment Report", impact:"Medium", pair:"AUD"}
+];
+
+// Render the news calendar
+function renderNewsCalendar(){
+    const container = document.getElementById('newsCalendar');
+    const now = new Date();
+    container.innerHTML = newsEvents.map(n=>{
+        const eventTime = new Date(n.time);
+        const isUpcoming = eventTime > now;
+        return `<div class="mission" style="display:flex;justify-content:space-between;align-items:center;${!isUpcoming?'opacity:0.5;':''}">
+            <div>
+                <p><strong>${n.country} - ${n.event}</strong> (${n.pair})</p>
+                <p>Impact: <span style="color:${n.impact==='High'?'#ff003c':n.impact==='Medium'?'#ffcc00':'#0f0'}">${n.impact}</span></p>
+            </div>
+            <div>
+                <p>${eventTime.toLocaleString()}</p>
+            </div>
+        </div>`;
+    }).join('');
+}
+renderNewsCalendar();
+
+// Optional: alerts for high-impact news 10 minutes before
+function checkNewsAlerts(){
+    const now = new Date();
+    newsEvents.forEach(n=>{
+        const eventTime = new Date(n.time);
+        const diffMin = (eventTime - now)/60000;
+        if(diffMin >0 && diffMin <=10 && n.impact==='High'){
+            console.log(`⚠️ ALERT: High impact event ${n.event} (${n.pair}) in ${Math.ceil(diffMin)} min`);
+            // You can trigger UI alert here
+            if(!document.getElementById('newsAlert')){
+                const alertDiv = document.createElement('div');
+                alertDiv.id='newsAlert';
+                alertDiv.style.position='fixed';
+                alertDiv.style.top='20px';
+                alertDiv.style.right='20px';
+                alertDiv.style.padding='15px';
+                alertDiv.style.background='var(--secondary)';
+                alertDiv.style.color='white';
+                alertDiv.style.zIndex='9999';
+                alertDiv.style.fontFamily="'JetBrains Mono', monospace";
+                alertDiv.innerText=`⚠️ High impact news: ${n.event} (${n.pair}) in 10 min`;
+                document.body.appendChild(alertDiv);
+                setTimeout(()=>alertDiv.remove(), 10000);
+            }
+        }
+    });
+}
+setInterval(checkNewsAlerts,60000); // check every minute
+
+  <!-- ===== PHASE 10: CRYPTO MARKET HEATMAP ===== -->
+<section id="phase10" class="container" style="margin-top:40px;">
+    <h2>CRYPTO MARKET HEATMAP</h2>
+    <div id="cryptoHeatmap" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;"></div>
+</section>
+
+<script>
+// ===== PHASE 10: CRYPTO MARKET HEATMAP =====
+
+// Example crypto pairs (you can expand)
+const cryptoPairs = ["BTCUSDT","ETHUSDT","BNBUSDT","XRPUSDT","ADAUSDT","SOLUSDT","DOGEUSDT","LTCUSDT"];
+
+// Fetch live prices using Binance public API
+async function fetchCryptoData(){
+    try {
+        const res = await fetch('https://api.binance.com/api/v3/ticker/24hr');
+        const data = await res.json();
+        const filtered = data.filter(d => cryptoPairs.includes(d.symbol));
+        renderHeatmap(filtered);
+    } catch(err){
+        console.error("Error fetching crypto data:",err);
+    }
+}
+
+// Render the heatmap
+function renderHeatmap(pairs){
+    const container = document.getElementById('cryptoHeatmap');
+    container.innerHTML = pairs.map(p=>{
+        const change = parseFloat(p.priceChangePercent);
+        const color = change>0?'#00ffcc':(change<0?'#ff003c':'#888');
+        return `<div style="padding:15px;background:#111;border:1px solid #333;text-align:center;color:${color};border-radius:5px;font-family:'JetBrains Mono';">
+            <p style="font-size:14px;">${p.symbol}</p>
+            <p style="font-size:12px;">${parseFloat(p.lastPrice).toFixed(4)}</p>
+            <p style="font-size:12px;">${change.toFixed(2)}%</p>
+        </div>`;
+    }).join('');
+}
+
+// Auto-refresh every 10 seconds
+fetchCryptoData();
+setInterval(fetchCryptoData,10000);
+
+  <!-- ===== PHASE 11: FEAR & GREED INDEX ===== -->
+<section id="phase11" class="container" style="margin-top:40px;">
+    <h2>FEAR & GREED INDEX</h2>
+    <div id="fearGreedContainer" style="background:#111;padding:20px;border:1px solid #333;border-radius:10px;text-align:center;">
+        <p id="fearGreedValue" style="font-size:28px;color:var(--primary);margin-bottom:10px;">--</p>
+        <p id="fearGreedText" style="font-size:16px;color:#888;">Loading...</p>
+    </div>
+</section>
+
+<script>
+// ===== PHASE 11: FEAR & GREED INDEX =====
+async function fetchFearGreed(){
+    try {
+        const res = await fetch('https://api.alternative.me/fng/?limit=1');
+        const data = await res.json();
+        const value = parseInt(data.data[0].value);
+        const text = data.data[0].value_classification.toUpperCase();
+        document.getElementById('fearGreedValue').innerText = value;
+        document.getElementById('fearGreedText').innerText = text;
+        // Color coding
+        let color = '#888';
+        if(value<=25) color = '#ff003c';          // Extreme Fear
+        else if(value<=50) color = '#ff9900';     // Fear
+        else if(value<=75) color = '#00ffcc';     // Greed
+        else color = '#7a00ff';                   // Extreme Greed
+        document.getElementById('fearGreedValue').style.color = color;
+    } catch(err){
+        console.error("Error fetching Fear & Greed:", err);
+    }
+}
+
+// Initial fetch + update every 10 minutes
+fetchFearGreed();
+setInterval(fetchFearGreed, 600000);
+
+  <!-- ===== PHASE 12: AI TRADE ANALYSIS ASSISTANT ===== -->
+<section id="phase12" class="container" style="margin-top:40px;">
+    <h2>AI TRADE ANALYSIS ASSISTANT</h2>
+    <div id="aiTradeContainer" style="background:#111;padding:20px;border:1px solid #333;border-radius:10px;">
+        <p style="margin-bottom:10px;color:#888;">Select pair for AI analysis:</p>
+        <select id="aiPairSelect" style="padding:10px;margin-bottom:15px;width:100%;">
+            <option value="BTCUSDT">BTC / USDT</option>
+            <option value="ETHUSDT">ETH / USDT</option>
+            <option value="BNBUSDT">BNB / USDT</option>
+            <option value="XAUUSD">GOLD / USD</option>
+        </select>
+        <button class="btn" onclick="runAIAnalysis()">RUN ANALYSIS</button>
+        <div id="aiTradeResult" style="margin-top:20px;font-size:16px;color:var(--primary);"></div>
+    </div>
+</section>
+
+<script>
+// ===== PHASE 12: AI TRADE ANALYSIS =====
+async function runAIAnalysis(){
+    const pair = document.getElementById('aiPairSelect').value;
+    const resultDiv = document.getElementById('aiTradeResult');
+    resultDiv.innerHTML = 'Analyzing...';
+
+    try {
+        // Fetch latest 50 candles from Binance public API (no API key needed)
+        const res = await fetch(`https://api.binance.com/api/v3/klines?symbol=${pair}&interval=15m&limit=50`);
+        const data = await res.json();
+        const closes = data.map(c => parseFloat(c[4]));
+
+        // Simple SMA calculation
+        const smaShort = closes.slice(-7).reduce((a,b)=>a+b,0)/7;
+        const smaLong = closes.slice(-21).reduce((a,b)=>a+b,0)/21;
+
+        // Simple RSI calculation
+        let gains=0, losses=0;
+        for(let i=1;i<closes.length;i++){
+            const change = closes[i]-closes[i-1];
+            if(change>0) gains+=change; else losses+=Math.abs(change);
+        }
+        const rs = gains/losses;
+        const rsi = 100-(100/(1+rs));
+
+        // Decision logic
+        let signal = 'HOLD';
+        if(closes[closes.length-1] > smaShort && smaShort > smaLong && rsi<70) signal='BUY';
+        if(closes[closes.length-1] < smaShort && smaShort < smaLong && rsi>30) signal='SELL';
+
+        resultDiv.innerHTML = `<strong>Pair:</strong> ${pair} | <strong>Signal:</strong> ${signal} <br>
+                               <strong>Last Close:</strong> ${closes[closes.length-1].toFixed(2)} | 
+                               <strong>SMA7:</strong> ${smaShort.toFixed(2)} | <strong>SMA21:</strong> ${smaLong.toFixed(2)} | 
+                               <strong>RSI:</strong> ${rsi.toFixed(2)}`;
+    } catch(err){
+        console.error("Error running AI analysis:", err);
+        resultDiv.innerHTML = "Error fetching data.";
+    }
+}
+
+  <!-- ===== PHASE 13: TRADER COMMUNITY CHAT ===== -->
+<section id="phase13" class="container" style="margin-top:40px;">
+    <h2>Trader Community Chat</h2>
+    <div id="traderChatContainer" style="background:#111;padding:20px;border:1px solid #333;border-radius:10px;">
+        <div id="traderChatBox" style="height:250px;overflow-y:auto;background:#0a0a0a;padding:10px;border-radius:5px;margin-bottom:10px;"></div>
+        <input type="text" id="traderName" placeholder="Your Name" style="width:25%;padding:10px;margin-right:10px;">
+        <input type="text" id="traderMessage" placeholder="Type message..." style="width:50%;padding:10px;margin-right:10px;">
+        <button class="btn" onclick="sendTraderMessage()">SEND</button>
+    </div>
+</section>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+<script>
+// ===== PHASE 13: TRADER COMMUNITY CHAT =====
+
+// Firebase config (use the same as your main chat)
+const firebaseConfigChat = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_PROJECT.firebaseapp.com",
+    databaseURL: "https://YOUR_PROJECT-default-rtdb.firebaseio.com",
+    projectId: "YOUR_PROJECT",
+    storageBucket: "YOUR_PROJECT.appspot.com",
+    messagingSenderId: "XXXX",
+    appId: "YOUR_APP_ID"
+};
+
+// Initialize Firebase only if not already
+if (!firebase.apps.length) firebase.initializeApp(firebaseConfigChat);
+
+const traderChatDB = firebase.database().ref("traderCommunityChat");
+const traderChatBox = document.getElementById('traderChatBox');
+const traderNameInput = document.getElementById('traderName');
+const traderMessageInput = document.getElementById('traderMessage');
+
+function sendTraderMessage() {
+    const name = traderNameInput.value.trim() || "Guest";
+    const msg = traderMessageInput.value.trim();
+    if(!msg) return;
+
+    traderChatDB.push({
+        name: name,
+        msg: msg,
+        timestamp: Date.now()
+    });
+
+    traderMessageInput.value = '';
+}
+
+// Listen for new messages
+traderChatDB.on('child_added', snapshot => {
+    const { name, msg } = snapshot.val();
+    const newMsg = document.createElement('p');
+    newMsg.innerHTML = `<strong style="color:var(--primary)">${name}:</strong> ${msg}`;
+    newMsg.style.margin = '5px 0';
+    traderChatBox.appendChild(newMsg);
+    traderChatBox.scrollTop = traderChatBox.scrollHeight;
+});
+
+</script>
 </body>
   </html>
