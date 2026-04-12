@@ -1,374 +1,330 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AVODA ACADEMY | V12 SOVEREIGN SYSTEM</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-<style>
-:root{
-    --primary:#00ffcc;
-    --secondary:#ff003c;
-    --gold:#ffcc00;
-    --purple:#7a00ff;
-    --bg:#0a0a0a;
-    --glass:rgba(255,255,255,0.03);
-    --border:rgba(255,255,255,0.1);
-    --panel:#111;
-}
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Orbitron',sans-serif;scroll-behavior:smooth;}
-body{background:var(--bg);color:white;overflow-x:hidden;line-height:1.6;}
-body::before{content:"";position:fixed;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle at 50% 50%,#1a1a1a 0%,#050505 100%);z-index:-2;}
-.ticker-wrap{width:100%;overflow:hidden;background:#000;border-bottom:1px solid var(--border);padding:10px 0;white-space:nowrap;font-family:'JetBrains Mono',monospace;font-size:12px;}
-.ticker-move{display:inline-block;animation:ticker 30s linear infinite;color:var(--primary);}
-@keyframes ticker{0%{transform:translateX(100%);}100%{transform:translateX(-100%);}}
-header{padding:80px 20px;text-align:center;position:relative;}
-h1{font-size:clamp(40px,8vw,80px);font-weight:900;letter-spacing:10px;background:linear-gradient(270deg,var(--secondary),var(--gold),var(--purple),var(--primary));background-size:600% 600%;-webkit-background-clip:text;color:transparent;animation:gradientMove 8s ease infinite;text-transform:uppercase;}
-@keyframes gradientMove{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-.subtitle{color:#888;margin-top:15px;font-size:clamp(14px,2vw,18px);letter-spacing:5px;}
-.btn-container{margin-top:40px;}
-.btn{display:inline-block;padding:18px 45px;border-radius:2px;background:transparent;border:1px solid var(--primary);color:var(--primary);font-weight:bold;text-decoration:none;transition:0.4s;text-transform:uppercase;letter-spacing:3px;position:relative;overflow:hidden;cursor:pointer;}
-.btn:hover{background:var(--primary);color:black;box-shadow:0 0 50px rgba(0,255,204,0.4);transform:translateY(-3px);}
-section{padding:80px 10%;max-width:1600px;margin:0 auto;}
-h2{font-size:24px;letter-spacing:5px;margin-bottom:40px;border-left:5px solid var(--primary);padding-left:20px;color:#fff;}
-.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px;margin-bottom:60px;}
-.card{background:var(--glass);border:1px solid var(--border);padding:40px;transition:0.5s cubic-bezier(0.19,1,0.22,1);text-align:left;backdrop-filter:blur(15px);position:relative;cursor:pointer;}
-.card:hover{border-color:var(--primary);transform:scale(1.02);background:rgba(255,255,255,0.06);}
-.card::after{content:"→";position:absolute;bottom:20px;right:20px;color:var(--primary);font-size:20px;opacity:0;transition:0.3s;}
-.card:hover::after{opacity:1;}
-.mission{margin:15px 0;padding:20px;background:#0d0d0d;border:1px solid #1a1a1a;display:flex;justify-content:space-between;align-items:center;transition:0.3s;cursor:pointer;}
-.mission:hover{border-color:var(--primary);background:#111;box-shadow:0 0 20px rgba(0,255,204,0.1);}
-.mission.completed{border-color:#333;opacity:0.5;cursor:default;}
-.status-tag{font-family:'JetBrains Mono';font-size:12px;color:#444;}
-.stats-hud{background:#000;padding:30px;border:1px solid var(--border);margin-bottom:60px;}
-.progress-bar{background:#111;height:10px;margin:20px 0;border-radius:0;overflow:hidden;}
-.progress{height:100%;background:var(--primary);width:0%;transition:1.5s cubic-bezier(0.19,1,0.22,1);box-shadow:0 0 20px var(--primary);}
-.leader{background:#0d0d0d;border:1px solid #1a1a1a;padding:30px;text-align:left;transition:0.3s;position:relative;}
-.rank-num{position:absolute;top:10px;right:20px;color:#222;font-size:40px;font-weight:900;}
-.leader:first-child{border-color:var(--gold);}
-footer{padding:100px 20px;border-top:1px solid var(--border);color:#444;text-align:center;font-size:12px;letter-spacing:5px;}
-#loginOverlay{position:fixed;top:0;left:0;width:100%;height:100%;background:#000;z-index:9999;display:flex;align-items:center;justify-content:center;transition:0.5s;}
-.login-box{background:var(--panel);border:1px solid var(--primary);padding:50px;width:400px;text-align:center;box-shadow:0 0 50px rgba(0,255,204,0.1);}
-.login-box h2{font-size:18px;letter-spacing:5px;margin-bottom:30px;color:var(--primary);}
-.login-box input{width:100%;padding:15px;margin-bottom:15px;background:#000;border:1px solid #333;color:#fff;font-family:'JetBrains Mono';}
-#profilePanel{position:fixed;top:0;right:-400px;width:350px;height:100%;background:#111;border-left:1px solid #00ffcc;padding:30px;transition:0.4s;z-index:9998;}
-#chatContainer{display:none;border-radius:10px;backdrop-filter:blur(20px);box-shadow:0 0 30px rgba(0,255,204,0.2);transition:0.3s;max-width:800px;margin:50px auto;padding:20px;background:#111;}
-#chatBox{height:250px;overflow-y:auto;padding:10px;background:#111;border-radius:5px;}
-#chatBox::-webkit-scrollbar{width:6px;}
-#chatBox::-webkit-scrollbar-track{background:#111;}
-#chatBox::-webkit-scrollbar-thumb{background-color:var(--primary);border-radius:3px;}
-#chatMessage,#chatName{border-radius:5px;outline:none;transition:0.3s;}
-#chatMessage:focus,#chatName:focus{border-color:var(--primary);box-shadow:0 0 15px var(--primary);}
-#chatContainer button.btn{padding:12px 20px;font-size:14px;letter-spacing:2px;}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AVODA | Digital Empire</title>
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --card-bg: rgba(20, 20, 20, 0.8);
+            --gold: #d4af37;
+            --gold-glow: rgba(212, 175, 55, 0.3);
+            --text-main: #e0e0e0;
+            --text-dim: #a0a0a0;
+            --accent: #1a1a1a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Background Effects */
+        .glow-sphere {
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%);
+            top: -100px;
+            right: -100px;
+            z-index: -1;
+        }
+
+        /* Navigation */
+        nav {
+            padding: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: 4px;
+            color: var(--gold);
+            text-transform: uppercase;
+        }
+
+        /* Hero Section */
+        header {
+            text-align: center;
+            padding: 6rem 1rem 4rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #fff, var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 900;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-dim);
+            margin-bottom: 2rem;
+        }
+
+        /* Marketplace Grid */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        /* Product Cards */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--gold);
+        }
+
+        .badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--gold);
+            color: #000;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--gold);
+        }
+
+        .price-section {
+            margin: 1.5rem 0;
+        }
+
+        .fake-price {
+            text-decoration: line-through;
+            color: var(--text-dim);
+            font-size: 1rem;
+            margin-right: 10px;
+        }
+
+        .real-price {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .mmk {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--text-dim);
+        }
+
+        .features {
+            list-style: none;
+            margin-bottom: 2rem;
+            flex-grow: 1;
+        }
+
+.features li {
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .features li::before {
+            content: '✓';
+            color: var(--gold);
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .btn {
+            display: block;
+            text-align: center;
+            background: #fff;
+            color: #000;
+            text-decoration: none;
+            padding: 1rem;
+            border-radius: 12px;
+            font-weight: 700;
+            transition: background 0.3s ease;
+        }
+
+        .btn:hover {
+            background: var(--gold);
+        }
+
+        .btn-gold {
+            background: var(--gold);
+        }
+
+        /* Myanmar Font Specifics */
+        .mm-text {
+            font-family: 'Pyidaungsu', serif;
+            font-size: 0.95rem;
+            color: var(--text-dim);
+        }
+
+        /* Payment Section */
+        .payments {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: rgba(255, 255, 255, 0.02);
+            margin-top: 4rem;
+        }
+
+        .payment-icons {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            opacity: 0.6;
+            filter: grayscale(1);
+        }
+
+        footer {
+            text-align: center;
+            padding: 4rem 2rem;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card { animation: fadeIn 0.8s ease forwards; }
+    </style>
 </head>
 <body>
 
-<!-- LOGIN -->
-<div id="loginOverlay">
-    <div class="login-box">
-        <h2>IDENTIFICATION REQUIRED</h2>
-        <input type="text" id="username" placeholder="USERNAME">
-        <input type="password" id="password" placeholder="ACCESS KEY">
-        <button class="btn" onclick="login()">INITIALIZE SYSTEM</button>
-        <p id="loginMsg" style="color:var(--secondary); font-size:10px; margin-top:20px; font-family:'JetBrains Mono';"></p>
+    <div class="glow-sphere"></div>
+
+    <nav>
+        <div class="logo">AVODA</div>
+        <div class="mm-text">Premium Trading Solutions</div>
+    </nav>
+
+    <header>
+        <h1>Stop Trading Like the 95%</h1>
+        <p class="subtitle">Join the elite network of traders using high-fidelity signals and professional systems. Secure your financial future today.</p>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <div class="badge">Most Popular</div>
+            <h3>CWS Private Group</h3>
+            <p class="mm-text">Premium Signals & Mentorship</p>
+            
+            <div class="price-section">
+                <span class="fake-price">$115</span>
+                <span class="real-price">$28</span><small>/mo</small>
+                <span class="mmk">120,000 MMK</span>
+            </div>
+
+            <ul class="features">
+                <li>80-90% Win Rate Signals</li>
+                <li>Mentor Networking</li>
+                <li>Premium Trading Videos</li>
+                <li>Daily Market Insights</li>
+            </ul>
+
+            <a href="https://t.me/AvodaLinn" class="btn">JOIN TELEGRAM</a>
+        </div>
+
+        <div class="card">
+            <h3>Forex Mastery Course</h3>
+            <p class="mm-text">Trading Basic to advanced</p>
+            
+            <div class="price-section">
+                <span class="fake-price">$150</span>
+                <span class="real-price">$34</span>
+                <span class="mmk">144,000 MMK (Lifetime)</span>
+            </div>
+
+            <ul class="features">
+                <li>Support & Resistance Mastery</li>
+                <li>Fundamental News Analysis</li>
+                <li>Lot Size & Risk Management</li>
+                <li>Roadmap for Beginners</li>
+                <li>Candle Stick Patterns</li>
+            </ul>
+
+            <a href="https://t.me/AvodaLinn" class="btn btn-gold">GET LIFETIME ACCESS</a>
+        </div>
+
+<div class="card">
+            <div class="badge" style="background: #ff4d4d; color: white;">3 Spots Left</div>
+            <h3>1-on-1 Coaching</h3>
+            <p class="mm-text">Direct Private Mentorship</p>
+            
+            <div class="price-section">
+                <span class="fake-price">$250</span>
+                <span class="real-price">$69</span>
+                <span class="mmk">Limited Availability</span>
+            </div>
+
+            <ul class="features">
+                <li>Personalized Strategy</li>
+                <li>Live Chart Analysis Sessions</li>
+                <li>Psychology & Discipline</li>
+                <li>Direct DM Support</li>
+            </ul>
+
+            <a href="https://t.me/AvodaLinn" class="btn">RESERVE SPOT</a>
+        </div>
     </div>
-</div>
 
-<!-- TICKER -->
-<div class="ticker-wrap">
-    <div class="ticker-move" id="market-ticker">SYNCHRONIZING WITH GLOBAL MARKETS...</div>
-</div>
-
-<!-- HEADER -->
-<header>
-    <h1>AVODA ACADEMY</h1>
-    <p class="subtitle">SOVEREIGN WEALTH TERMINAL</p>
-    <button class="btn" onclick="toggleProfile(true)">USER PROFILE</button>
-    <button class="btn" onclick="toggleChat(true)">OPEN CHAT</button>
-</header>
-
-<!-- DASHBOARD -->
-<section id="dashboard">
-    <div class="stats-hud">
-        <div style="display:flex;justify-content:space-between;align-items:flex-end;">
-            <h2>SYSTEM PROGRESS</h2>
-            <p id="progressText" style="font-family:'JetBrains Mono';color:var(--primary);">RANK: INITIATE [0 XP]</p>
-        </div>
-        <div class="progress-bar"><div class="progress" id="progress"></div></div>
-    </div>
-
-    <div id="missionList"></div>
-
-    <h2 style="margin-top:80px;">INTEL MODULES</h2>
-    <div class="card-grid">
-        <div class="card" onclick="goToModule('wealth.html')">
-            <h3 style="color:var(--gold)">WEALTH</h3>
-            <p style="font-size:12px;color:#666;margin-top:10px;">CAPITAL & PRESERVATION</p>
-        </div>
-        <div class="card" onclick="goToModule('trading.html')">
-            <h3 style="color:var(--primary)">TRADING</h3>
-            <p style="font-size:12px;color:#666;margin-top:10px;">SMC & ORDERFLOW</p>
-        </div>
-        <div class="card" onclick="goToModule('business.html')">
-            <h3 style="color:var(--purple)">BUSINESS</h3>
-            <p style="font-size:12px;color:#666;margin-top:10px;">SCALABLE SYSTEMS</p>
-        </div>
-        <div class="card" onclick="goToModule('fitness.html')">
-            <h3 style="color:var(--secondary)">FITNESS</h3>
-            <p style="font-size:12px;color:#666;margin-top:10px;">PHYSICAL & MENTAL</p>
-        </div>
-        <div class="card" onclick="goToModule('crypto.html')">
-            <h3 style="color:var(--primary)">CRYPTO</h3>
-            <p style="font-size:12px;color:#666;margin-top:10px;">BLOCKCHAIN STUDY</p>
+    <div class="payments">
+        <h3>Trusted Payment Methods</h3>
+        <p class="mm-text">Instant activation upon payment confirmation</p>
+        <div class="payment-icons">
+            <span>Kpay</span>
+            <span>Wavepay</span>
+            <span>USDT (TRC20)</span>
         </div>
     </div>
 
-    <h2 style="margin-top:80px;">GLOBAL RANKINGS</h2>
-    <div id="leaderboard"></div>
-</section>
+    <footer>
+        <p>&copy; 2026 AVODA NETWORK. All rights reserved.</p>
+        <p>Built for elite traders.</p>
+    </footer>
 
-    <!-- AVODA TRADING JOURNAL -->
-<div id="tradingJournal" style="background:#111;padding:20px;border-radius:10px;margin-top:20px">
-
-<h2>AVODA Trading Journal</h2>
-
-<input id="pair" placeholder="Pair (BTCUSDT / GOLD / NASDAQ)">
-<input id="entry" placeholder="Entry Price">
-<input id="sl" placeholder="Stop Loss">
-<input id="tp" placeholder="Take Profit">
-<input id="result" placeholder="Result (Win/Loss)">
-<button onclick="addTrade()">Add Trade</button>
-
-<table style="width:100%;margin-top:15px;border-collapse:collapse">
-<thead>
-<tr>
-<th>Pair</th>
-<th>Entry</th>
-<th>SL</th>
-<th>TP</th>
-<th>Result</th>
-</tr>
-</thead>
-
-<tbody id="tradeTable"></tbody>
-
-</table>
-
-</div>
-    
-<!-- CHAT -->
-<div id="chatContainer">
-    <h2>PUBLIC CHAT</h2>
-    <div id="chatBox"></div>
-    <input type="text" id="chatName" placeholder="Your Name" style="width:30%;margin-right:10px;padding:10px;">
-    <input type="text" id="chatMessage" placeholder="Type message..." style="width:50%;margin-right:10px;padding:10px;">
-    <button class="btn" onclick="sendChat()">SEND</button>
-</div>
-
-<!-- PROFILE PANEL -->
-<div id="profilePanel">
-    <h2 style="color:#00ffcc;margin-bottom:20px;">USER PROFILE</h2>
-    <p><strong>Username:</strong> <span id="p-name"></span></p>
-    <p><strong>Total XP:</strong> <span id="p-xp"></span></p>
-    <p><strong>Missions Completed:</strong> <span id="p-missions"></span></p>
-    <p><strong>Rank:</strong> <span id="p-rank"></span></p>
-    <button class="btn" style="margin-top:20px;" onclick="toggleProfile(false)">CLOSE</button>
-    <button class="btn" style="margin-top:10px;background:var(--secondary);border:none;" onclick="logout()">LOGOUT</button>
-</div>
-
-<footer>
-© 2026 AVODA ACADEMY — FOUNDATION FOR REAL BUILDERS
-</footer>
-
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-<script>
-// ===== DATA =====
-const missionData = [
-    { id: 1, title: "Market Session Review", xp: 100, cat: "TRADING" },
-    { id: 2, title: "Backtest 5 Setups", xp: 150, cat: "TRADING" },
-    { id: 3, title: "Capital Allocation Plan", xp: 200, cat: "WEALTH" },
-    { id: 4, title: "Physical Threshold Workout", xp: 80, cat: "FITNESS" }
-];
-
-let users = JSON.parse(localStorage.getItem("avoda_users")) || {};
-let currentUser = localStorage.getItem("currentUser");
-let state = { totalXP: 0, completedIds: [] };
-
-// ===== LOGIN =====
-function login(){
-    const u = document.getElementById("username").value.trim();
-    const p = document.getElementById("password").value.trim();
-    const msg = document.getElementById("loginMsg");
-    if(!u || !p){ msg.innerText="ENTER CREDENTIALS"; return; }
-    if(!users[u]) users[u]={password:p,totalXP:0,completedIds:[]};
-    if(users[u].password===p){
-        currentUser=u;
-        state=users[u];
-        localStorage.setItem("currentUser",u);
-        localStorage.setItem("avoda_users",JSON.stringify(users));
-        document.getElementById("loginOverlay").style.display="none";
-        render();
-    } else { msg.innerText="ACCESS DENIED"; }
-}
-function logout(){ localStorage.removeItem("currentUser"); location.reload(); }
-
-// ===== NAVIGATION =====
-function goToModule(url){ if(!currentUser){alert("LOGIN REQUIRED");return;} window.location.href=url; }
-
-// ===== MISSIONS =====
-function complete(id,xp){
-    if(!state.completedIds.includes(id)){
-        state.completedIds.push(id);
-        state.totalXP+=xp;
-        users[currentUser]=state;
-        localStorage.setItem("avoda_users",JSON.stringify(users));
-        render();
-    }
-}
-
-// ===== PROFILE =====
-function toggleProfile(show){
-    const panel=document.getElementById("profilePanel");
-    if(show){
-        panel.style.right="0";
-        document.getElementById("p-name").innerText=currentUser;
-        document.getElementById("p-xp").innerText=state.totalXP;
-        document.getElementById("p-missions").innerText=state.completedIds.length;
-        const rank=Object.keys(users).sort((a,b)=>users[b].totalXP-users[a].totalXP).indexOf(currentUser)+1;
-        document.getElementById("p-rank").innerText="#"+rank;
-    } else { panel.style.right="-400px"; }
-}
-
-// ===== UI RENDER =====
-function render(){
-    const list=document.getElementById("missionList");
-    list.innerHTML=missionData.map(m=>{
-        const done=state.completedIds.includes(m.id);
-        return `<div class="mission ${done?'completed':''}" onclick="complete(${m.id},${m.xp})">
-            <div><span style="font-size:10px;color:#444">// ${m.cat}</span><p>${m.title}</p></div>
-            <span class="status-tag">${done?'VERIFIED':'+'+m.xp+' XP'}</span>
-        </div>`;
-    }).join('');
-    const maxXP=missionData.reduce((a,b)=>a+b.xp,0);
-    const ratio=(state.totalXP/maxXP)*100;
-    document.getElementById("progress").style.width=ratio+"%";
-    document.getElementById("progressText").innerText=`RANK: INITIATE [${state.totalXP} XP]`;
-    const lead=document.getElementById("leaderboard");
-    const sorted=Object.keys(users).map(k=>({name:k,xp:users[k].totalXP})).sort((a,b)=>b.xp-a.xp);
-    lead.innerHTML=sorted.map((u,i)=>`<div class="leader"><span class="rank-num">${i+1}</span><p style="color:${u.name===currentUser?'var(--primary)':'#fff'}">${u.name}</p><p style="font-family:'JetBrains Mono';font-size:14px;color:#444">${u.xp} XP</p></div>`).join('');
-}
-
-    
-// ===== TICKER =====
-function updateTicker(){
-    const prices=[`BTC $${(68000+Math.random()*100).toFixed(0)}`, `ETH $${(1900+Math.random()*50).toFixed(0)}`, `GOLD $5,157`];
-    document.getElementById("market-ticker").innerText=prices.join(" • ")+" • DATA STREAM ENCRYPTED • ";
-}
-setInterval(updateTicker,3000);
-
-// ===== INIT =====
-if(currentUser && users[currentUser]){
-    state=users[currentUser];
-    document.getElementById("loginOverlay").style.display="none";
-    render();
-}
-
-// ===== TRADING JOURNAL SYSTEM =====
-
-let trades = JSON.parse(localStorage.getItem("avodaTrades")) || []
-
-function renderTrades(){
-
-const table = document.getElementById("tradeTable")
-
-table.innerHTML = ""
-
-trades.forEach(trade => {
-
-const row = document.createElement("tr")
-
-row.innerHTML = `
-<td>${trade.pair}</td>
-<td>${trade.entry}</td>
-<td>${trade.sl}</td>
-<td>${trade.tp}</td>
-<td>${trade.result}</td>
-`
-
-table.appendChild(row)
-
-})
-
-}
-
-function addTrade(){
-
-const pair = document.getElementById("pair").value
-const entry = document.getElementById("entry").value
-const sl = document.getElementById("sl").value
-const tp = document.getElementById("tp").value
-const result = document.getElementById("result").value
-
-const trade = {pair, entry, sl, tp, result}
-
-trades.push(trade)
-
-localStorage.setItem("avodaTrades", JSON.stringify(trades))
-
-renderTrades()
-
-}
-
-renderTrades()
-    
-// ===== FIREBASE CHAT =====
-const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT.firebaseapp.com",
-    databaseURL: "https://YOUR_PROJECT-default-rtdb.firebaseio.com",
-    projectId: "YOUR_PROJECT",
-    storageBucket: "YOUR_PROJECT.appspot.com",
-    messagingSenderId: "XXXX",
-    appId: "YOUR_APP_ID"
-};
-if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
-const chatDB = firebase.database().ref("publicChat");
-const chatBox = document.getElement('chatBox');
-const chatNameInput = document.getElementById('chatName');
-const chatMessageInput = document.getElementById('chatMessage');
-
-// ===== SEND CHAT =====
-function sendChat() {
-    const name = chatNameInput.value.trim() || currentUser || "Guest";
-    const msg = chatMessageInput.value.trim();
-    if (!msg) return;
-
-    chatDB.push({
-        name: name,
-        msg: msg,
-        timestamp: Date.now()
-    });
-
-    chatMessageInput.value = '';
-}
-
-// ===== REAL-TIME CHAT LISTENER =====
-chatDB.on('child_added', snapshot => {
-    const { name, msg } = snapshot.val();
-    const newMsg = document.createElement('p');
-    newMsg.innerHTML = `<strong style="color:var(--primary)">${name}:</strong> ${msg}`;
-    newMsg.style.margin = '5px 0';
-    chatBox.appendChild(newMsg);
-    chatBox.scrollTop = chatBox.scrollHeight;
-});
-
-// ===== TOGGLE CHAT VISIBILITY =====
-function toggleChat(show) {
-    const chatSection = document.getElementById('chatContainer');
-    chatSection.style.display = show ? 'block' : 'none';
-}
-</script>
 </body>
-</html>
+                </html>
