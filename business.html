@@ -1,174 +1,449 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AVODA ACADEMY | BUSINESS COMMAND CENTER</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-<style>
-:root{
-    --primary:#00ffcc;
-    --secondary:#ff003c;
-    --gold:#ffcc00;
-    --purple:#7a00ff;
-    --bg:#0a0a0a;
-    --glass:rgba(255,255,255,0.03);
-    --border:rgba(255,255,255,0.1);
-}
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Orbitron',sans-serif;scroll-behavior:smooth;}
-body{background:var(--bg);color:white;overflow-x:hidden;line-height:1.6;}
-body::before{content:"";position:fixed;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle at 50% 50%,#1a1a1a 0%,#050505 100%);z-index:-2;}
-header{padding:60px 20px;text-align:center;position:relative;}
-h1{font-size:clamp(40px,8vw,70px);font-weight:900;letter-spacing:10px;background:linear-gradient(270deg,var(--gold),var(--purple),var(--primary));background-size:600% 600%;-webkit-background-clip:text;color:transparent;animation:gradientMove 8s ease infinite;text-transform:uppercase;}
-@keyframes gradientMove{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-.subtitle{color:#888;margin-top:10px;font-size:clamp(14px,2vw,18px);letter-spacing:3px;}
-.btn-container{margin-top:30px;}
-.btn{display:inline-block;padding:15px 35px;border-radius:2px;background:transparent;border:1px solid var(--primary);color:var(--primary);font-weight:bold;text-decoration:none;transition:0.4s;text-transform:uppercase;letter-spacing:2px;position:relative;overflow:hidden;}
-.btn:hover{background:var(--primary);color:black;box-shadow:0 0 40px rgba(0,255,204,0.4);transform:translateY(-3px);}
-section{padding:60px 10%;max-width:1400px;margin:0 auto;}
-h2{font-size:22px;letter-spacing:4px;margin-bottom:30px;border-left:5px solid var(--primary);padding-left:15px;color:#fff;}
-.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px;margin-bottom:50px;}
-.card,.tool-card{background:var(--glass);border:1px solid var(--border);padding:30px;transition:0.5s cubic-bezier(0.19,1,0.22,1);text-align:left;backdrop-filter:blur(15px);position:relative;cursor:pointer;}
-.card:hover,.tool-card:hover{border-color:var(--primary);transform:scale(1.02);background:rgba(0,255,204,0.05);}
-.card::after{content:"→";position:absolute;bottom:15px;right:15px;color:var(--primary);font-size:18px;opacity:0;transition:0.3s;}
-.card:hover::after{opacity:1;}
-.mission{margin:12px 0;padding:18px;background:#0d0d0d;border:1px solid #1a1a1a;display:flex;justify-content:space-between;align-items:center;transition:0.3s;cursor:pointer;}
-.mission:hover{border-color:var(--primary);background:#111;box-shadow:0 0 15px rgba(0,255,204,0.1);}
-.mission.completed{border-color:#333;opacity:0.5;cursor:default;}
-.status-tag{font-family:'JetBrains Mono';font-size:11px;color:#444;}
-.stats-hud{background:#000;padding:25px;border:1px solid var(--border);margin-bottom:50px;}
-.progress-bar{background:#111;height:12px;margin:15px 0;border-radius:0;overflow:hidden;}
-.progress{height:100%;background:var(--primary);width:0%;transition:1.5s cubic-bezier(0.19,1,0.22,1);box-shadow:0 0 20px var(--primary);}
-input,button{width:100%;padding:8px;margin-top:10px;background:#000;border:1px solid #333;color:white;}
-button{background:var(--gold);color:black;font-weight:bold;cursor:pointer;}
-.mission,.tool-card input,.tool-card button{margin-bottom:10px;}
-footer{padding:80px 20px;border-top:1px solid var(--border);color:#444;text-align:center;font-size:12px;letter-spacing:4px;}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AVODA | INSTITUTIONAL AUTHORITY</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;400;600;800&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #000000;
+            --surface: rgba(10, 10, 10, 0.8);
+            --border: rgba(255, 255, 255, 0.08);
+            --gold-light: #fcf6ba;
+            --gold-main: #d4af37;
+            --gold-dark: #aa771c;
+            --gold-gradient: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            --text-primary: #ffffff;
+            --text-secondary: #94a3b8;
+            --danger: #ff4d4d;
+        }
+
+        /* Base Reset & Smooth Scroll */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: default;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-primary);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Luxury Background Glows */
+        .ambient-glow {
+            position: fixed;
+            width: 60vw;
+            height: 60vw;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.03) 0%, transparent 70%);
+            top: -20%;
+            right: -10%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .ambient-glow-2 {
+            position: fixed;
+            width: 40vw;
+            height: 40vw;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.02) 0%, transparent 70%);
+            bottom: -10%;
+            left: -10%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Navigation */
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.8rem;
+            font-size: 1.4rem;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 20px 100px;
+            text-align: center;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .hero span {
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 0.5rem;
+            font-size: 0.75rem;
+            color: var(--gold-main);
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 5.5rem);
+            font-weight: 800;
+            line-height: 0.95;
+            letter-spacing: -0.05em;
+            margin-bottom: 40px;
+        }
+
+        .hero p {
+            color: var(--text-secondary);
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 0 auto 50px;
+            line-height: 1.6;
+        }
+
+        /* The Audit: Market Psychology */
+        .audit-grid {
+            max-width: 1200px;
+            margin: 0 auto 150px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            padding: 0 40px;
+        }
+
+        .audit-card {
+            padding: 40px;
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.01);
+            transition: 0.4s ease;
+        }
+
+        .audit-card:hover {
+            border-color: rgba(212, 175, 55, 0.2);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+.audit-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            letter-spacing: -0.02em;
+        }
+
+        .audit-card p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        /* The Marketplace: FOMO Grid */
+        .marketplace {
+            max-width: 1300px;
+            margin: 0 auto 100px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            padding: 0 20px;
+        }
+
+        .tier {
+            position: relative;
+            background: var(--surface);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 40px;
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+            overflow: hidden;
+        }
+
+        .tier:hover {
+            transform: translateY(-20px);
+            border-color: rgba(212, 175, 55, 0.4);
+            box-shadow: 0 20px 80px rgba(0, 0, 0, 0.5), 0 0 30px rgba(212, 175, 55, 0.05);
+        }
+
+        .featured-border {
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: var(--gold-gradient);
+        }
+
+        .tier-header span {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3rem;
+            color: var(--gold-main);
+            font-weight: 700;
+        }
+
+        .tier-header h2 {
+            font-size: 1.8rem;
+            margin: 15px 0 30px;
+            font-weight: 600;
+        }
+
+        /* Price Manipulation */
+        .price-box {
+            margin-bottom: 40px;
+        }
+
+        .anchor-price {
+            display: block;
+            text-decoration: line-through;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            opacity: 0.6;
+        }
+
+        .current-price {
+            font-size: 4rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            display: flex;
+            align-items: baseline;
+        }
+
+        .current-price sub {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-left: 5px;
+            font-weight: 400;
+        }
+
+        .mmk-price {
+            display: block;
+            color: var(--gold-light);
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-top: 5px;
+        }
+
+        /* Scarcity Markers */
+        .scarcity-bar {
+            margin: 20px 0;
+            padding: 8px 15px;
+            background: rgba(255, 77, 77, 0.1);
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        .scarcity-text {
+            color: var(--danger);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05rem;
+        }
+
+        .features {
+            list-style: none;
+            margin-bottom: 50px;
+            flex-grow: 1;
+        }
+
+        .features li {
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+        }
+
+        .features li::before {
+            content: "";
+            width: 5px;
+            height: 5px;
+            background: var(--gold-main);
+            border-radius: 50%;
+            margin-right: 15px;
+            box-shadow: 0 0 10px var(--gold-main);
+        }
+
+        /* The Million Dollar CTA */
+        .cta-button {
+            display: block;
+            padding: 22px;
+
+text-align: center;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.2rem;
+            font-size: 0.85rem;
+            transition: all 0.4s ease;
+        }
+
+        .cta-gold {
+            background: var(--gold-gradient);
+            color: #000;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+        }
+
+        .cta-gold:hover {
+            transform: scale(1.03);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.3);
+        }
+
+        .cta-outline {
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+        }
+
+        .cta-outline:hover {
+            border-color: var(--gold-main);
+            color: var(--gold-main);
+        }
+
+        /* Payment/Footer */
+        .trust-footer {
+            padding: 100px 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .payment-strip {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 30px;
+            opacity: 0.4;
+            font-size: 0.8rem;
+            letter-spacing: 0.2rem;
+        }
+
+        @media (max-width: 1100px) {
+            .marketplace, .audit-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 3.5rem; }
+            nav { padding: 20px; }
+        }
+    </style>
 </head>
 <body>
 
-<header>
-    <h1>BUSINESS COMMAND CENTER</h1>
-    <p class="subtitle">SCALABLE SYSTEMS & NETWORKS</p>
-    <div class="btn-container">
-        <a href="index.html" class="btn">BACK TO HUB</a>
+    <div class="ambient-glow"></div>
+    <div class="ambient-glow-2"></div>
+
+    <nav>
+        <div class="logo">AVODA</div>
+        <div style="font-size: 0.65rem; color: var(--gold-main); letter-spacing: 0.2rem;">楊仰光 / EST. 2026</div>
+    </nav>
+
+    <section class="hero">
+        <span>The Institutional Standard</span>
+        <h1>You lose money because <br><span style="background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">nobody taught you this.</span></h1>
+        <p>Traditional trading is designed to extract your capital. AVODA is designed to protect it. Join the 5% who understand institutional order flow.</p>
+    </section>
+
+    <div class="audit-grid">
+        <div class="audit-card">
+            <h3>The Liquidity Illusion</h3>
+            <p>Every "perfect" retail pattern you see is a bank-manufactured trap. If you don't see the liquidity, you are the liquidity.</p>
+        </div>
+        <div class="audit-card">
+            <h3>Information Asymmetry</h3>
+            <p>While the crowd follows lagging indicators, we read the footprint of institutional intervention in real-time. Speed is the only edge.</p>
+        </div>
     </div>
-</header>
 
-<section>
-<!-- ===== BUSINESS PROGRESS ===== -->
-<div class="stats-hud">
-<h2>BUSINESS PROGRESS</h2>
-<p id="progressText" style="font-family:'JetBrains Mono';color:var(--primary);">RANK: INITIATE [0 XP]</p>
-<div class="progress-bar"><div class="progress" id="progress"></div></div>
-</div>
+    <div class="marketplace">
+        <div class="tier">
+            <div class="tier-header">
+                <span>The Network</span>
+                <h2>CWS Private</h2>
+            </div>
+            <div class="price-box">
+                <span class="anchor-price">$115.00</span>
+                <div class="current-price">$28<sub>/mo</sub></div>
+                <span class="mmk-price">120,000 MMK</span>
+            </div>
+            <ul class="features">
+                <li>Institutional Grade Signals</li>
+                <li>80-90% Verified Accuracy</li>
+                <li>Exclusive Mentor Networking</li>
+                <li>Daily Market Architecture</li>
+            </ul>
+            <a href="https://t.me/AvodaLinn" class="cta-button cta-outline">Claim Monthly Access</a>
+        </div>
 
-<!-- ===== DAILY BUSINESS TASKS ===== -->
-<h2>DAILY BUSINESS TASKS</h2>
-<div id="missionList" class="card-grid"></div>
+        <div class="tier">
+            <div class="featured-border"></div>
+            <div class="tier-header">
+                <span>Most Efficient</span>
+                <h2>The Course</h2>
+            </div>
+            <div class="price-box">
+                <span class="anchor-price">$350.00</span>
+                <div class="current-price">$34<sub>/life</sub></div>
 
-<!-- ===== BUSINESS LESSONS ===== -->
-<h2>BUSINESS INTEL LIBRARY</h2>
-<div class="card-grid">
-<div class="card" onclick="openLesson('system')"><h3>SYSTEM BUILDING</h3><p>Design scalable business processes and operations.</p></div>
-<div class="card" onclick="openLesson('network')"><h3>NETWORKING</h3><p>Master partnerships, collaborations, and influence.</p></div>
-<div class="card" onclick="openLesson('strategy')"><h3>BUSINESS STRATEGY</h3><p>Create growth plans and market positioning.</p></div>
-</div>
-<div id="lessonBox" style="display:none;margin-bottom:50px;">
-<h3 id="lessonTitle" style="color:var(--gold);"></h3>
-<p id="lessonContent" style="color:#aaa;font-size:14px;"></p>
-</div>
+<span class="mmk-price">144,000 MMK</span>
+            </div>
+            <div class="scarcity-bar">
+                <span class="scarcity-text">Limited Lifetime License</span>
+            </div>
+            <ul class="features">
+                <li>Full SMC Curriculum</li>
+                <li>Liquidity & Trap Identification</li>
+                <li>Advanced News Analysis</li>
+                <li>Beginner to Pro Roadmap</li>
+                <li>Psychology Hardwiring</li>
+            </ul>
+            <a href="https://t.me/AvodaLinn" class="cta-button cta-gold">Secure Lifetime Access</a>
+        </div>
 
-<!-- ===== SPECIALIST TOOLS ===== -->
-<h2>SPECIALIST TOOLS</h2>
-<div class="tool-grid">
-<div class="tool-card"><h3>REVENUE TRACKER</h3><p>Monitor income streams and growth.</p></div>
-<div class="tool-card"><h3>SYSTEM BUILDER</h3><p>Create and optimize processes.</p></div>
-<div class="tool-card"><h3>MARKET RESEARCH</h3><p>Analyze competitors & trends.</p></div>
-<div class="tool-card"><h3>TEAM MANAGER</h3><p>Track team tasks and KPIs.</p></div>
-</div>
+        <div class="tier">
+            <div class="tier-header">
+                <span>High Performance</span>
+                <h2>1-on-1 Protocol</h2>
+            </div>
+            <div class="price-box">
+                <span class="anchor-price">$650.00</span>
+                <div class="current-price">$69<sub>/session</sub></div>
+                <span class="mmk-price">Direct Private Consult</span>
+            </div>
+            <div class="scarcity-bar" style="background: rgba(255, 255, 255, 0.05);">
+                <span class="scarcity-text" style="color: var(--text-primary);">Only 3 Slots Available</span>
+            </div>
+            <ul class="features">
+                <li>Custom Strategy Development</li>
+                <li>Live Execution Audit</li>
+                <li>Direct DM Line to Founder</li>
+                <li>Private Trading Roadmap</li>
+            </ul>
+            <a href="https://t.me/AvodaLinn" class="cta-button cta-outline">Apply for Mentorship</a>
+        </div>
+    </div>
 
-<!-- ===== BUSINESS CALCULATORS ===== -->
-<h2>FINANCIAL CALCULATORS</h2>
-<div class="tool-grid">
-<div class="tool-card">
-<h3>REVENUE GOAL CALCULATOR</h3>
-<input type="number" id="currentRevenue" placeholder="Current Revenue">
-<input type="number" id="targetRevenue" placeholder="Target Revenue">
-<button onclick="calcRevenueGoal()">Calculate Growth %</button>
-<p id="revenueResult"></p>
-</div>
-
-<div class="tool-card">
-<h3>INVESTMENT ROI CALCULATOR</h3>
-<input type="number" id="investmentAmount" placeholder="Investment Amount">
-<input type="number" id="returnAmount" placeholder="Return Amount">
-<button onclick="calcROI()">Calculate ROI</button>
-<p id="roiResult"></p>
-</div>
-</div>
-
-<!-- ===== BUSINESS JOURNAL ===== -->
-<h2>BUSINESS JOURNAL</h2>
-<input type="text" id="journalTask" placeholder="Task / Meeting / Call">
-<input type="number" id="journalXP" placeholder="XP Earned">
-<button onclick="addJournal()">Add Entry</button>
-<div id="journalList"></div>
-<h3 style="margin-top:20px;">Performance Stats</h3>
-<p id="performanceStats"></p>
-
-</section>
-<footer>
-© 2026 AVODA ACADEMY — BUSINESS COMMAND CENTER
-</footer>
-
-<script>
-// ===== DAILY TASKS =====
-const missionData=[
-{id:1,title:"BUILD NEW INCOME CHANNEL",xp:120},
-{id:2,title:"REVIEW SYSTEM PROCESSES",xp:80},
-{id:3,title:"NETWORK WITH PARTNERS",xp:100},
-{id:4,title:"CHECK PASSIVE INCOME",xp:70},
-{id:5,title:"PLAN NEXT BUSINESS STRATEGY",xp:90}
-];
-let state = JSON.parse(localStorage.getItem('business_state')) || {totalXP:0,completedIds:[]};
-function loadMissions(){
-const list=document.getElementById('missionList'); list.innerHTML='';
-missionData.forEach(m=>{
-const done=state.completedIds.includes(m.id);
-const div=document.createElement('div');
-div.className=`mission ${done?'completed':''}`;
-div.innerHTML=`<div><p>${m.title}</p></div><span class="status-tag">${done?'VERIFIED':'+ '+m.xp+' XP'}</span>`;
-if(!done) div.onclick=()=>completeMission(m.id,m.xp);
-list.appendChild(div);
-});
-}
-function completeMission(id,xp){if(!state.completedIds.includes(id)){state.completedIds.push(id); state.totalXP+=xp; saveState(); loadMissions(); updateUI();}}
-function saveState(){localStorage.setItem('business_state',JSON.stringify(state));}
-function updateUI(){const maxXP=missionData.reduce((acc,m)=>acc+m.xp,0); const percent=(state.totalXP/maxXP)*100; document.getElementById('progress').style.width=percent+'%'; let rank="INITIATE"; if(state.totalXP>150) rank="EXECUTOR"; if(state.totalXP>300) rank="SOVEREIGN"; document.getElementById('progressText').innerText=`RANK: ${rank} [${state.totalXP} XP]`;}
-
-// ===== BUSINESS LESSONS =====
-const lessons={
-system:{title:"SYSTEM BUILDING",content:"Learn to create processes and SOPs that scale efficiently across teams."},
-network:{title:"NETWORKING",content:"Master partnerships, collaborations, and influence for business growth."},
-strategy:{title:"BUSINESS STRATEGY",content:"Design actionable plans, growth hacks, and market positioning to dominate."}
-};
-function openLesson(key){document.getElementById("lessonTitle").innerText=lessons[key].title;document.getElementById("lessonContent").innerText=lessons[key].content;document.getElementById("lessonBox").style.display="block";}
-
-// ===== CALCULATORS =====
-function calcRevenueGoal(){const cur=parseFloat(currentRevenue.value); const target=parseFloat(targetRevenue.value); if(cur && target){const growth=((target-cur)/cur*100).toFixed(1); revenueResult.innerText="Growth Needed: "+growth+"%";}}
-function calcROI(){const invest=parseFloat(investmentAmount.value); const ret=parseFloat(returnAmount.value); if(invest && ret){const roi=((ret-invest)/invest*100).toFixed(1); roiResult.innerText="ROI: "+roi+"%";}}
-
-// ===== BUSINESS JOURNAL =====
-let businessData=JSON.parse(localStorage.getItem("business_journal")) || {journal:[],streak:0,lastDate:null};
-function saveJournal(){localStorage.setItem("business_journal",JSON.stringify(businessData));}
-function addJournal(){if(journalTask.value && journalXP.value){businessData.journal.push({task:journalTask.value,xp:parseInt(journalXP.value)}); updateStreak(); saveJournal(); renderJournal();}}
-function updateStreak(){const today=new Date().toDateString(); if(businessData.lastDate!==today){businessData.streak++; businessData.lastDate=today;}}
-function renderJournal(){journalList.innerHTML=""; let totalXP=0; businessData.journal.forEach(t=>{journalList.innerHTML+=`${t.task} | +${t.xp} XP<br>`; totalXP+=t.xp;}); performanceStats.innerText="Total Entries: "+businessData.journal.length+" | Total XP: "+totalXP+" | Streak: "+businessData.streak+" days";}
-
-// ===== LAUNCH =====
-loadMissions(); updateUI(); renderJournal();
-</script>
+    <footer class="trust-footer">
+        <p style="font-size: 0.7rem; color: var(--gold-main); letter-spacing: 0.3rem; margin-bottom: 20px;">ABSOLUTE AUTHORITY</p>
+        <p style="color: var(--text-secondary); max-width: 500px; margin: 0 auto; font-size: 0.9rem;">The markets wait for no one. Secure your position within the AVODA ecosystem today.</p>
+        <div class="payment-strip">
+            <span>KBZPAY</span>
+            <span>WAVEPAY</span>
+            <span>USDT/Crypto</span>
+        </div>
+        <p style="margin-top: 60px; font-size: 0.6rem; opacity: 0.3; letter-spacing: 0.1rem;">AVODA BRAND &copy; 2026. ALL RIGHTS RESERVED.</p>
+    </footer>
 
 </body>
     </html>
